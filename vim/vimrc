@@ -1,0 +1,292 @@
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+" vundld packages
+Plugin 'gmarik/vundle'
+
+" Languages
+Plugin 'toyamarinyon/vim-swift'
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+Plugin 'pangloss/vim-javascript'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'slim-template/vim-slim'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'JulesWang/css.vim'
+Plugin 'cakebaker/scss-syntax.vim'
+
+" Utilities
+Plugin 'ctrlp.vim'
+Plugin 'msanders/snipmate.vim'
+Plugin 'bling/vim-airline'
+Plugin 'powerline/powerline'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'scrooloose/nerdtree'
+" Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'tpope/vim-fugitive'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'janko-m/vim-test'
+Plugin 'mattn/emmet-vim'
+
+" Color & Themes 
+Plugin 'freeo/vim-kalisi'
+Plugin 'jpo/vim-railscasts-theme'
+Plugin 'chriskempson/base16-vim'
+
+" Plugin 'ZoomWin'
+" Plugin 'Syntastic'
+" Plugin 'matchit.zip'
+" Plugin 'tristen/vim-sparkup'
+" Plugin 'ervandew/supertab'
+" Plugin 'bronson/vim-trailing-whitespace'
+"
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+
+
+" ========================================================
+" VIM Interface 
+" ========================================================
+set nocompatible " be iMproved, required
+set backspace=2
+set encoding=utf-8
+"set backspace=ident,eol,start
+filetype off 
+set ruler
+set laststatus=2 " show the satus line all the time
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set magic " Set magic on, for regex
+
+" VertSplit
+set fillchars+=vert:\ 
+
+set ttyfast " faster redrawing
+set clipboard=unnamed "suposed to be the mac os x clipboard
+set so=7 " set 7 lines to the cursors - when moving vertical
+set wildmenu " enhanced command line completion
+set showcmd " show incomplete commands
+"set noshowmode " don't show which mode disabled for PowerLine
+set wildmode=list:longest " complete files like a shell
+" set scrolloff=3 " lines of text around cursor
+set cmdheight=1 " command bar height
+filetype plugin indent on
+syntax on
+set title " set terminal title
+
+" Folding
+" set foldenable
+" set foldmethod=indent
+" set foldlevel=1
+
+" ========================================================
+" ColorSchemes 
+" ========================================================
+if (has("gui_running"))
+  set guioptions+=e
+  set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14 "make sure to escape the spaces in the name properly
+  set linespace=1
+  colorscheme base16-atelierdune
+  set background=light
+  "Line number and ColumnColor
+  " highlight LineNr guifg=#515559 guibg=#272a2e
+  "highlight ColorColumn guifg=Red guibg=Red
+  "highlight ColorColumn guifg=#515559 guibg=#272a2e
+
+  " Cursor on GUI
+  highlight Cursor guifg=white guibg=Red
+  "highlight iCursor guifg=white guibg=steelblue
+  "set guicursor=n-v-c:block-Cursor
+  "set guicursor+=i:ver100-iCursor
+  "set guicursor+=n-v-c:blinkon0
+  "set guicursor+=i:blinkwait10
+endif
+
+
+" let base16colorspace=256  " Access colors present in 256 colorspace
+set background=light
+highlight NonText ctermbg=none
+highlight Normal ctermbg=none
+highlight clear VertSplit
+highlight VertSplit ctermfg=100 ctermbg=250
+highlight LineNr ctermbg=lightgray ctermfg=darkgray
+highlight CursorLine cterm=NONE ctermbg=lightred
+highlight Cursor ctermfg=white ctermbg=Red
+highlight ColorColumn ctermbg=red
+highlight SignColumn ctermbg=140 "git gutter
+" Tab bar
+highlight TabLineFill ctermfg=white ctermbg=black
+highlight TabLine ctermfg=gray ctermbg=white
+highlight TabLineSel ctermfg=lightGray ctermbg=Darkgreen
+highlight Title ctermfg=LightBlue ctermbg=Magenta
+
+let g:airline_theme = 'sol'
+
+
+" ========================================================
+set makeprg=rake
+
+" ========================================================
+" Ruby specific 
+" ========================================================
+set nocompatible      " We're running Vim, not Vi!
+syntax on             " Enable syntax highlighting
+filetype on           " Enable filetype detection
+filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
+
+" ========================================================
+" Mouse
+" ========================================================
+if has('mouse')
+  set mouse=a
+  set ttymouse=xterm2
+endif
+
+" ========================================================
+" Searching
+" ========================================================
+set ignorecase " case insensitive searching
+set smartcase " case-sensitive if expresson contains a capital letter
+set hlsearch
+set incsearch " set incremental search, like modern browsers
+set nolazyredraw " don't redraw while executing macros
+
+set showmatch " show matching braces
+set mat=2 " how many tenths of a second to blink
+
+set expandtab
+set nocompatible
+set tabstop=2
+set shiftwidth=2
+
+" ========================================================
+" Line Numbers and Cursor
+" ========================================================
+set wrap
+set linespace=1 
+set number " show line numbers
+set numberwidth=5
+" set relativenumber
+set cursorline
+set colorcolumn=81 " red line and over is error
+
+" ========================================================
+" Vim Test
+" ========================================================
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>r :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+
+" ========================================================
+" NerdTree
+" ========================================================
+" autocmd vimenter * NERDTree
+let g:NERDTreeDirArrows = 1
+let g:NERDTreeDirArrowExpandable = '▸'
+let g:NERDTreeDirArrowCollapsible = '▾'
+let g:NERDTreeWinSize = 20
+" let NERDTreeMapOpenInTab='<ENTER>'
+"let NERDTreeMapOpenInTab='\r'
+let g:NERDTreeQuitOnOpen=1 " close NERDTree after a file is opened
+let NERDTreeShowHidden=1 " show hidden files in NERDTree
+"let NERDTreeIgnore = ['\.js.map$']" remove some files by extension
+
+" NERDTree maps
+map <C-n> :NERDTreeToggle<CR>
+"nmap <silent> <leader>k :NERDTreeToggle<cr>
+"nmap <silent> <leader>y :NERDTreeFind<cr>
+"let g:nerdtree_tabs_open_on_gui_startup = 1
+
+
+" ========================================================
+" ControlP
+" ========================================================
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_prompt_mappings = {
+      \ 'AcceptSelection("e")': ['<c-t>'],
+      \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+      \ }
+
+nmap <leader>l :set list!<CR>
+
+" ========================================================
+" Toggle invisible characters
+" ========================================================
+set invlist
+set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
+set showbreak=↪
+
+" ========================================================
+" Airline 
+" ========================================================
+" tab line
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#left_sep = ' '
+" let g:airline#extensions#tabline#left_alt_sep = '|'
+
+let g:airline#extensions#whitespace#enabled = 0 "trailing spaces
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
+
+function! AirlineInit()
+  let g:airline_section_a = airline#section#create(['mode'])
+  let g:airline_section_b = airline#section#create(['branch'])
+  let g:airline_section_c = airline#section#create(['%f'])
+  " let g:airline_section_d = airline#section#create([])
+  " let g:airline_section_e = airline#section#create([])
+  " let g:airline_section_f = airline#section#create([])
+  " let g:airline_section_g = airline#section#create([])
+  " let g:airline_section_h = airline#section#create([])
+  let g:airline_section_x = airline#section#create([])
+  let g:airline_section_y= airline#section#create(['%p%%'])
+  let g:airline_section_z = airline#section#create_right(['l:%l c:%c'])
+endfunction
+autocmd VimEnter * call AirlineInit()
+
+let g:airline_powerline_fonts=1
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+" ========================================================
+" Buffers & Tabs
+" ========================================================
+" https://github.com/jdavis/dotfiles/blob/master/.vimrc
+" set hidden
+"noremap <M-right> :bnext<CR>
+"noremap <M-left> :bprevious<CR>
+
+" Next and Prev Buffer
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+
+" Next and Prev Tabs
+noremap <M-right> :tabn<CR>
+noremap <M-left> :tabp<CR>
+
+" ========================================================
+" Enforce Purity
+" ========================================================
+noremap  <Up> <Nop>
+noremap  <Down> <Nop>
+noremap  <Left> <Nop>
+noremap  <Right> <Nop>
