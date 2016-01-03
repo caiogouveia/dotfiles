@@ -1,13 +1,17 @@
-#Exports
+# Exports
+# ===========================================================================>
 source ~/Projects/dotfiles/exports.sh
 
 # Oh My Zsh
+# ===========================================================================>
 source ~/Projects/dotfiles/zsh/oh-my-zsh.sh
 
-#Alias
+# Alias
+# ===========================================================================>
 source ~/Projects/dotfiles/alias.sh
 
 # Base16 Shell
+# ===========================================================================>
 # BASE16_SHELL="$HOME/.config/base16-shell/base16-eighties.dark.sh"
 # [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
