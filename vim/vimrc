@@ -43,11 +43,8 @@ Plugin 'chriskempson/base16-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-
-
-" ========================================================
-" VIM Interface 
-" ========================================================
+" VIM
+" ===========================================================================>
 set nocompatible " be iMproved, required
 set backspace=2
 set encoding=utf-8
@@ -80,9 +77,8 @@ set title " set terminal title
 " set foldmethod=indent
 " set foldlevel=1
 
-" ========================================================
 " ColorSchemes 
-" ========================================================
+" ===========================================================================>
 if (has("gui_running"))
   set guioptions+=e
   set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14 "make sure to escape the spaces in the name properly
@@ -103,7 +99,6 @@ if (has("gui_running"))
   "set guicursor+=i:blinkwait10
 endif
 
-
 " let base16colorspace=256  " Access colors present in 256 colorspace
 set background=light
 highlight NonText ctermbg=none
@@ -123,30 +118,24 @@ highlight Title ctermfg=LightBlue ctermbg=Magenta
 
 let g:airline_theme = 'sol'
 
-
-" ========================================================
-set makeprg=rake
-
-" ========================================================
 " Ruby specific 
-" ========================================================
+" ===========================================================================>
+set makeprg=rake
 set nocompatible      " We're running Vim, not Vi!
 syntax on             " Enable syntax highlighting
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
-" ========================================================
 " Mouse
-" ========================================================
+" ===========================================================================>
 if has('mouse')
   set mouse=a
   set ttymouse=xterm2
 endif
 
-" ========================================================
 " Searching
-" ========================================================
+" ===========================================================================>
 set ignorecase " case insensitive searching
 set smartcase " case-sensitive if expresson contains a capital letter
 set hlsearch
@@ -161,9 +150,8 @@ set nocompatible
 set tabstop=2
 set shiftwidth=2
 
-" ========================================================
 " Line Numbers and Cursor
-" ========================================================
+" ===========================================================================>
 set wrap
 set linespace=1 
 set number " show line numbers
@@ -172,18 +160,16 @@ set numberwidth=5
 set cursorline
 set colorcolumn=81 " red line and over is error
 
-" ========================================================
 " Vim Test
-" ========================================================
+" ===========================================================================>
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>r :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
-" ========================================================
 " NerdTree
-" ========================================================
+" ===========================================================================>
 " autocmd vimenter * NERDTree
 let g:NERDTreeDirArrows = 1
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -202,9 +188,8 @@ map <C-n> :NERDTreeToggle<CR>
 "let g:nerdtree_tabs_open_on_gui_startup = 1
 
 
-" ========================================================
 " ControlP
-" ========================================================
+" ===========================================================================>
 let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_show_hidden = 1
@@ -215,17 +200,15 @@ let g:ctrlp_prompt_mappings = {
 
 nmap <leader>l :set list!<CR>
 
-" ========================================================
 " Toggle invisible characters
-" ========================================================
+" ===========================================================================>
 set invlist
 set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
 set showbreak=↪
 
-" ========================================================
 " Airline 
-" ========================================================
+" ===========================================================================>
 " tab line
 " let g:airline#extensions#tabline#enabled = 1
 " let g:airline#extensions#tabline#left_sep = ' '
@@ -267,9 +250,8 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
 
-" ========================================================
 " Buffers & Tabs
-" ========================================================
+" ===========================================================================>
 " https://github.com/jdavis/dotfiles/blob/master/.vimrc
 " set hidden
 "noremap <M-right> :bnext<CR>
@@ -283,9 +265,8 @@ nnoremap <S-Tab> :bprevious<CR>
 noremap <M-right> :tabn<CR>
 noremap <M-left> :tabp<CR>
 
-" ========================================================
 " Enforce Purity
-" ========================================================
+" ===========================================================================>
 noremap  <Up> <Nop>
 noremap  <Down> <Nop>
 noremap  <Left> <Nop>
