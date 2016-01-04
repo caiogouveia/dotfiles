@@ -83,8 +83,8 @@ if (has("gui_running"))
   set guioptions+=e
   set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14 "make sure to escape the spaces in the name properly
   set linespace=1
-  colorscheme base16-atelierdune
-  set background=light
+  " colorscheme base16-atelierdune
+  " set background=light
   "Line number and ColumnColor
   " highlight LineNr guifg=#515559 guibg=#272a2e
   "highlight ColorColumn guifg=Red guibg=Red
