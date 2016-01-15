@@ -14,6 +14,9 @@ Plugin 'slim-template/vim-slim'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'JulesWang/css.vim'
 Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'junegunn/goyo.vim'
 
 " Utilities
 Plugin 'ctrlp.vim'
@@ -74,6 +77,7 @@ set title " set terminal title
 
 " Folding
 " set foldenable
+set nofoldenable
 " set foldmethod=indent
 " set foldlevel=1
 
@@ -271,3 +275,21 @@ noremap  <Up> <Nop>
 noremap  <Down> <Nop>
 noremap  <Left> <Nop>
 noremap  <Right> <Nop>
+
+" turn-on distraction free writing mode for markdown files
+" au BufNewFile,BufRead *.{rdoc,md,mdown,mkd,mkdn,markdown,mdwn} call DistractionFreeWriting()
+function! DistractionFreeWriting()
+  colorscheme iawriter
+  let g:vim_markdown_folding_disabled=1
+  set nofoldenable
+  set background=light
+  set gfn=Cousine:h14                " font to use
+  set lines=40 columns=100           " size of the editable area
+  " set fuoptions=background:#00f5f6f6 " macvim specific setting for editor's background color 
+  set guioptions-=r                  " remove right scrollbar
+  set laststatus=0                   " don't show status line
+  set noruler                        " don't show ruler
+  " set fullscreen                     " go to fullscreen editing mode
+  set nonumber
+  set linebreak                      " break the lines on words
+endfunction
