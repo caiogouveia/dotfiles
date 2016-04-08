@@ -19,8 +19,8 @@ PS1="[%n%{$fg[red]%}@%{$reset_color%}%m %~]\$ " #Red Hat style PS1
 # export MANPATH="/usr/local/man:$MANPATH"
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin"
 export PATH=$PATH:"/Developer/usr/bin"
-export PATH=$PATH:"~/bin"
-
+# export PATH=$PATH:"~/bin"
+export PATH=~/bin:.:$PATH
 # Imagem Magick Stuff
 # ===========================================================================>
 #export MAGICK_HOME="$HOME/opt/ImageMagick-6.9.1"
