@@ -1,13 +1,13 @@
 # Path to your oh-my-zsh installation.
-# export ZSH=/Users/caiogouveia/.oh-my-zsh
+export ZSH=/Users/caiogouveia/.oh-my-zsh
 # source $ZSH/oh-my-zsh.sh
-# plugins=(git)
+plugins=(git)
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="bullet-train"
+ZSH_THEME="bullet-train"
 # ZSH_THEME="mira"
 
 # Uncomment the following line to use case-sensitive completion.
