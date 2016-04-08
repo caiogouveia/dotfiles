@@ -8,6 +8,7 @@ Plugin 'gmarik/vundle'
 Plugin 'toyamarinyon/vim-swift'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
+Plugin 'ngmy/vim-rubocop'
 Plugin 'pangloss/vim-javascript'
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'slim-template/vim-slim'
@@ -21,10 +22,11 @@ Plugin 'junegunn/goyo.vim'
 " Utilities
 Plugin 'ctrlp.vim'
 Plugin 'msanders/snipmate.vim'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'powerline/powerline'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'scrooloose/nerdtree'
+" Plugin 'scrooloose/nerdtree'
 " Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
@@ -52,7 +54,7 @@ set nocompatible " be iMproved, required
 set backspace=2
 set encoding=utf-8
 "set backspace=ident,eol,start
-filetype off 
+filetype off
 set ruler
 set laststatus=2 " show the satus line all the time
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -60,7 +62,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set magic " Set magic on, for regex
 
 " VertSplit
-set fillchars+=vert:\ 
+set fillchars+=vert:\|
 
 set ttyfast " faster redrawing
 set clipboard=unnamed "suposed to be the mac os x clipboard
@@ -73,6 +75,8 @@ set wildmode=list:longest " complete files like a shell
 set cmdheight=1 " command bar height
 filetype plugin indent on
 syntax on
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
 set title " set terminal title
 
 " Folding
@@ -81,12 +85,15 @@ set nofoldenable
 " set foldmethod=indent
 " set foldlevel=1
 
-" ColorSchemes 
+" ColorSchemes
 " ===========================================================================>
 if (has("gui_running"))
   set guioptions+=e
-  set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h14 "make sure to escape the spaces in the name properly
-  set linespace=1
+  " set guifont=Monaco:h14
+  set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15 "make sure to escape the spaces in the name properly
+  set linespace=5
+  highlight clear VertSplit
+  highlight VertSplit guifg=#333333 guibg=#666666
   " colorscheme base16-atelierdune
   " set background=light
   "Line number and ColumnColor
@@ -104,23 +111,26 @@ if (has("gui_running"))
 endif
 
 " let base16colorspace=256  " Access colors present in 256 colorspace
-set background=light
+" set background=dark
+" colorscheme base16-atelierdune
+
 highlight NonText ctermbg=none
 highlight Normal ctermbg=none
 highlight clear VertSplit
-highlight VertSplit ctermfg=100 ctermbg=250
+highlight VertSplit ctermfg=1 ctermbg=15
 highlight LineNr ctermbg=lightgray ctermfg=darkgray
 highlight CursorLine cterm=NONE ctermbg=lightred
 highlight Cursor ctermfg=white ctermbg=Red
 highlight ColorColumn ctermbg=red
-highlight SignColumn ctermbg=140 "git gutter
+highlight SignColumn ctermbg=254 "git gutter color
+
 " Tab bar
 highlight TabLineFill ctermfg=white ctermbg=black
 highlight TabLine ctermfg=gray ctermbg=white
-highlight TabLineSel ctermfg=lightGray ctermbg=Darkgreen
-highlight Title ctermfg=LightBlue ctermbg=Magenta
+highlight TabLineSel ctermfg=white ctermbg=DarkRed
+highlight Title guifg=red ctermfg=DarkRed ctermbg=none
 
-let g:airline_theme = 'sol'
+let g:airline_theme = 'redhat'
 
 " Ruby specific 
 " ===========================================================================>
@@ -157,7 +167,7 @@ set shiftwidth=2
 " Line Numbers and Cursor
 " ===========================================================================>
 set wrap
-set linespace=1 
+set linespace=1
 set number " show line numbers
 set numberwidth=5
 " set relativenumber
@@ -191,7 +201,6 @@ map <C-n> :NERDTreeToggle<CR>
 "nmap <silent> <leader>y :NERDTreeFind<cr>
 "let g:nerdtree_tabs_open_on_gui_startup = 1
 
-
 " ControlP
 " ===========================================================================>
 let g:ctrlp_map = '<c-p>'
@@ -206,12 +215,12 @@ nmap <leader>l :set list!<CR>
 
 " Toggle invisible characters
 " ===========================================================================>
-set invlist
-set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
-highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
-set showbreak=↪
+" set invlist
+" set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+" highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
+" set showbreak=↪
 
-" Airline 
+" Airline
 " ===========================================================================>
 " tab line
 " let g:airline#extensions#tabline#enabled = 1
@@ -221,8 +230,8 @@ set showbreak=↪
 let g:airline#extensions#whitespace#enabled = 0 "trailing spaces
 let g:airline_mode_map = {
       \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
+      \ 'n'  : 'NORM',
+      \ 'i'  : 'INSE',
       \ 'R'  : 'R',
       \ 'c'  : 'C',
       \ 'v'  : 'V',
@@ -266,15 +275,25 @@ nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 
 " Next and Prev Tabs
-noremap <M-right> :tabn<CR>
-noremap <M-left> :tabp<CR>
+" noremap <M-right> :tabn<CR>
+" noremap <M-left> :tabp<CR>
+nnoremap th :tabnext<CR>
+nnoremap tl :tabprev<CR>
+nnoremap tn :tabnew<CR>
 
 " Enforce Purity
+" Disable arrow keys
 " ===========================================================================>
 noremap  <Up> <Nop>
 noremap  <Down> <Nop>
 noremap  <Left> <Nop>
 noremap  <Right> <Nop>
+
+" Map :W to :w
+:command! WQ wq
+:command! Wq wq
+:command! W w
+:command! Q q
 
 " turn-on distraction free writing mode for markdown files
 " au BufNewFile,BufRead *.{rdoc,md,mdown,mkd,mkdn,markdown,mdwn} call DistractionFreeWriting()
