@@ -1,52 +1,37 @@
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-" vundld packages
-Plugin 'gmarik/vundle'
+call plug#begin('~/.vim/plugged')
 
-" Languages
-Plugin 'toyamarinyon/vim-swift'
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'pangloss/vim-javascript'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'slim-template/vim-slim'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'JulesWang/css.vim'
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'junegunn/goyo.vim'
+Plug 'JulesWang/css.vim'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 
-" Utilities
-Plugin 'ctrlp.vim'
-Plugin 'msanders/snipmate.vim'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'powerline/powerline'
-Plugin 'tomtom/tcomment_vim'
-" Plugin 'scrooloose/nerdtree'
-" Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'janko-m/vim-test'
-Plugin 'mattn/emmet-vim'
+" javascript
+Plug 'tpope/vim-commentary'
+Plug 'mxw/vim-jsx'
+Plug 'jiangmiao/auto-pairs'
+Plug 'othree/yajs.vim'
 
 " Color & Themes 
-Plugin 'freeo/vim-kalisi'
-Plugin 'jpo/vim-railscasts-theme'
-Plugin 'chriskempson/base16-vim'
+Plug 'tomasiser/vim-code-dark'
+" Plug 'jpo/vim-railscasts-theme'
 
-" Plugin 'ZoomWin'
-" Plugin 'Syntastic'
-" Plugin 'matchit.zip'
-" Plugin 'tristen/vim-sparkup'
-" Plugin 'ervandew/supertab'
-" Plugin 'bronson/vim-trailing-whitespace'
-"
-call vundle#end()            " required
-filetype plugin indent on    " required
+" disabled ??
+" Plug 'plasticboy/vim-markdown'
+" Plug 'pangloss/vim-javascript'
+" Plug 'powerline/powerline'
+" Plug 'msanders/snipmate.vim'
+" Plug 'tomtom/tcomment_vim'
+" Plug 'janko-m/vim-test'
+" Plug 'mattn/emmet-vim'
+
+" Initialize plugin system
+call plug#end()
 
 " VIM
 " ===========================================================================>
@@ -57,8 +42,9 @@ set encoding=utf-8
 filetype off
 set ruler
 set laststatus=2 " show the satus line all the time
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set nobackup nowritebackup
 set magic " Set magic on, for regex
 
 " VertSplit
@@ -87,66 +73,46 @@ set nofoldenable
 
 " ColorSchemes
 " ===========================================================================>
-if (has("gui_running"))
-  set guioptions+=e
-  " set guifont=Monaco:h14
-  set guifont=DejaVu\ Sans\ Mono\ for\ Powerline:h15 "make sure to escape the spaces in the name properly
-  set linespace=5
-  highlight clear VertSplit
-  highlight VertSplit guifg=#333333 guibg=#666666
-  " colorscheme base16-atelierdune
-  " set background=light
-  "Line number and ColumnColor
-  " highlight LineNr guifg=#515559 guibg=#272a2e
-  "highlight ColorColumn guifg=Red guibg=Red
-  "highlight ColorColumn guifg=#515559 guibg=#272a2e
+colorscheme codedark
+let g:airline_theme = 'kolor'
 
-  " Cursor on GUI
-  highlight Cursor guifg=white guibg=Red
-  "highlight iCursor guifg=white guibg=steelblue
-  "set guicursor=n-v-c:block-Cursor
-  "set guicursor+=i:ver100-iCursor
-  "set guicursor+=n-v-c:blinkon0
-  "set guicursor+=i:blinkwait10
-endif
-
-" let base16colorspace=256  " Access colors present in 256 colorspace
-" set background=dark
-" colorscheme base16-atelierdune
-
-highlight NonText ctermbg=none
-highlight Normal ctermbg=none
-highlight clear VertSplit
-highlight VertSplit ctermfg=1 ctermbg=15
-highlight LineNr ctermbg=lightgray ctermfg=darkgray
-highlight CursorLine cterm=NONE ctermbg=lightred
-highlight Cursor ctermfg=white ctermbg=Red
-highlight ColorColumn ctermbg=red
-highlight SignColumn ctermbg=254 "git gutter color
-
-" Tab bar
-highlight TabLineFill ctermfg=white ctermbg=black
-highlight TabLine ctermfg=gray ctermbg=white
-highlight TabLineSel ctermfg=white ctermbg=DarkRed
-highlight Title guifg=red ctermfg=DarkRed ctermbg=none
-
-let g:airline_theme = 'redhat'
+" highlight NonText ctermbg=none
+" highlight Normal ctermbg=none
+" highlight clear VertSplit
+" highlight VertSplit ctermfg=1 ctermbg=15
+" highlight LineNr ctermbg=lightgray ctermfg=darkgray
+" " highlight LineNr guifg=#515559 guibg=#272a2e
+" highlight CursorLine cterm=NONE ctermbg=lightred
+"
+" " Cursor
+" highlight Cursor guifg=red guibg=black
+" highlight iCursor guifg=red guibg=steelblue
+" set guicursor=n-v-c:block-Cursor
+" set guicursor+=i:ver100-iCursor
+" set guicursor+=n-v-c:blinkon0
+" set guicursor+=i:blinkwait10
+" highlight ColorColumn ctermbg=red
+" highlight SignColumn ctermbg=254 "git gutter color
+"
+" " Tab bar
+" highlight TabLineFill ctermfg=white ctermbg=black
+" highlight TabLine ctermfg=gray ctermbg=white
+" highlight TabLineSel ctermfg=white ctermbg=DarkRed
+" highlight Title guifg=red ctermfg=DarkRed ctermbg=none
+"
 
 " Ruby specific 
 " ===========================================================================>
-set makeprg=rake
-set nocompatible      " We're running Vim, not Vi!
-syntax on             " Enable syntax highlighting
-filetype on           " Enable filetype detection
-filetype indent on    " Enable filetype-specific indenting
-filetype plugin on    " Enable filetype-specific plugins
-
-" Mouse
+" set makeprg=rake
+" set nocompatible      " We're running Vim, not Vi!
+" syntax on             " Enable syntax highlighting
+" filetype on           " Enable filetype detection
+" filetype indent on    " Enable filetype-specific indenting
+" filetype plugin on    " Enable filetype-specific plugins
+"
+" Mouse support
 " ===========================================================================>
-if has('mouse')
-  set mouse=a
-  set ttymouse=xterm2
-endif
+set mouse=a
 
 " Searching
 " ===========================================================================>
@@ -167,20 +133,23 @@ set shiftwidth=2
 " Line Numbers and Cursor
 " ===========================================================================>
 set wrap
-set linespace=1
+set linespace=4
 set number " show line numbers
 set numberwidth=5
-" set relativenumber
+set relativenumber
 set cursorline
+
+" Colorcolumn
+highlight ColorColumn ctermbg=red
 set colorcolumn=81 " red line and over is error
 
 " Vim Test
 " ===========================================================================>
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>r :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+" nmap <silent> <leader>t :TestNearest<CR>
+" nmap <silent> <leader>r :TestFile<CR>
+" nmap <silent> <leader>a :TestSuite<CR>
+" nmap <silent> <leader>l :TestLast<CR>
+" nmap <silent> <leader>g :TestVisit<CR>
 
 " NerdTree
 " ===========================================================================>
@@ -210,6 +179,8 @@ let g:ctrlp_prompt_mappings = {
       \ 'AcceptSelection("e")': ['<c-t>'],
       \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
       \ }
+let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
 nmap <leader>l :set list!<CR>
 
@@ -223,15 +194,15 @@ nmap <leader>l :set list!<CR>
 " Airline
 " ===========================================================================>
 " tab line
-" let g:airline#extensions#tabline#enabled = 1
-" let g:airline#extensions#tabline#left_sep = ' '
-" let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
 
 let g:airline#extensions#whitespace#enabled = 0 "trailing spaces
 let g:airline_mode_map = {
       \ '__' : '-',
-      \ 'n'  : 'NORM',
-      \ 'i'  : 'INSE',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
       \ 'R'  : 'R',
       \ 'c'  : 'C',
       \ 'v'  : 'V',
@@ -245,38 +216,45 @@ let g:airline_mode_map = {
 function! AirlineInit()
   let g:airline_section_a = airline#section#create(['mode'])
   let g:airline_section_b = airline#section#create(['branch'])
-  let g:airline_section_c = airline#section#create(['%f'])
+  " let g:airline_section_c = airline#section#create(['%f'])
   " let g:airline_section_d = airline#section#create([])
   " let g:airline_section_e = airline#section#create([])
   " let g:airline_section_f = airline#section#create([])
   " let g:airline_section_g = airline#section#create([])
   " let g:airline_section_h = airline#section#create([])
-  let g:airline_section_x = airline#section#create([])
-  let g:airline_section_y= airline#section#create(['%p%%'])
+  " let g:airline_section_x = airline#section#create([])
+  " let g:airline_section_y= airline#section#create(['%p%%'])
   let g:airline_section_z = airline#section#create_right(['l:%l c:%c'])
 endfunction
 autocmd VimEnter * call AirlineInit()
 
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 let g:airline_symbols.space = "\ua0"
 
-" Buffers & Tabs
+" Buffers, Tabs & Splits
 " ===========================================================================>
+
 " https://github.com/jdavis/dotfiles/blob/master/.vimrc
-" set hidden
+" Buffers
+"============================
 "noremap <M-right> :bnext<CR>
 "noremap <M-left> :bprevious<CR>
 
-" Next and Prev Buffer
+" Next and Prev Buffer in the same Tab
 nnoremap <Tab> :bnext<CR>
 nnoremap <S-Tab> :bprevious<CR>
 
+" Tabs
+"============================
 " Next and Prev Tabs
-" noremap <M-right> :tabn<CR>
-" noremap <M-left> :tabp<CR>
+" noremap <M-right> :tabnext<CR>
+" noremap <M-left> :tabprev<CR>
+"
+" tl < goto previous Tab. th > goto next Tab.
+" tn open new empty Tab.
 nnoremap th :tabnext<CR>
 nnoremap tl :tabprev<CR>
 nnoremap tn :tabnew<CR>
@@ -312,3 +290,16 @@ function! DistractionFreeWriting()
   set nonumber
   set linebreak                      " break the lines on words
 endfunction
+
+" Git Gutter"
+set updatetime=250
+let g:gitgutter_max_signs = 500
+" No mapping
+let g:gitgutter_map_keys = 0
+" Colors
+let g:gitgutter_override_sign_column_highlight = 0
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=2
+highlight GitGutterChange ctermfg=3
+highlight GitGutterDelete ctermfg=1
+highlight GitGutterChangeDelete ctermfg=4
