@@ -153,7 +153,8 @@ let g:fzf_action = {
   \ 'ctrl-s': 'vsplit',
   \ 'ctrl-l': 'vsplit'
   \}
- let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+let g:fzf_layout = { 'up': '~40%'  }
+let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " Toggle invisible characters
 " =====================================================================>
@@ -241,25 +242,8 @@ nnoremap tn :tabnew<CR>
 :command! W w
 :command! Q q
 
-" turn-on distraction free writing mode for markdown files
-" au BufNewFile,BufRead *.{rdoc,md,mdown,mkd,mkdn,markdown,mdwn} call DistractionFreeWriting()
-function! DistractionFreeWriting()
-  colorscheme iawriter
-  let g:vim_markdown_folding_disabled=1
-  set nofoldenable
-  set background=light
-  set gfn=Cousine:h14                " font to use
-  set lines=40 columns=100           " size of the editable area
-  " set fuoptions=background:#00f5f6f6 " macvim specific setting for editor's background color 
-  set guioptions-=r                  " remove right scrollbar
-  set laststatus=0                   " don't show status line
-  set noruler                        " don't show ruler
-  " set fullscreen                     " go to fullscreen editing mode
-  set nonumber
-  set linebreak                      " break the lines on words
-endfunction
-
 " Git Gutter"
+" =====================================================================>
 set updatetime=250
 let g:gitgutter_max_signs = 500
 " No mapping
@@ -274,12 +258,13 @@ highlight GitGutterChangeDelete ctermfg=4
 
 " start terminal in insert mode
 " =====================================================================>
+" turn terminal to normal mode with escape
+tnoremap <Esc> <C-\><C-n>
+" " start terminal in insert mode
 au BufEnter * if &buftype == 'terminal' | :startinsert | endif
-
-" open terminal on ctrl+;
-" uses zsh instead of bash
+" " open terminal on ctrl+n
 function! OpenTerminal()
-  split term://zsh
-  resize 10
+  split term://bash
+  resize 15
 endfunction
 nnoremap <c-n> :call OpenTerminal()<CR>

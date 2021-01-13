@@ -101,14 +101,25 @@ source "$HOME/dotfiles/alias.sh"
 
 eval $(dircolors -p | sed -e 's/DIR 01;34/DIR 01;36/' | dircolors /dev/stdin)
 
-export PATH="$HOME/bin/:$PATH"
+# user bin folder
+USR_BIN_DIR=$HOME/bin/
+if [ -d "$USR_BIN_DIR"  ]; then
+  export path="$home/bin/:$path"
+fi
 
 # rvm config
-source "/etc/profile.d/rvm.sh"
+RVM_CONFIG_FILE=/etc/profile.d/rvm.sh
+if [ -f "$RVM_CONFIG_FILE"  ]; then
+  source $RVM_CONFIG_FILE
+fi
+
 # nvm config
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+NVM_DIR=$HOME/.nvm
+if [ -d "$NVM_DIR"  ]; then
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
 # SPACESHIP_PROMPT_ORDER=(
 #   user          # Username section
