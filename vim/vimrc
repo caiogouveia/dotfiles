@@ -2,39 +2,35 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'JulesWang/css.vim'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'godlygeek/tabular'
-Plug 'kien/ctrlp.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
-Plug 'jistr/vim-nerdtree-tabs'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'ryanoasis/vim-devicons'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plug 'junegunn/fzf.vim'
 
 " javascript
 Plug 'tpope/vim-commentary'
 Plug 'mxw/vim-jsx'
 Plug 'jiangmiao/auto-pairs'
 Plug 'othree/yajs.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
 
 " Color & Themes 
 Plug 'tomasiser/vim-code-dark'
+Plug 'arcticicestudio/nord-vim'
 " Plug 'jpo/vim-railscasts-theme'
-
-" disabled ??
-" Plug 'plasticboy/vim-markdown'
-" Plug 'pangloss/vim-javascript'
-" Plug 'powerline/powerline'
-" Plug 'msanders/snipmate.vim'
-" Plug 'tomtom/tcomment_vim'
-" Plug 'janko-m/vim-test'
-" Plug 'mattn/emmet-vim'
 
 " Initialize plugin system
 call plug#end()
 
 " VIM
-" ===========================================================================>
+" =====================================================================>
 set nocompatible " be iMproved, required
 set backspace=2
 set encoding=utf-8
@@ -49,6 +45,8 @@ set magic " Set magic on, for regex
 
 " VertSplit
 set fillchars+=vert:\|
+set splitright
+set splitbelow
 
 set ttyfast " faster redrawing
 set clipboard=unnamed "suposed to be the mac os x clipboard
@@ -72,10 +70,12 @@ set nofoldenable
 " set foldlevel=1
 
 " ColorSchemes
-" ===========================================================================>
+" =====================================================================>
 colorscheme codedark
-let g:airline_theme = 'kolor'
+let g:airline_theme = 'codedark'
 
+" Colors
+" =====================================================================>
 " highlight NonText ctermbg=none
 " highlight Normal ctermbg=none
 " highlight clear VertSplit
@@ -101,21 +101,12 @@ let g:airline_theme = 'kolor'
 " highlight Title guifg=red ctermfg=DarkRed ctermbg=none
 "
 
-" Ruby specific 
-" ===========================================================================>
-" set makeprg=rake
-" set nocompatible      " We're running Vim, not Vi!
-" syntax on             " Enable syntax highlighting
-" filetype on           " Enable filetype detection
-" filetype indent on    " Enable filetype-specific indenting
-" filetype plugin on    " Enable filetype-specific plugins
-"
 " Mouse support
-" ===========================================================================>
+" =====================================================================>
 set mouse=a
 
 " Searching
-" ===========================================================================>
+" =====================================================================>
 set ignorecase " case insensitive searching
 set smartcase " case-sensitive if expresson contains a capital letter
 set hlsearch
@@ -131,68 +122,48 @@ set tabstop=2
 set shiftwidth=2
 
 " Line Numbers and Cursor
-" ===========================================================================>
+" =====================================================================>
 set wrap
 set linespace=4
 set number " show line numbers
 set numberwidth=5
-set relativenumber
+set norelativenumber
 set cursorline
 
 " Colorcolumn
 highlight ColorColumn ctermbg=red
 set colorcolumn=81 " red line and over is error
 
-" Vim Test
-" ===========================================================================>
-" nmap <silent> <leader>t :TestNearest<CR>
-" nmap <silent> <leader>r :TestFile<CR>
-" nmap <silent> <leader>a :TestSuite<CR>
-" nmap <silent> <leader>l :TestLast<CR>
-" nmap <silent> <leader>g :TestVisit<CR>
-
 " NerdTree
-" ===========================================================================>
-" autocmd vimenter * NERDTree
-let g:NERDTreeDirArrows = 1
-let g:NERDTreeDirArrowExpandable = '▸'
-let g:NERDTreeDirArrowCollapsible = '▾'
-let g:NERDTreeWinSize = 20
-" let NERDTreeMapOpenInTab='<ENTER>'
-"let NERDTreeMapOpenInTab='\r'
-let g:NERDTreeQuitOnOpen=1 " close NERDTree after a file is opened
-let NERDTreeShowHidden=1 " show hidden files in NERDTree
-"let NERDTreeIgnore = ['\.js.map$']" remove some files by extension
+" =====================================================================>
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
+let g:NERDTreeStatusline = ''
+" Automaticaly close nvim if NERDTree is only thing left open
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+ " Toggle
+ nnoremap <silent> <C-b> :NERDTreeToggle<CR>"
 
-" NERDTree maps
-map <C-n> :NERDTreeToggle<CR>
-"nmap <silent> <leader>k :NERDTreeToggle<cr>
-"nmap <silent> <leader>y :NERDTreeFind<cr>
-"let g:nerdtree_tabs_open_on_gui_startup = 1
-
-" ControlP
-" ===========================================================================>
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_prompt_mappings = {
-      \ 'AcceptSelection("e")': ['<c-t>'],
-      \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
-      \ }
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-
-nmap <leader>l :set list!<CR>
+" FZF
+" =====================================================================>
+nnoremap <C-p> :FZF<CR>
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'vsplit',
+  \ 'ctrl-l': 'vsplit'
+  \}
+ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 
 " Toggle invisible characters
-" ===========================================================================>
+" =====================================================================>
 " set invlist
 " set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 " highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
 " set showbreak=↪
 
 " Airline
-" ===========================================================================>
+" =====================================================================>
 " tab line
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = ' '
@@ -235,11 +206,9 @@ endif
 let g:airline_symbols.space = "\ua0"
 
 " Buffers, Tabs & Splits
-" ===========================================================================>
-
+" =====================================================================>
 " https://github.com/jdavis/dotfiles/blob/master/.vimrc
 " Buffers
-"============================
 "noremap <M-right> :bnext<CR>
 "noremap <M-left> :bprevious<CR>
 
@@ -259,13 +228,12 @@ nnoremap th :tabnext<CR>
 nnoremap tl :tabprev<CR>
 nnoremap tn :tabnew<CR>
 
-" Enforce Purity
-" Disable arrow keys
-" ===========================================================================>
-noremap  <Up> <Nop>
-noremap  <Down> <Nop>
-noremap  <Left> <Nop>
-noremap  <Right> <Nop>
+" Disable arrow keys - Enforce Purity
+" =====================================================================>
+" noremap  <Up> <Nop>
+" noremap  <Down> <Nop>
+" noremap  <Left> <Nop>
+" noremap  <Right> <Nop>
 
 " Map :W to :w
 :command! WQ wq
@@ -303,3 +271,15 @@ highlight GitGutterAdd ctermfg=2
 highlight GitGutterChange ctermfg=3
 highlight GitGutterDelete ctermfg=1
 highlight GitGutterChangeDelete ctermfg=4
+
+" start terminal in insert mode
+" =====================================================================>
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+
+" open terminal on ctrl+;
+" uses zsh instead of bash
+function! OpenTerminal()
+  split term://zsh
+  resize 10
+endfunction
+nnoremap <c-n> :call OpenTerminal()<CR>
