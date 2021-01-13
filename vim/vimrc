@@ -24,7 +24,7 @@ Plug 'peitalin/vim-jsx-typescript'
 " Color & Themes 
 Plug 'tomasiser/vim-code-dark'
 Plug 'arcticicestudio/nord-vim'
-" Plug 'jpo/vim-railscasts-theme'
+Plug 'jpo/vim-railscasts-theme'
 
 " Initialize plugin system
 call plug#end()

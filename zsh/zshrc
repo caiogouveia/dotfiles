@@ -104,7 +104,7 @@ eval $(dircolors -p | sed -e 's/DIR 01;34/DIR 01;36/' | dircolors /dev/stdin)
 # user bin folder
 USR_BIN_DIR=$HOME/bin/
 if [ -d "$USR_BIN_DIR"  ]; then
-  export path="$home/bin/:$path"
+  export PATH="$HOME/bin/:$PATH"
 fi
 
 # rvm config
@@ -114,8 +114,8 @@ if [ -f "$RVM_CONFIG_FILE"  ]; then
 fi
 
 # nvm config
-NVM_DIR=$HOME/.nvm
-if [ -d "$NVM_DIR"  ]; then
+NVM_DIR_TEST=$HOME/.nvm
+if [ -d "$NVM_DIR_TEST"  ]; then
   export NVM_DIR="$HOME/.nvm"
   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
