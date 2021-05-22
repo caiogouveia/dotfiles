@@ -98,28 +98,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 source "$HOME/dotfiles/alias.sh"
-
-eval $(dircolors -p | sed -e 's/DIR 01;34/DIR 01;36/' | dircolors /dev/stdin)
-
-# user bin folder
-USR_BIN_DIR=$HOME/bin/
-if [ -d "$USR_BIN_DIR"  ]; then
-  export PATH="$HOME/bin/:$PATH"
-fi
-
-# rvm config
-RVM_CONFIG_FILE=/etc/profile.d/rvm.sh
-if [ -f "$RVM_CONFIG_FILE"  ]; then
-  source $RVM_CONFIG_FILE
-fi
-
-# nvm config
-NVM_DIR_TEST=$HOME/.nvm
-if [ -d "$NVM_DIR_TEST"  ]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
+source "$HOME/dotfiles/exports.sh"
 
  SPACESHIP_PROMPT_ORDER=(
    user          # Username section
@@ -139,10 +118,9 @@ fi
  SPACESHIP_CHAR_SYMBOL="❯"
  SPACESHIP_CHAR_SUFFIX=" "
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 fpath=($fpath "/home/caiogouveia/.zfunctions")
 
-  # Set Spaceship ZSH as a prompt
-  autoload -U promptinit; promptinit
-  prompt spaceship
+# Set Spaceship ZSH as a prompt
+autoload -U promptinit; promptinit
+prompt spaceship
