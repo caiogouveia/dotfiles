@@ -19,3 +19,4 @@ alias killrudy='killruby'
 alias kr="killruby"
 # windows WSL
 alias open='powershell.exe /c start'
+alias subl='"/mnt/c/Program Files/Sublime Text 3/subl.exe"'
