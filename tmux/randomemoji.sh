@@ -9,16 +9,13 @@ function randomize_string () {
 function random_el () {
   local array=($(randomize_string $@))
   # Bash $RANDOM is terrible; use jot.
+  # jot package required
   echo ${array[$(jot -r 1 0 `expr ${#array[*]} - 1`)]}
 }
 
 # Generate a random food emoji.
 function random_food () {
-    echo $(random_el "🍺 🍸 🍹 🍷 🍕 🍔 🍟 🍗 🍖 🍝 🍤 🍣 🍥 🍜 🍡 🍞 🍩 🍦 🍨 🍰 🍪 🍫 🍬 🍭 🍎 🍏 🍊 🍋 🍒 🍇 🍉 🍓 🍑 🍌 🍐 🍍 🍆 🍅  ")
-  # if [ -e "/System/Library/Fonts/Apple Color Emoji.ttf"  ]; then
-  # else
-  #   echo ""
-  # fi
+  echo $(random_el "🍺 🍸 🍹 🍷 🍕 🍔 🍟 🍗 🍖 🍝 🍤 🍣 🍥 🍜 🍡 🍞 🍩 🍦 🍨 🍰 🍪 🍫 🍬 🍭 🍎 🍏 🍊 🍋 🍒 🍇 🍉 🍓 🍑 🍌 🍐 🍍 🍆 🍅  ")
 }
 
 random_food
