@@ -100,6 +100,10 @@ source $ZSH/oh-my-zsh.sh
 source "$HOME/dotfiles/alias.sh"
 source "$HOME/dotfiles/exports.sh"
 
+# Export variables for Docker and Docker Compose
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+
  SPACESHIP_PROMPT_ORDER=(
    user          # Username section
    dir           # Current directory section
