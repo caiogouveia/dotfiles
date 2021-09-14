@@ -20,3 +20,9 @@ alias kr="killruby"
 # windows WSL
 alias open='powershell.exe /c start'
 alias subl='"/mnt/c/Program Files/Sublime Text/subl.exe"'
+# Laravel
+alias art="php artisan"
+alias dbreset="php artisan migrate:fresh --seed"
+alias tinker="php artisan tinker"
+alias serve="php artisan serve"
+alias migrate="php artisan migrate"
