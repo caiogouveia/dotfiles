@@ -35,6 +35,8 @@ call plug#end()
 
 " VIM
 " =====================================================================>
+" Disable Ex mode
+map Q <Nop>
 set nocompatible " be iMproved, required
 set backspace=2
 set encoding=utf-8
