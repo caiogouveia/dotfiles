@@ -51,4 +51,4 @@ fi
 # export M2_HOME=$HOME/Projects/apache-maven-3.2.3
 # export PATH=$PATH:$M2_HOME/bin
 
-
+export PATH=$PATH:/usr/local/bin/python
