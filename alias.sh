@@ -21,7 +21,6 @@ alias kr="killruby"
 
 # windows WSL
 alias open='powershell.exe /c start'
-alias subl='"/mnt/c/Program Files/Sublime Text/subl.exe"'
 
 # Laravel
 alias artisan="php artisan"
@@ -31,6 +30,7 @@ alias dbseed="dbreset"
 alias lseed="dbreset"
 alias tinker="php artisan tinker"
 alias laraserve="php artisan serve"
+alias ltest="php artisan test"
 alias lserve="laraserve"
 alias lmigrate="php artisan migrate"
 alias laramigrate="lmigrate"
