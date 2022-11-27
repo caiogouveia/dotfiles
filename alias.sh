@@ -19,6 +19,12 @@ alias killruby='killall -9 ruby'
 alias killrudy='killruby'
 alias kr="killruby"
 
+#docker stuff
+alias dll="docker container ls"
+alias dlli="docker image ls"
+alias dstop="docker container stop"
+alias rmdoc="docker container rm"
+
 # windows WSL
 alias open='powershell.exe /c start'
 
