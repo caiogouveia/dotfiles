@@ -97,8 +97,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-source "$HOME/dotfiles/alias.sh"
-source "$HOME/dotfiles/exports.sh"
+source "$HOME/Dev/dotfiles/alias.sh"
+source "$HOME/Dev/dotfiles/exports.sh"
 
 # Export variables for Docker and Docker Compose
 export USER_ID=$(id -u)
