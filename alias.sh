@@ -19,14 +19,15 @@ alias killruby='killall -9 ruby'
 alias killrudy='killruby'
 alias kr="killruby"
 
+# open
+[[ $OSTYPE = darwin* ]] && alias open="open" || alias open="thunar"
+[[ $OSTYPE = msys* ]] && alias open="powershell.exe /c start" || alias open="thunar"
+ 
 #docker stuff
 alias dll="docker container ls"
 alias dlli="docker image ls"
 alias dstop="docker container stop"
 alias rmdoc="docker container rm"
-
-# windows WSL
-alias open='powershell.exe /c start'
 
 # Laravel
 alias artisan="php artisan"
