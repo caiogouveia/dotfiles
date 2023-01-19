@@ -4,12 +4,16 @@ alias c="clear"
 alias cls="clear"
 alias vim="nvim"
 alias ovim="vim"
+alias vi="nvim"
 alias ls='ls -G --color=auto'
 alias ll="ls -ls --color=auto"
 alias llm="ls -lsh --color=auto"
 alias la="ls -la --color=auto"
 alias lla="ls -la --color=auto"
 alias more="less"
+
+# git
+alias giff="git diff $1^!"
 
 # rails/ruby
 alias rs="rails s"
@@ -25,8 +29,8 @@ alias dlli="docker image ls"
 alias dstop="docker container stop"
 alias rmdoc="docker container rm"
 
-# windows WSL
-alias open='powershell.exe /c start'
+# windows WSL, linus and mac (WIP)
+alias open='dolphin .'
 
 # Laravel
 alias artisan="php artisan"
