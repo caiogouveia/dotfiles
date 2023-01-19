@@ -1,5 +1,6 @@
 # Alias
 # ============================================================================>
+## teste
 alias c="clear"
 alias cls="clear"
 alias vim="nvim"
