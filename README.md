@@ -1,1 +1,1 @@
-My Dotfiles (wip)
+My Dotfiles (work in progress)
