@@ -24,7 +24,7 @@ alias killrudy='killruby'
 alias kr="killruby"
 
 # open
-linus_app="dolphin"
+linux_app="dolphin"
 [[ $OSTYPE = darwin* ]] && alias open="open" || alias open=$linux_app
 [[ $OSTYPE = msys* ]] && alias open="powershell.exe /c start" || alias open=$linux_app
  
