@@ -2,15 +2,17 @@
 # ============================================================================>
 alias c="clear"
 alias cls="clear"
-alias vim="nvim"
+alias vim="~/.local/bin/lvim"
+# alias vim="nvim"
 alias ovim="vim"
-alias vi="nvim"
+alias vi="vim"
 alias ls='ls -G --color=auto'
 alias ll="ls -ls --color=auto"
 alias llm="ls -lsh --color=auto"
 alias la="ls -la --color=auto"
 alias lla="ls -la --color=auto"
 alias more="less"
+alias tamanho_pastas="du -h --max-depth=1"
 
 # git
 alias giff="git diff $1^!"
