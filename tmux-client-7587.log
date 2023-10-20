@@ -1,0 +1,47 @@
+1697804587.123760 client started (7587): version 3.0a, socket /tmp/tmux-1000/default, protocol 8
+1697804587.123787 on Linux 5.15.90.1-microsoft-standard-WSL2 #1 SMP Fri Jan 27 02:56:13 UTC 2023; libevent 2.1.11-stable (poll)
+1697804587.123795 socket is /tmp/tmux-1000/default
+1697804587.123802 trying connect
+1697804587.123853 add peer 0x557aa2f98630: 6 ((nil))
+1697804587.123888 sending message 100 to peer 0x557aa2f98630 (4 bytes)
+1697804587.123892 sending message 101 to peer 0x557aa2f98630 (15 bytes)
+1697804587.123894 sending message 102 to peer 0x557aa2f98630 (12 bytes)
+1697804587.123896 sending message 108 to peer 0x557aa2f98630 (24 bytes)
+1697804587.123898 sending message 104 to peer 0x557aa2f98630 (0 bytes)
+1697804587.123900 sending message 107 to peer 0x557aa2f98630 (4 bytes)
+1697804587.123902 sending message 105 to peer 0x557aa2f98630 (16 bytes)
+1697804587.123904 sending message 105 to peer 0x557aa2f98630 (24 bytes)
+1697804587.123906 sending message 105 to peer 0x557aa2f98630 (29 bytes)
+1697804587.123908 sending message 105 to peer 0x557aa2f98630 (17 bytes)
+1697804587.123910 sending message 105 to peer 0x557aa2f98630 (28 bytes)
+1697804587.123912 sending message 105 to peer 0x557aa2f98630 (13 bytes)
+1697804587.123914 sending message 105 to peer 0x557aa2f98630 (23 bytes)
+1697804587.123916 sending message 105 to peer 0x557aa2f98630 (16 bytes)
+1697804587.123918 sending message 105 to peer 0x557aa2f98630 (13 bytes)
+1697804587.123920 sending message 105 to peer 0x557aa2f98630 (34 bytes)
+1697804587.123922 sending message 105 to peer 0x557aa2f98630 (1506 bytes)
+1697804587.123928 sending message 105 to peer 0x557aa2f98630 (26 bytes)
+1697804587.123930 sending message 105 to peer 0x557aa2f98630 (34 bytes)
+1697804587.123932 sending message 105 to peer 0x557aa2f98630 (20 bytes)
+1697804587.123934 sending message 105 to peer 0x557aa2f98630 (32 bytes)
+1697804587.123936 sending message 105 to peer 0x557aa2f98630 (10 bytes)
+1697804587.123938 sending message 105 to peer 0x557aa2f98630 (11 bytes)
+1697804587.123940 sending message 105 to peer 0x557aa2f98630 (8 bytes)
+1697804587.123942 sending message 105 to peer 0x557aa2f98630 (32 bytes)
+1697804587.123944 sending message 105 to peer 0x557aa2f98630 (8 bytes)
+1697804587.123946 sending message 105 to peer 0x557aa2f98630 (65 bytes)
+1697804587.123948 sending message 105 to peer 0x557aa2f98630 (638 bytes)
+1697804587.123951 sending message 105 to peer 0x557aa2f98630 (54 bytes)
+1697804587.123953 sending message 105 to peer 0x557aa2f98630 (16 bytes)
+1697804587.123954 sending message 105 to peer 0x557aa2f98630 (40 bytes)
+1697804587.123957 sending message 105 to peer 0x557aa2f98630 (22 bytes)
+1697804587.123958 sending message 105 to peer 0x557aa2f98630 (16 bytes)
+1697804587.123960 sending message 106 to peer 0x557aa2f98630 (0 bytes)
+1697804587.123963 sending message 200 to peer 0x557aa2f98630 (4 bytes)
+1697804587.123965 client loop enter
+1697804587.125113 peer 0x557aa2f98630 message 207
+1697804587.125145 sending message 208 to peer 0x557aa2f98630 (0 bytes)
+1697804600.351028 peer 0x557aa2f98630 message 203
+1697804600.351061 sending message 205 to peer 0x557aa2f98630 (0 bytes)
+1697804600.351279 peer 0x557aa2f98630 message 204
+1697804600.351299 client loop exit

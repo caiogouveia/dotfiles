@@ -21,6 +21,11 @@ if [ -d "$USR_BIN_DIR"  ]; then
   export PATH="$HOME/bin/:$PATH"
 fi
 
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 # rvm config
 RVM_CONFIG_FILE=/etc/profile.d/rvm.sh
 if [ -f "$RVM_CONFIG_FILE"  ]; then
@@ -45,7 +50,7 @@ fi
 
 # JAVA
 #/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/jre
-# export JAVA_HOME=`/usr/libexec/java_home` 
+# export JAVA_HOME=`/usr/libexec/java_home`
 
 # Apache Maven
 # export M2_HOME=$HOME/Projects/apache-maven-3.2.3
