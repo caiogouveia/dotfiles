@@ -40,6 +40,12 @@ if [ -d "$NVM_DIR_TEST"  ]; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
+DENO_DIR_TEST=$HOME/.deno
+if [ -d "$NVM_DIR_TEST"  ]; then
+  export DENO_INSTALL="$HOME/.deno"
+  export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
 # Imagem Magick Stuff
 #export MAGICK_HOME="$HOME/opt/ImageMagick-6.9.1"
 #export PATH="$MAGICK_HOME/bin:$PATH"
