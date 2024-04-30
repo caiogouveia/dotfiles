@@ -2,7 +2,7 @@
 # ============================================================================>
 alias c="clear"
 alias cls="clear"
-alias vim="~/.local/bin/lvim"
+# alias vim="~/.local/bin/lvim"
 # alias vim="nvim"
 alias ovim="vim"
 alias vi="vim"
