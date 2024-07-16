@@ -124,6 +124,8 @@ source ~/DEV/dotfiles/powerlevel10k/powerlevel10k.zsh-theme
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# ssl + sqlserver
+export OPENSSL_CONF=/etc/ssl/openssl.cnf
 export PATH="$PATH:/opt/mssql-tools18/bin"
 
 eval "$(starship init zsh)"

@@ -65,6 +65,6 @@ fi
 export PATH=$PATH:/usr/local/bin/python
 export PATH="$PATH:$HOME/Dev/libs/flutter/bin"
 export PATH="$PATH:$HOME/Android/Sdk"
-export PATH="$PATH:/opt/mssql-tools/bin"
-# export PATH="$PATH:/opt/mssql-tools18/bin"
+# export PATH="$PATH:/opt/mssql-tools/bin"
+export PATH="$PATH:/opt/mssql-tools18/bin"
 
