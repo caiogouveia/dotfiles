@@ -135,7 +135,9 @@ set wrap
 set linespace=4
 set number " show line numbers
 set numberwidth=5
-set norelativenumber
+" set norelativenumber
+set relativenumber
+set rnu
 set cursorline
 
 " Colorcolumn
