@@ -1,6 +1,8 @@
 call plug#begin('~/.vim/plugged')
 
 Plug 'github/copilot.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'bagrat/vim-buffet'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
@@ -9,8 +11,6 @@ Plug 'airblade/vim-gitgutter'
 Plug 'ryanoasis/vim-devicons'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
-" Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-startify'
 
 " javascript
@@ -81,8 +81,8 @@ set nofoldenable
 
 " ColorSchemes
 " =====================================================================>
-colorscheme codedark
-let g:airline_theme = 'codedark'
+colorscheme railscasts
+" let g:airline_theme = 'nord'
 
 " Colors
 " =====================================================================>
@@ -91,10 +91,10 @@ let g:airline_theme = 'codedark'
 " highlight clear VertSplit
 " highlight VertSplit ctermfg=1 ctermbg=15
 " highlight LineNr ctermbg=lightgray ctermfg=darkgray
-" " highlight LineNr guifg=#515559 guibg=#272a2e
+" highlight LineNr guifg=#515559 guibg=#272a2e
 " highlight CursorLine cterm=NONE ctermbg=lightred
-"
-" " Cursor
+
+" " " Cursor
 " highlight Cursor guifg=red guibg=black
 " highlight iCursor guifg=red guibg=steelblue
 " set guicursor=n-v-c:block-Cursor
@@ -103,13 +103,13 @@ let g:airline_theme = 'codedark'
 " set guicursor+=i:blinkwait10
 " highlight ColorColumn ctermbg=red
 " highlight SignColumn ctermbg=254 "git gutter color
-"
-" " Tab bar
+
+" " " Tab bar
 " highlight TabLineFill ctermfg=white ctermbg=black
 " highlight TabLine ctermfg=gray ctermbg=white
 " highlight TabLineSel ctermfg=white ctermbg=DarkRed
 " highlight Title guifg=red ctermfg=DarkRed ctermbg=none
-"
+
 
 " Mouse support
 " =====================================================================>
@@ -136,12 +136,14 @@ set wrap
 set linespace=5
 set number " show line numbers
 set numberwidth=5
-set norelativenumber
+" set norelativenumber
+set relativenumber
+set rnu
 set cursorline
 
 " Colorcolumn
 highlight ColorColumn ctermbg=red
-set colorcolumn=81 
+set colorcolumn=81
 
 " NerdTree
 " =====================================================================>
@@ -154,36 +156,40 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
  " Toggle
  nnoremap <silent> <C-b> :NERDTreeToggle<CR>"
 
+"Control P
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
 " FZF
 " =====================================================================>
-nnoremap <C-p> :FZF<CR>
-" An action can be a reference to a function that processes selected lines
-let g:fzf_colors =
-      \ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+" nnoremap <C-p> :FZF<CR>
+" " An action can be a reference to a function that processes selected lines
+" let g:fzf_colors =
+"       \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
 
-function! s:build_quickfix_list(lines)
-  call setqflist(map(copy(a:lines), '{ "filename": v:val  }'))
-  copen
-  cc
-endfunction
+" function! s:build_quickfix_list(lines)
+"   call setqflist(map(copy(a:lines), '{ "filename": v:val  }'))
+"   copen
+"   cc
+" endfunction
 
-let g:fzf_action = {
-      \ 'ctrl-q': function('s:build_quickfix_list'),
-      \ 'ctrl-t': 'tab split',
-      \ 'ctrl-x': 'split',
-      \ 'ctrl-v': 'vsplit' }
+" let g:fzf_action = {
+"       \ 'ctrl-q': function('s:build_quickfix_list'),
+"       \ 'ctrl-t': 'tab split',
+"       \ 'ctrl-x': 'split',
+"       \ 'ctrl-v': 'vsplit' }
 
 
 " let g:fzf_action = {
@@ -227,15 +233,17 @@ let g:airline_mode_map = {
 function! AirlineInit()
   let g:airline_section_a = airline#section#create(['mode'])
   let g:airline_section_b = airline#section#create(['branch'])
-  " let g:airline_section_c = airline#section#create(['%f'])
-  " let g:airline_section_d = airline#section#create([])
-  " let g:airline_section_e = airline#section#create([])
-  " let g:airline_section_f = airline#section#create([])
-  " let g:airline_section_g = airline#section#create([])
-  " let g:airline_section_h = airline#section#create([])
-  " let g:airline_section_x = airline#section#create([])
+  let g:airline_section_c = airline#section#create(['%f'])
+  let g:airline_section_d = airline#section#create([])
+  let g:airline_section_e = airline#section#create([])
+  let g:airline_section_f = airline#section#create([])
+  let g:airline_section_g = airline#section#create([])
+  let g:airline_section_h = airline#section#create([])
+  let g:airline_section_x = airline#section#create([])
   " let g:airline_section_y= airline#section#create(['%p%%'])
-  let g:airline_section_z = airline#section#create_right(['l:%l c:%c'])
+  " let g:airline_section_z = airline#section#create_right(['l:%l c:%c'])
+  let g:airline_section_y= airline#section#create([''])
+  let g:airline_section_z = airline#section#create_right([''])
 endfunction
 autocmd VimEnter * call AirlineInit()
 
@@ -245,16 +253,27 @@ if !exists('g:airline_symbols')
 endif
 let g:airline_symbols.space = "\ua0"
 
+" move split panes to left/bottom/top/right
+nnoremap <A-h> <C-W>H
+nnoremap <A-j> <C-W>J
+nnoremap <A-k> <C-W>K
+nnoremap <A-l> <C-W>L
+" move between panes to left/bottom/top/right
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 " Buffers, Tabs & Splits
 " =====================================================================>
 " https://github.com/jdavis/dotfiles/blob/master/.vimrc
 " Buffers
-"noremap <M-right> :bnext<CR>
-"noremap <M-left> :bprevious<CR>
+" noremap <M-right> :bnext<CR>
+" noremap <M-left> :bprevious<CR>
 
 " Next and Prev Buffer in the same Tab
-nnoremap <Tab> :bnext<CR>
-nnoremap <S-Tab> :bprevious<CR>
+" nnoremap <Tab> :bnext<CR>
+" nnoremap <S-Tab> :bprevious<CR>
 
 " Tabs
 "============================
@@ -264,9 +283,9 @@ nnoremap <S-Tab> :bprevious<CR>
 "
 " tl < goto previous Tab. th > goto next Tab.
 " tn open new empty Tab.
-nnoremap th :tabnext<CR>
-nnoremap tl :tabprev<CR>
-nnoremap tn :tabnew<CR>
+" nnoremap th :tabnext<CR>
+" nnoremap tl :tabprev<CR>
+" nnoremap tn :tabnew<CR>
 
 " Disable arrow keys - Enforce Purity
 " =====================================================================>
