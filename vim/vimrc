@@ -15,7 +15,6 @@ Plug 'mhinz/vim-startify'
 
 " javascript
 Plug 'tpope/vim-commentary'
-" Plug 'mxw/vim-jsx' deprecated
 Plug 'yuezk/vim-js'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jiangmiao/auto-pairs'
@@ -81,7 +80,7 @@ set nofoldenable
 
 " ColorSchemes
 " =====================================================================>
-colorscheme railscasts
+colorscheme codedark
 " let g:airline_theme = 'nord'
 
 " Colors
