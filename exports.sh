@@ -2,6 +2,8 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+export EDITOR='vim'
+
 # Prompt
 # autoload -U colors && colors
 # PS1="[%n%{$fg[red]%}@%{$reset_color%}%m %~]\$ " #Red Hat style PS1
@@ -40,6 +42,7 @@ if [ -d "$NVM_DIR_TEST"  ]; then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
+# deno
 DENO_DIR_TEST=$HOME/.deno
 if [ -d "$NVM_DIR_TEST"  ]; then
   export DENO_INSTALL="$HOME/.deno"
@@ -57,14 +60,37 @@ fi
 # JAVA
 #/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/jre
 # export JAVA_HOME=`/usr/libexec/java_home`
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export PATH=$PATH:$JAVA_HOME/bin
 
 # Apache Maven
-# export M2_HOME=$HOME/Projects/apache-maven-3.2.3
-# export PATH=$PATH:$M2_HOME/bin
+# export M1_HOME=$HOME/Projects/apache-maven-3.2.3
+# export PATH=$PATH:$M1_HOME/bin
 
+# Python
 export PATH=$PATH:/usr/local/bin/python
+
+# ANDROID
 export PATH="$PATH:$HOME/Dev/libs/flutter/bin"
 export PATH="$PATH:$HOME/Android/Sdk"
-# export PATH="$PATH:/opt/mssql-tools/bin"
+export ANDROID_HOME=$HOME/Android
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+# Export variables for Docker and Docker Compose
+export USER_ID=$(id -u)
+export GROUP_ID=$(id -g)
+
+emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
+
+# bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# ssl + sqlserver
 export PATH="$PATH:/opt/mssql-tools18/bin"
+export OPENSSL_CONF=/etc/ssl/openssl.cnf
 

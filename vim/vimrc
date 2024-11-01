@@ -1,5 +1,6 @@
 call plug#begin('~/.vim/plugged')
 
+Plug 'github/copilot.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdtree'
@@ -132,7 +133,7 @@ set shiftwidth=2
 " Line Numbers and Cursor
 " =====================================================================>
 set wrap
-set linespace=4
+set linespace=5
 set number " show line numbers
 set numberwidth=5
 set norelativenumber
@@ -196,8 +197,8 @@ let g:fzf_action = {
 
 " Toggle invisible characters
 " =====================================================================>
-" set invlist
-" set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+set invlist
+set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 " highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
 " set showbreak=↪
 
