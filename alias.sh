@@ -6,7 +6,7 @@ alias cls="clear"
 # alias vim="nvim"
 alias ovim="vim"
 alias vi="vim"
-alias ls='ls -G --color=auto'
+alias ls="ls -G --color=auto"
 alias ll="ls -ls --color=auto"
 alias llm="ls -lsh --color=auto"
 alias la="ls -la --color=auto"
@@ -21,8 +21,8 @@ alias giff="git diff $1^!"
 alias rs="rails s"
 alias rc="rails console"
 alias rmigrate="rake db:drop && rake db:create && rake db:migrate && rake db:seed"
-alias killruby='killall -9 ruby'
-alias killrudy='killruby'
+alias killruby="killall -9 ruby"
+alias killrudy="killruby"
 alias kr="killruby"
 
 # open
