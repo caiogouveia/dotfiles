@@ -12,7 +12,7 @@ alias llm="ls -lsh --color=auto"
 alias la="ls -la --color=auto"
 alias lla="ls -la --color=auto"
 alias more="less"
-alias tamanho_pastas="du -h --max-depth=1"
+alias tamanho_pastas="du -h -d 1"
 
 # git
 alias giff="git diff $1^!"
@@ -26,9 +26,9 @@ alias killrudy="killruby"
 alias kr="killruby"
 
 # open
-linux_app="dolphin"
-[[ $OSTYPE = darwin* ]] && alias open="open" || alias open=$linux_app
-[[ $OSTYPE = msys* ]] && alias open="powershell.exe /c start" || alias open=$linux_app
+# linux_app="dolphin"
+# [[ $OSTYPE = darwin* ]] && alias open="open" || alias open=$linux_app
+# [[ $OSTYPE = msys* ]] && alias open="powershell.exe /c start" || alias open=$linux_app
  
 #docker stuff
 alias dll="docker container ls"
