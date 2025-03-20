@@ -35,6 +35,9 @@ alias dll="docker container ls"
 alias dlli="docker image ls"
 alias dstop="docker container stop"
 alias rmdoc="docker container rm"
+alias lsdocker="docker container ls"
+alias dockerstop="dstop"
+alias dockerrun="docker container run"
 alias dockerexec="docker exec -it"
 
 # Laravel
