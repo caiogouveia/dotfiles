@@ -96,3 +96,6 @@ source "$DOTFILES_PATH/alias.sh"
 source "$DOTFILES_PATH/exports.sh"
 # eval "$(starship init zsh)"
 
+
+# bun completions
+[ -s "/Users/caiogouveia/.bun/_bun" ] && source "/Users/caiogouveia/.bun/_bun"
