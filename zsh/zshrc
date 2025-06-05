@@ -84,6 +84,7 @@ source $ZSH/oh-my-zsh.sh
 export MANPATH="/usr/local/man:$MANPATH"
 
 
+# TODO: fix this to work on mac and linux
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -99,3 +100,7 @@ source "$DOTFILES_PATH/exports.sh"
 
 # bun completions
 [ -s "/Users/caiogouveia/.bun/_bun" ] && source "/Users/caiogouveia/.bun/_bun"
+# TODO: this may run only in linux
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+

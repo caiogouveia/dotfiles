@@ -29,7 +29,10 @@ alias kr="killruby"
 # linux_app="dolphin"
 # [[ $OSTYPE = darwin* ]] && alias open="open" || alias open=$linux_app
 # [[ $OSTYPE = msys* ]] && alias open="powershell.exe /c start" || alias open=$linux_app
- 
+linux_app="nautilus"
+[[ $OSTYPE = darwin* ]] && alias open="open" || alias open=$linux_app
+[[ $OSTYPE = msys* ]] && alias open="powershell.exe /c start" || alias open=$linux_app
+
 #docker stuff
 alias dll="docker container ls"
 alias dlli="docker image ls"
