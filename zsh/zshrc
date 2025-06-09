@@ -106,3 +106,11 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 # php composer
 export PATH=$HOME/.config/composer/vendor/bin:$PATH
+
+# linux Android
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  export ANDROID_HOME=$HOME/Android/Sdk
+  export PATH=$PATH:$ANDROID_HOME/emulator
+  export PATH=$PATH:$ANDROID_HOME/platform-tools
+fi
+
