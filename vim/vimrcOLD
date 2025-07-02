@@ -1,0 +1,347 @@
+call plug#begin('~/.vim/plugged')
+
+Plug 'github/copilot.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'bagrat/vim-buffet'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'ryanoasis/vim-devicons'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+let g:coc_global_extensions = ['coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-prettier', 'coc-tsserver']
+Plug 'mhinz/vim-startify'
+
+" javascript
+Plug 'tpope/vim-commentary'
+Plug 'yuezk/vim-js'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'jiangmiao/auto-pairs'
+Plug 'othree/yajs.vim'
+Plug 'leafgarland/typescript-vim'
+Plug 'peitalin/vim-jsx-typescript'
+Plug 'styled-components/vim-styled-components'
+Plug 'JulesWang/css.vim'
+Plug 'cakebaker/scss-syntax.vim'
+
+" Color / Themes
+Plug 'tomasiser/vim-code-dark'
+Plug 'arcticicestudio/nord-vim'
+Plug 'jpo/vim-railscasts-theme'
+
+" Initialize plugin system
+call plug#end()
+
+" VIM
+" =====================================================================>
+" Disable Ex mode
+map Q <Nop>
+set modifiable
+set nocompatible " be iMproved, required
+set backspace=2
+set encoding=utf-8
+"set backspace=ident,eol,start
+filetype off
+set ruler
+set laststatus=2 " show the satus line all the time
+set ma
+" set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+" set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set nobackup nowritebackup
+set noswapfile
+set magic " Set magic on, for regex
+
+" VertSplit
+set fillchars+=vert:\|
+set splitright
+set splitbelow
+
+set ttyfast " faster redrawing
+set clipboard=unnamed "suposed to be the mac os x clipboard
+set so=7 " set 7 lines to the cursors - when moving vertical
+set wildmenu " enhanced command line completion
+set showcmd " show incomplete commands
+"set noshowmode " don't show which mode disabled for PowerLine
+set wildmode=list:longest " complete files like a shell
+" set scrolloff=3 " lines of text around cursor
+set cmdheight=1 " command bar height
+filetype plugin indent on
+syntax on
+filetype plugin on
+set omnifunc=syntaxcomplete#Complete
+set title " set terminal title
+
+" Folding
+" set foldenable
+set nofoldenable
+" set foldmethod=indent
+" set foldlevel=1
+
+" ColorSchemes
+" =====================================================================>
+colorscheme codedark
+" let g:airline_theme = 'nord'
+
+" Colors
+" =====================================================================>
+" highlight NonText ctermbg=none
+" highlight Normal ctermbg=none
+" highlight clear VertSplit
+" highlight VertSplit ctermfg=1 ctermbg=15
+" highlight LineNr ctermbg=lightgray ctermfg=darkgray
+" highlight LineNr guifg=#515559 guibg=#272a2e
+" highlight CursorLine cterm=NONE ctermbg=lightred
+
+" " " Cursor
+" highlight Cursor guifg=red guibg=black
+" highlight iCursor guifg=red guibg=steelblue
+" set guicursor=n-v-c:block-Cursor
+" set guicursor+=i:ver100-iCursor
+" set guicursor+=n-v-c:blinkon0
+" set guicursor+=i:blinkwait10
+" highlight ColorColumn ctermbg=red
+" highlight SignColumn ctermbg=254 "git gutter color
+
+" " " Tab bar
+" highlight TabLineFill ctermfg=white ctermbg=black
+" highlight TabLine ctermfg=gray ctermbg=white
+" highlight TabLineSel ctermfg=white ctermbg=DarkRed
+" highlight Title guifg=red ctermfg=DarkRed ctermbg=none
+
+
+" Mouse support
+" =====================================================================>
+set mouse=a
+
+" Searching
+" =====================================================================>
+set ignorecase " case insensitive searching
+set smartcase " case-sensitive if expresson contains a capital letter
+set hlsearch
+set incsearch " set incremental search, like modern browsers
+set nolazyredraw " don't redraw while executing macros
+
+set showmatch " show matching braces
+set mat=2 " how many tenths of a second to blink
+
+set expandtab
+set tabstop=2
+set shiftwidth=2
+
+" Line Numbers and Cursor
+" =====================================================================>
+set wrap
+set linespace=5
+set number " show line numbers
+set numberwidth=5
+" set norelativenumber
+set relativenumber
+set rnu
+set cursorline
+
+" Colorcolumn
+highlight ColorColumn ctermbg=red
+set colorcolumn=81
+
+" NerdTree
+" =====================================================================>
+let g:NERDTreeShowHidden = 1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = []
+let g:NERDTreeStatusline = ''
+" Automaticaly close nvim if NERDTree is only thing left open
+" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+ " Toggle
+ nnoremap <silent> <C-b> :NERDTreeToggle<CR>"
+
+"Control P - Configurações para ignorar node_modules
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+" Ignorar pasta node_modules e outras pastas comuns
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](node_modules|\.git|\.hg|\.svn|dist|build|coverage)$',
+  \ 'file': '\v\.(exe|so|dll|pyc)$',
+  \ }
+
+" Usar .gitignore para ignorar arquivos (se existir)
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+
+" Alternativa: usar ripgrep ou ag se disponível (mais rápido)
+" let g:ctrlp_user_command = 'rg --files --hidden --follow --glob "!.git/*" --glob "!node_modules/*" %s'
+" let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden -g ""'
+
+" Não limpar o cache ao sair
+let g:ctrlp_clear_cache_on_exit = 0
+
+" Configurar cache
+let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+
+
+" FZF
+" =====================================================================>
+" nnoremap <C-p> :FZF<CR>
+" " An action can be a reference to a function that processes selected lines
+" let g:fzf_colors =
+"       \ { 'fg':      ['fg', 'Normal'],
+"   \ 'bg':      ['bg', 'Normal'],
+"   \ 'hl':      ['fg', 'Comment'],
+"   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+"   \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+"   \ 'hl+':     ['fg', 'Statement'],
+"   \ 'info':    ['fg', 'PreProc'],
+"   \ 'border':  ['fg', 'Ignore'],
+"   \ 'prompt':  ['fg', 'Conditional'],
+"   \ 'pointer': ['fg', 'Exception'],
+"   \ 'marker':  ['fg', 'Keyword'],
+"   \ 'spinner': ['fg', 'Label'],
+"   \ 'header':  ['fg', 'Comment'] }
+
+" function! s:build_quickfix_list(lines)
+"   call setqflist(map(copy(a:lines), '{ "filename": v:val  }'))
+"   copen
+"   cc
+" endfunction
+
+" let g:fzf_action = {
+"       \ 'ctrl-q': function('s:build_quickfix_list'),
+"       \ 'ctrl-t': 'tab split',
+"       \ 'ctrl-x': 'split',
+"       \ 'ctrl-v': 'vsplit' }
+
+
+" let g:fzf_action = {
+"   \ 'ctrl-x': 'silent exec "!echo"',
+"   \ 'ctrl-t': 'tab split',
+"   \ 'ctrl-s': 'vsplit',
+"   \ 'ctrl-l': 'vsplit'
+"   \}
+" let g:fzf_layout = { 'up': '~40%'  }
+" let $FZF_DEFAULT_COMMAND = 'ag -g ""'
+
+" Toggle invisible characters
+" =====================================================================>
+set invlist
+set listchars=tab:▸\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+" highlight SpecialKey ctermbg=none " make the highlighting of tabs less annoying
+" set showbreak=↪
+
+" Airline
+" =====================================================================>
+" tab line
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+let g:airline#extensions#whitespace#enabled = 0 "trailing spaces
+let g:airline_mode_map = {
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
+
+function! AirlineInit()
+  let g:airline_section_a = airline#section#create(['mode'])
+  let g:airline_section_b = airline#section#create(['branch'])
+  let g:airline_section_c = airline#section#create(['%f'])
+  let g:airline_section_d = airline#section#create([])
+  let g:airline_section_e = airline#section#create([])
+  let g:airline_section_f = airline#section#create([])
+  let g:airline_section_g = airline#section#create([])
+  let g:airline_section_h = airline#section#create([])
+  let g:airline_section_x = airline#section#create([])
+  " let g:airline_section_y= airline#section#create(['%p%%'])
+  " let g:airline_section_z = airline#section#create_right(['l:%l c:%c'])
+  let g:airline_section_y= airline#section#create([''])
+  let g:airline_section_z = airline#section#create_right([''])
+endfunction
+autocmd VimEnter * call AirlineInit()
+
+let g:airline_powerline_fonts=0
+if !exists('g:airline_symbols')
+  let g:airline_symbols = {}
+endif
+let g:airline_symbols.space = "\ua0"
+
+" move split panes to left/bottom/top/right
+nnoremap <A-h> <C-W>H
+nnoremap <A-j> <C-W>J
+nnoremap <A-k> <C-W>K
+nnoremap <A-l> <C-W>L
+" move between panes to left/bottom/top/right
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
+" Buffers, Tabs & Splits
+" =====================================================================>
+" https://github.com/jdavis/dotfiles/blob/master/.vimrc
+" Buffers
+" noremap <M-right> :bnext<CR>
+" noremap <M-left> :bprevious<CR>
+
+" Next and Prev Buffer in the same Tab
+" nnoremap <Tab> :bnext<CR>
+" nnoremap <S-Tab> :bprevious<CR>
+
+" Tabs
+"============================
+" Next and Prev Tabs
+" noremap <M-right> :tabnext<CR>
+" noremap <M-left> :tabprev<CR>
+"
+" tl < goto previous Tab. th > goto next Tab.
+" tn open new empty Tab.
+" nnoremap th :tabnext<CR>
+" nnoremap tl :tabprev<CR>
+" nnoremap tn :tabnew<CR>
+
+" Disable arrow keys - Enforce Purity
+" =====================================================================>
+" noremap  <Up> <Nop>
+" noremap  <Down> <Nop>
+" noremap  <Left> <Nop>
+" noremap  <Right> <Nop>
+
+" Map :W to :w
+:command! WQ wq
+:command! Wq wq
+:command! W w
+:command! Q q
+
+" Git Gutter"
+" =====================================================================>
+set updatetime=250
+let g:gitgutter_max_signs = 500
+" No mapping
+let g:gitgutter_map_keys = 0
+" Colors
+let g:gitgutter_override_sign_column_highlight = 0
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=2
+highlight GitGutterChange ctermfg=3
+highlight GitGutterDelete ctermfg=1
+highlight GitGutterChangeDelete ctermfg=4
+
+" start terminal in insert mode
+" =====================================================================>
+" turn terminal to normal mode with escape
+tnoremap <Esc> <C-\><C-n>
+" " start terminal in insert mode
+au BufEnter * if &buftype == 'terminal' | :startinsert | endif
+" " open terminal on ctrl+n
+function! OpenTerminal()
+  split term://zsh
+  resize 15
+endfunction
+nnoremap <c-n> :call OpenTerminal()<CR>
