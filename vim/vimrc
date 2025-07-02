@@ -45,6 +45,9 @@ Plug 'tomasiser/vim-code-dark'
 Plug 'arcticicestudio/nord-vim'
 Plug 'jpo/vim-railscasts-theme'
 
+" AI Integration
+Plug 'vim-autoformat/vim-autoformat'
+
 call plug#end()
 
 " BASIC SETTINGS
@@ -220,6 +223,15 @@ tnoremap <Esc> <C-\><C-n>
 nnoremap <leader>ev :vsplit $MYVIMRC<CR>
 nnoremap <leader>sv :source $MYVIMRC<CR>
 
+" Claude Code integration
+nnoremap <leader>cc :call ClaudeCodeInteract()<CR>
+nnoremap <leader>ca :call ClaudeCodeAnalyze()<CR>
+nnoremap <leader>cf :call ClaudeCodeFix()<CR>
+
+" Git operations with Claude Code
+nnoremap <leader>gc :call ClaudeCodeCommit()<CR>
+vnoremap <leader>ce :call ClaudeCodeExplain()<CR>
+
 " FUNCTIONS
 " ====================================================================
 
@@ -235,6 +247,45 @@ augroup TerminalSettings
   autocmd!
   autocmd BufEnter * if &buftype == 'terminal' | :startinsert | endif
 augroup END
+
+" Claude Code functions
+function! ClaudeCodeInteract()
+  let input = input('Claude Code: ')
+  if !empty(input)
+    execute '!claude "' . input . '"'
+  endif
+endfunction
+
+function! ClaudeCodeAnalyze()
+  let filename = expand('%:p')
+  if !empty(filename)
+    execute '!claude "Analyze this file: ' . filename . '"'
+  else
+    echo "No file to analyze"
+  endif
+endfunction
+
+function! ClaudeCodeFix()
+  let filename = expand('%:p')
+  if !empty(filename)
+    execute '!claude "Fix any issues in this file: ' . filename . '"'
+  else
+    echo "No file to fix"
+  endif
+endfunction
+
+function! ClaudeCodeCommit()
+  execute '!claude "Create a git commit for the current changes"'
+endfunction
+
+function! ClaudeCodeExplain()
+  let text = @*
+  if !empty(text)
+    execute '!claude "Explain this code: ' . text . '"'
+  else
+    echo "No text selected"
+  endif
+endfunction
 
 " AUTOCOMMANDS
 " ====================================================================
