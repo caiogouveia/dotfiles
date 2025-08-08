@@ -1,0 +1,40 @@
+# ====================================================================
+# NEOVIM GITIGNORE - Arquivos que não devem ser versionados
+# ====================================================================
+
+# Plugin directory (lazy.nvim)
+lazy/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Log files
+*.log
+
+# Local configuration overrides
+local.lua
+local/
+
+# Backup files
+*.backup
+*~
+
+# Cache directories
+.cache/
+
+# Alternative config files (for testing)
+init_backup.lua
+init_old.lua
+init_test.lua
