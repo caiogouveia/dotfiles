@@ -23,7 +23,7 @@ Plug 'ryanoasis/vim-devicons'
 " Language Support & Completion
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 let g:coc_global_extensions = [
-  \ 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 
+  \ 'coc-emmet', 'coc-css', 'coc-html', 'coc-json',
   \ 'coc-prettier', 'coc-tsserver', 'coc-eslint'
   \ ]
 
@@ -180,7 +180,7 @@ let g:AutoPairsMultilineClose = 0
 " ====================================================================
 
 " Leader key (keep default)
-" let mapleader = ","
+" let mapleader = " "
 
 " Disable Ex mode
 map Q <Nop>
@@ -206,6 +206,35 @@ nnoremap <A-l> <C-W>L
 nnoremap <leader>bn :bnext<CR>
 nnoremap <leader>bp :bprevious<CR>
 nnoremap <leader>bd :bdelete<CR>
+
+" Enhanced buffer navigation
+nnoremap <Tab> :bnext<CR>
+nnoremap <S-Tab> :bprevious<CR>
+nnoremap <leader>b :buffers<CR>:buffer<Space>
+nnoremap <leader>1 :buffer 1<CR>
+nnoremap <leader>2 :buffer 2<CR>
+nnoremap <leader>3 :buffer 3<CR>
+nnoremap <leader>4 :buffer 4<CR>
+nnoremap <leader>5 :buffer 5<CR>
+nnoremap <leader>6 :buffer 6<CR>
+nnoremap <leader>7 :buffer 7<CR>
+nnoremap <leader>8 :buffer 8<CR>
+nnoremap <leader>9 :buffer 9<CR>
+
+" Tab navigation
+nnoremap <C-t> :tabnew<CR>
+nnoremap <C-w> :tabclose<CR>
+nnoremap <A-1> :tabn 1<CR>
+nnoremap <A-2> :tabn 2<CR>
+nnoremap <A-3> :tabn 3<CR>
+nnoremap <A-4> :tabn 4<CR>
+nnoremap <A-5> :tabn 5<CR>
+nnoremap <A-6> :tabn 6<CR>
+nnoremap <A-7> :tabn 7<CR>
+nnoremap <A-8> :tabn 8<CR>
+nnoremap <A-9> :tabn 9<CR>
+nnoremap <A-Right> :tabnext<CR>
+nnoremap <A-Left> :tabprevious<CR>
 
 " Toggle plugins
 nnoremap <C-b> :NERDTreeToggle<CR>
@@ -237,7 +266,7 @@ vnoremap <leader>ce :call ClaudeCodeExplain()<CR>
 
 " Open terminal in split
 function! OpenTerminal()
-  split term://zsh
+  " split term://zsh
   resize 15
   startinsert
 endfunction
@@ -294,12 +323,12 @@ augroup FileTypeSettings
   autocmd!
   " Remove trailing whitespace on save
   autocmd BufWritePre * :%s/\s\+$//e
-  
+
   " Set specific settings for different file types
   autocmd FileType javascript,typescript,json setlocal ts=2 sw=2 sts=2
   autocmd FileType html,css,scss setlocal ts=2 sw=2 sts=2
   autocmd FileType python setlocal ts=4 sw=4 sts=4
-  
+
   " Auto-format on save for supported languages
   autocmd BufWritePre *.js,*.ts,*.json :CocCommand prettier.formatFile
 augroup END
