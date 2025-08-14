@@ -62,6 +62,42 @@ keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
 -- Clear search highlighting
 keymap("n", "<leader>/", ":nohlsearch<CR>", opts)
 
+-- Home and End key fixes for all modes
+-- Normal mode
+keymap("n", "<Home>", "^", opts)  -- Go to first non-blank character
+keymap("n", "<End>", "$", opts)   -- Go to end of line
+
+-- Insert mode
+keymap("i", "<Home>", "<C-o>^", opts)  -- Go to first non-blank character
+keymap("i", "<End>", "<C-o>$", opts)   -- Go to end of line
+
+-- Visual mode
+keymap("v", "<Home>", "^", opts)  -- Go to first non-blank character
+keymap("v", "<End>", "$", opts)   -- Go to end of line
+
+-- Command mode
+keymap("c", "<Home>", "<C-b>", opts)  -- Go to beginning of command line
+keymap("c", "<End>", "<C-e>", opts)   -- Go to end of command line
+
+-- Custom close function that allows closing last window
+local function smart_close()
+  local win_count = vim.fn.winnr('$')
+  if win_count == 1 then
+    -- If it's the last window, create a new empty buffer instead of closing
+    vim.cmd('enew')
+  else
+    -- If there are multiple windows, close normally
+    vim.cmd('close')
+  end
+end
+
+-- Override the default close behavior
+keymap("n", "<C-w>c", smart_close, opts)
+keymap("n", "<leader>c", smart_close, opts)
+
+-- Create a custom :close command
+vim.api.nvim_create_user_command("Close", smart_close, {})
+
 -- Terminal
 keymap("n", "<C-n>", function()
   vim.cmd("split")
