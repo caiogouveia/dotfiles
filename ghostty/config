@@ -1,9 +1,12 @@
 command=/opt/homebrew/bin/tmux
-#theme=github
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
-font-family = "JetBrains Mono"
-font-size = 14
+# font-family = "JetBrains Mono"
+font-family = "Ubuntu Mono"
+font-size = 18
+font-style-bold = Ubuntu Mono ExtraBold
+font-style-italic = Ubuntu Mono Italic
+font-style-bold-italic = Ubuntu Mono ExtraBold Italic
 window-height=24
 window-width=80
-background-opacity = 0.80
-background-blur=true
+# background-opacity = 0.80
+# background-blur=true
