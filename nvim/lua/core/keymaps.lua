@@ -101,6 +101,9 @@ vim.api.nvim_create_user_command("Close", smart_close, {})
 -- Create :Q command as alias for :q
 vim.api.nvim_create_user_command("Q", "q", {})
 
+-- Create :W command as alias for :w
+vim.api.nvim_create_user_command("W", "w", {})
+
 -- Terminal
 keymap("n", "<C-n>", function()
   vim.cmd("split")
