@@ -5,6 +5,10 @@
 local opt = vim.opt
 local g = vim.g
 
+-- map leader to spaces
+g.mapleader = " "
+g.maplocalleader = " "
+
 -- Basic settings
 opt.compatible = false                -- Disable Vi compatibility
 opt.encoding = "utf-8"               -- Set encoding

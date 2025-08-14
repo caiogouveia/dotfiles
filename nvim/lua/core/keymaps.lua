@@ -98,6 +98,9 @@ keymap("n", "<leader>c", smart_close, opts)
 -- Create a custom :close command
 vim.api.nvim_create_user_command("Close", smart_close, {})
 
+-- Create :Q command as alias for :q
+vim.api.nvim_create_user_command("Q", "q", {})
+
 -- Terminal
 keymap("n", "<C-n>", function()
   vim.cmd("split")
