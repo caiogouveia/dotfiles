@@ -12,6 +12,7 @@ telescope.setup({
     path_display = {"truncate"},
     file_ignore_patterns = {
       "node_modules/.*",
+      "vendor/.*",
       "%.git/.*",
       "%.DS_Store",
       "dist/.*",
