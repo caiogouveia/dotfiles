@@ -17,10 +17,7 @@ require("conform").setup({
     markdown = { "prettier" },
     yaml = { "prettier" },
   },
-  format_on_save = {
-    timeout_ms = 500,
-    lsp_fallback = true,
-  },
+  -- format_on_save disabled - format manually with :Format or <leader>f
   formatters = {
     prettier = {
       prepend_args = { "--tab-width", "2" },
