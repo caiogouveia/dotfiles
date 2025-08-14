@@ -91,12 +91,40 @@ local function smart_close()
   end
 end
 
+-- Close all files function inspired by smart_close
+local function close_all_files()
+  local buffers = vim.fn.getbufinfo({buflisted = 1})
+  
+  for _, buf in ipairs(buffers) do
+    -- Skip modified buffers to prevent data loss
+    if not buf.changed then
+      vim.api.nvim_buf_delete(buf.bufnr, {force = false})
+    end
+  end
+  
+  -- Check if any buffers remain
+  local remaining_buffers = vim.fn.getbufinfo({buflisted = 1})
+  if #remaining_buffers == 0 then
+    -- If no buffers remain, create a new empty buffer
+    vim.cmd('enew')
+  else
+    -- If modified buffers remain, notify the user
+    print("Some buffers have unsaved changes and were not closed")
+  end
+end
+
 -- Override the default close behavior
 keymap("n", "<C-w>c", smart_close, opts)
 keymap("n", "<leader>c", smart_close, opts)
 
+-- Close all files keybinding
+keymap("n", "<leader>qa", close_all_files, opts)
+
 -- Create a custom :close command
 vim.api.nvim_create_user_command("Close", smart_close, {})
+
+-- Create a custom :CloseAll command
+vim.api.nvim_create_user_command("CloseAll", close_all_files, {})
 
 -- Create :Q command as alias for :q
 vim.api.nvim_create_user_command("Q", "q", {})

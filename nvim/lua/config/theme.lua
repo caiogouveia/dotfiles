@@ -8,7 +8,7 @@ vim.cmd("syntax enable")
 -- Set colorscheme (using vscode theme as equivalent to codedark)
 -- Try multiple themes in order of preference
 -- Mude a ordem aqui para trocar o tema padrão
-local themes = { "tokyonight", "vscode", "nord", "default" }
+local themes = {"vscode", "default", "tokyonight", "nord" }
 for _, theme in ipairs(themes) do
   local success = pcall(vim.cmd, "colorscheme " .. theme)
   if success then
@@ -20,10 +20,10 @@ end
 local function set_highlights()
   -- Color column highlight
   vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#2d2d2d" })
-  
+
   -- Clear sign column background
   vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
-  
+
   -- Git signs colors (will be used when gitsigns is loaded)
   vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#00ff00" })
   vim.api.nvim_set_hl(0, "GitSignsChange", { fg = "#ffff00" })
