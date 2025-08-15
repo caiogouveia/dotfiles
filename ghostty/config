@@ -1,12 +1,13 @@
 command=/opt/homebrew/bin/tmux
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
-# font-family = "JetBrains Mono"
-font-family = "Ubuntu Mono"
+font-family = "JetBrains Mono NL Bold"
+font-thicken = true
+adjust-cell-width = -15%
 font-size = 18
-font-style-bold = Ubuntu Mono ExtraBold
-font-style-italic = Ubuntu Mono Italic
-font-style-bold-italic = Ubuntu Mono ExtraBold Italic
 window-height=24
 window-width=80
 # background-opacity = 0.80
-# background-blur=true
+# background-blur=tr
+#keybind = cmd+shift+s>r=reload_config
+#adjust-cell-height = 35%
+
