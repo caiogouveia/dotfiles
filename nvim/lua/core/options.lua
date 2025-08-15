@@ -17,7 +17,7 @@ opt.hidden = true                    -- Allow switching buffers without saving
 
 -- Performance
 opt.ttyfast = true                   -- Faster redrawing
-opt.lazyredraw = true               -- Don't redraw during macros
+-- opt.lazyredraw = true               -- Don't redraw during macros (disabled for noice.nvim compatibility)
 opt.updatetime = 250                -- Faster updates
 
 -- Files & Backups

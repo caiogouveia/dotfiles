@@ -94,14 +94,14 @@ end
 -- Close all files function inspired by smart_close
 local function close_all_files()
   local buffers = vim.fn.getbufinfo({buflisted = 1})
-  
+
   for _, buf in ipairs(buffers) do
     -- Skip modified buffers to prevent data loss
     if not buf.changed then
       vim.api.nvim_buf_delete(buf.bufnr, {force = false})
     end
   end
-  
+
   -- Check if any buffers remain
   local remaining_buffers = vim.fn.getbufinfo({buflisted = 1})
   if #remaining_buffers == 0 then
@@ -131,6 +131,9 @@ vim.api.nvim_create_user_command("Q", "q", {})
 
 -- Create :W command as alias for :w
 vim.api.nvim_create_user_command("W", "w", {})
+
+-- Create :Wq command as alias for :wq
+vim.api.nvim_create_user_command("Wq", "wq", {})
 
 -- Terminal
 keymap("n", "<C-n>", function()
