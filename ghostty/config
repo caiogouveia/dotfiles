@@ -6,8 +6,14 @@ adjust-cell-width = -15%
 font-size = 18
 window-height=24
 window-width=80
-# background-opacity = 0.80
-# background-blur=tr
+
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = hidden
+macos-option-as-alt = true
+
+background-opacity = 0.90
+background-blur = true
+background-blur-radius = 40
 #keybind = cmd+shift+s>r=reload_config
 #adjust-cell-height = 35%
-
+theme = vesper
