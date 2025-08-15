@@ -18,8 +18,13 @@ end
 
 -- Custom highlights
 local function set_highlights()
-  -- Color column highlight
-  vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#2d2d2d" })
+  -- Make background transparent
+  vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+  vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
+  
+  -- Color column highlight - red line at 80 characters
+  vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#ff0000", fg = "NONE" })
 
   -- Clear sign column background
   vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
