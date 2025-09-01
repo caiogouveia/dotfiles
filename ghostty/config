@@ -1,12 +1,17 @@
-command=/opt/homebrew/bin/tmux
+command=/usr/bin/tmux
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
-# font-family = "JetBrains Mono"
-font-family = "Ubuntu Mono"
-font-size = 18
-font-style-bold = Ubuntu Mono ExtraBold
-font-style-italic = Ubuntu Mono Italic
-font-style-bold-italic = Ubuntu Mono ExtraBold Italic
+font-family = "JetBrains Mono Nerd Font"
+font-size = 10
 window-height=24
 window-width=80
-# background-opacity = 0.80
-# background-blur=true
+cursor-style = block_hollow
+cursor-color = red
+
+# Macos only
+# font-style-bold = Ubuntu Mono ExtraBold
+# font-style-italic = Ubuntu Mono Italic
+# font-style-bold-italic = Ubuntu Mono ExtraBold Italic
+# font-thicken = true
+# font-thicken-strength = 0.5
+background-opacity = 0.95
+background-blur=true
