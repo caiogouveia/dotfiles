@@ -22,7 +22,8 @@ telescope.setup({
       "%.pyc",
       "%.pyo",
       "%.swp",
-      "%.swo"
+      "%.swo",
+      ".next/.*"
     },
     mappings = {
       i = {

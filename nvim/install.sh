@@ -28,10 +28,6 @@ if [[ -L "$NVIM_CONFIG_DIR" ]]; then
         echo "✅ Symlink is already correctly pointing to $SCRIPT_DIR"
         echo "No action needed."
         exit 0
-    else
-        echo "⚠️  Symlink points to different location: $CURRENT_TARGET"
-        echo "Updating symlink to point to $SCRIPT_DIR"
-        rm "$NVIM_CONFIG_DIR"
     fi
 elif [[ -d "$NVIM_CONFIG_DIR" ]]; then
     echo "⚠️  Directory already exists at $NVIM_CONFIG_DIR"
