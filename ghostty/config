@@ -1,19 +1,36 @@
-command=/opt/homebrew/bin/tmux
+command=/usr/bin/tmux
+
+# Keybinds
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
-font-family = "JetBrains Mono NL"
+#keybind = cmd+shift+s>r=reload_config
+
+# fonts config
+# font-family = "JetBrains Mono NL"
+# font-family = "JetBrains Mono Nerd Font"
 font-thicken = true
-# adjust-cell-width = -5%
 font-size = 14
+
+# Window, cursor, theme config
 window-height=24
 window-width=80
+# adjust-cell-height = 35%
+# adjust-cell-width = -5%
+cursor-style = block_hollow
+cursor-color = red
+theme = vesper
 
+# Background
+background-opacity = 0.95
+bbackground-opacity = 0.90
+background-blur = true
+background-blur-radius = 40
+
+# Macos only
+# font-style-bold = Ubuntu Mono ExtraBold
+# font-style-italic = Ubuntu Mono Italic
+# font-style-bold-italic = Ubuntu Mono ExtraBold Italic
+# font-thicken = true
+# font-thicken-strength = 0.5
 macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
-
-background-opacity = 0.90
-background-blur = true
-background-blur-radius = 40
-#keybind = cmd+shift+s>r=reload_config
-#adjust-cell-height = 35%
-theme = vesper
