@@ -31,8 +31,8 @@ keymap("n", "<leader>bp", "<Cmd>BufferPrevious<CR>", opts)
 keymap("n", "<leader>bd", "<Cmd>BufferClose<CR>", opts)
 
 -- Enhanced buffer navigation
-keymap("n", "<Tab>", "<Cmd>BufferNext<CR>", opts)
-keymap("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>", opts)
+-- keymap("n", "<Tab>", "<Cmd>BufferNext<CR>", opts)
+-- keymap("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>", opts)
 keymap("n", "<leader>b", "<Cmd>BufferPick<CR>", opts)
 
 -- Quick buffer access (numbers 1-9) - using barbar
