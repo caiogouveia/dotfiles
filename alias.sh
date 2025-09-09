@@ -2,8 +2,7 @@
 # ============================================================================>
 alias c="clear"
 alias cls="clear"
-# alias vim="~/.local/bin/lvim"
-# alias vim="nvim"
+alias vim="nvim"
 alias ovim="vim"
 alias vi="vim"
 alias ls="ls -G --color=auto"
@@ -16,14 +15,7 @@ alias tamanho_pastas="du -h -d 1"
 
 # git
 alias giff="git diff $1^!"
-
-# rails/ruby
-alias rs="rails s"
-alias rc="rails console"
-alias rmigrate="rake db:drop && rake db:create && rake db:migrate && rake db:seed"
-alias killruby="killall -9 ruby"
-alias killrudy="killruby"
-alias kr="killruby"
+alias lz="lazygit"
 
 # open
 # linux_app="dolphin"
@@ -60,3 +52,12 @@ alias lserve="laraserve"
 alias lmigrate="php artisan migrate"
 alias laramigrate="lmigrate"
 alias lroute="php artisan route:list"
+
+# rails/ruby
+alias rs="rails s"
+alias rc="rails console"
+alias rmigrate="rake db:drop && rake db:create && rake db:migrate && rake db:seed"
+alias killruby="killall -9 ruby"
+alias killrudy="killruby"
+alias kr="killruby"
+
