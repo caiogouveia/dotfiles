@@ -15,6 +15,19 @@ local plugins = {
     end
   },
 
+  -- Dashboard
+  -- {
+  --   'nvimdev/dashboard-nvim',
+  --   event = 'VimEnter',
+  --   config = function()
+  --     require('dashboard').setup {
+  --       -- config
+  --     }
+  --   end,
+  --   dependencies = { {'nvim-tree/nvim-web-devicons'}}
+  -- },
+  --
+  -- AI-assisted coding
   {
     "coder/claudecode.nvim",
     dependencies = { "folke/snacks.nvim" },
@@ -67,7 +80,21 @@ local plugins = {
       "MunifTanjim/nui.nvim",
     },
   },
-  
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   config = function()
+  --     require("notify").setup({
+  --       background_colour = "#000000",
+  --     })
+  --   end
+  -- },
+
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {},
+  },
+
   -- File finder (telescope instead of ctrlp for better Neovim integration)
   {
     "nvim-telescope/telescope.nvim",
@@ -76,7 +103,7 @@ local plugins = {
       pcall(require, 'config.telescope')
     end
   },
-  
+
   -- File explorer (nvim-tree instead of nerdtree)
   {
     "nvim-tree/nvim-tree.lua",
@@ -85,7 +112,7 @@ local plugins = {
       pcall(require, 'config.nvim-tree')
     end
   },
-  
+
   -- Git integration
   {
     "tpope/vim-fugitive"
@@ -96,7 +123,7 @@ local plugins = {
       pcall(require, 'config.gitsigns')
     end
   },
-  
+
   -- Lazygit integration
   {
     "kdheepak/lazygit.nvim",
@@ -114,15 +141,9 @@ local plugins = {
       { "<leader>gg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
     }
   },
-  
-  -- Startup screen
-  {
-    "goolord/alpha-nvim",
-    config = function()
-      pcall(require, 'config.alpha')
-    end
-  },
-  
+
+
+
   -- Status line
   {
     "nvim-lualine/lualine.nvim",
@@ -131,7 +152,7 @@ local plugins = {
       pcall(require, 'config.lualine')
     end
   },
-  
+
   -- Buffer line (replaced with barbar.nvim)
   {
     "romgrk/barbar.nvim",
@@ -143,7 +164,7 @@ local plugins = {
       pcall(require, 'config.barbar')
     end
   },
-  
+
   -- LSP and completion
   {
     "neovim/nvim-lspconfig",
@@ -161,7 +182,7 @@ local plugins = {
       pcall(require, 'config.lsp')
     end
   },
-  
+
   -- Treesitter for better syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
@@ -173,7 +194,7 @@ local plugins = {
       pcall(require, 'config.treesitter')
     end
   },
-  
+
   -- Auto pairs
   {
     "windwp/nvim-autopairs",
@@ -181,7 +202,7 @@ local plugins = {
       pcall(require, 'config.autopairs')
     end
   },
-  
+
   -- Commentary
   {
     "tpope/vim-commentary"
@@ -192,7 +213,7 @@ local plugins = {
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {},
   },
-  
+
   -- Themes
   {
     "folke/tokyonight.nvim",
@@ -205,7 +226,7 @@ local plugins = {
   {
     "Mofiqul/vscode.nvim"
   },
-  
+
   -- Formatting
   {
     "stevearc/conform.nvim",
@@ -213,7 +234,7 @@ local plugins = {
       pcall(require, 'config.conform')
     end
   },
-  
+
   -- Additional language support
   {
     "styled-components/vim-styled-components",
