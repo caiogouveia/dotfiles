@@ -17,11 +17,10 @@ window-width=80
 # adjust-cell-width = -5%
 cursor-style = block_hollow
 cursor-color = red
-theme = vesper
+theme = Apple System Colors Light
 
 # Background
-background-opacity = 0.95
-bbackground-opacity = 0.90
+background-opacity = 1.0
 background-blur = true
 background-blur-radius = 40
 
@@ -34,3 +33,4 @@ background-blur-radius = 40
 macos-titlebar-style = tabs
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
+confirm-close-surface = false
