@@ -1,4 +1,5 @@
-command=/usr/bin/tmux
+# command=/usr/bin/tmux
+command = $(test "$(uname)" = "Linux" && echo "/usr/bin/tmux" || echo "/opt/homebrew/bin/tmux")
 
 # Keybinds
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
