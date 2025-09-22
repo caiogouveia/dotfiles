@@ -38,3 +38,4 @@ local/
 init_backup.lua
 init_old.lua
 init_test.lua
+lazy-lock.json
