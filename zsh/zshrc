@@ -85,7 +85,10 @@ export MANPATH="/usr/local/man:$MANPATH"
 
 
 # TODO: fix this to work on mac and linux
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Load zsh-autosuggestions if it exists
+if [[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+  source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -105,7 +108,10 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 
 # php composer
-export PATH=$HOME/.config/composer/vendor/bin:$PATH
+# Add Composer vendor bin to PATH if it exists
+if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
+  export PATH=$HOME/.config/composer/vendor/bin:$PATH
+fi
 
 # linux Android
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -114,3 +120,7 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
   export PATH=$PATH:$ANDROID_HOME/platform-tools
 fi
 
+# Add Ruby gems bin to PATH if it exists
+if [[ -d "/opt/homebrew/lib/ruby/gems/3.2.0/bin" ]]; then
+  export PATH="/opt/homebrew/lib/ruby/gems/3.2.0/bin:$PATH"
+fi
