@@ -2,6 +2,12 @@
 -- TREESITTER CONFIGURATION - Better syntax highlighting
 -- ====================================================================
 
+-- Set up ts_context_commentstring before treesitter to avoid deprecation warning
+vim.g.skip_ts_context_commentstring_module = true
+require('ts_context_commentstring').setup({
+  enable_autocmd = false,
+})
+
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
     "lua",
@@ -15,6 +21,7 @@ require('nvim-treesitter.configs').setup({
     "scss",
     "python",
     "markdown",
+    "markdown_inline",
     "bash",
     "yaml",
     "toml"
@@ -37,7 +44,5 @@ require('nvim-treesitter.configs').setup({
       node_decremental = "grm",
     },
   },
-  context_commentstring = {
-    enable = true,
-  },
+  -- context_commentstring deprecated - using ts_context_commentstring directly
 })

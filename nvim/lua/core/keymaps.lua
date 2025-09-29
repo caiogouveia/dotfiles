@@ -12,6 +12,7 @@ keymap("n", "Q", "<Nop>", opts)
 keymap("n", "<leader>w", ":w<CR>", opts)
 keymap("n", "<leader>q", ":q<CR>", opts)
 keymap("n", "<leader>wq", ":wq<CR>", opts)
+keymap("n", "<leader>x", ":bdelete<CR>", opts)
 
 -- Navigation between splits
 keymap("n", "<C-h>", "<C-w>h", opts)
@@ -26,38 +27,38 @@ keymap("n", "<A-k>", "<C-W>K", opts)
 keymap("n", "<A-l>", "<C-W>L", opts)
 
 -- Buffer navigation (using barbar.nvim)
-keymap("n", "<leader>bn", "<Cmd>BufferNext<CR>", opts)
-keymap("n", "<leader>bp", "<Cmd>BufferPrevious<CR>", opts)
-keymap("n", "<leader>bd", "<Cmd>BufferClose<CR>", opts)
+-- keymap("n", "<leader>bn", "<Cmd>BufferNext<CR>", opts)
+-- keymap("n", "<leader>bp", "<Cmd>BufferPrevious<CR>", opts)
+-- keymap("n", "<leader>bd", "<Cmd>BufferClose<CR>", opts)
 
 -- Enhanced buffer navigation
 -- keymap("n", "<Tab>", "<Cmd>BufferNext<CR>", opts)
 -- keymap("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>", opts)
-keymap("n", "<leader>b", "<Cmd>BufferPick<CR>", opts)
+-- keymap("n", "<leader>b", "<Cmd>BufferPick<CR>", opts)
 
 -- Quick buffer access (numbers 1-9) - using barbar
-for i = 1, 9 do
-  keymap("n", "<leader>" .. i, "<Cmd>BufferGoto " .. i .. "<CR>", opts)
-end
+-- for i = 1, 9 do
+--   keymap("n", "<leader>" .. i, "<Cmd>BufferGoto " .. i .. "<CR>", opts)
+-- end
 
 -- Additional barbar keymaps
-keymap("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
-keymap("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
-keymap("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
-keymap("n", "<A->>", "<Cmd>BufferMoveNext<CR>", opts)
-keymap("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
-keymap("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
-keymap("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
-keymap("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
-keymap("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
-keymap("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
-keymap("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
-keymap("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
-keymap("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
-keymap("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
-keymap("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
-keymap("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
-keymap("n", "<leader>p", "<Cmd>BufferPick<CR>", opts)
+-- keymap("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
+-- keymap("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
+-- keymap("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
+-- keymap("n", "<A->>", "<Cmd>BufferMoveNext<CR>", opts)
+-- keymap("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
+-- keymap("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
+-- keymap("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
+-- keymap("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
+-- keymap("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
+-- keymap("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
+-- keymap("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
+-- keymap("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
+-- keymap("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
+-- keymap("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
+-- keymap("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
+-- keymap("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
+-- keymap("n", "<leader>p", "<Cmd>BufferPick<CR>", opts)
 
 -- Tab navigation
 keymap("n", "<C-t>", ":tabnew<CR>", opts)
@@ -80,20 +81,20 @@ keymap("n", "<leader>/", ":nohlsearch<CR>", opts)
 
 -- Home and End key fixes for all modes
 -- Normal mode
-keymap("n", "<Home>", "^", opts)  -- Go to first non-blank character
-keymap("n", "<End>", "$", opts)   -- Go to end of line
+-- keymap("n", "<Home>", "^", opts)  -- Go to first non-blank character
+-- keymap("n", "<End>", "$", opts)   -- Go to end of line
 
 -- Insert mode
-keymap("i", "<Home>", "<C-o>^", opts)  -- Go to first non-blank character
-keymap("i", "<End>", "<C-o>$", opts)   -- Go to end of line
+-- keymap("i", "<Home>", "<C-o>^", opts)  -- Go to first non-blank character
+-- keymap("i", "<End>", "<C-o>$", opts)   -- Go to end of line
 
 -- Visual mode
-keymap("v", "<Home>", "^", opts)  -- Go to first non-blank character
-keymap("v", "<End>", "$", opts)   -- Go to end of line
+-- keymap("v", "<Home>", "^", opts)  -- Go to first non-blank character
+-- keymap("v", "<End>", "$", opts)   -- Go to end of line
 
 -- Command mode
-keymap("c", "<Home>", "<C-b>", opts)  -- Go to beginning of command line
-keymap("c", "<End>", "<C-e>", opts)   -- Go to end of command line
+-- keymap("c", "<Home>", "<C-b>", opts)  -- Go to beginning of command line
+-- keymap("c", "<End>", "<C-e>", opts)   -- Go to end of command line
 
 -- Custom close function that allows closing last window
 local function smart_close()
@@ -130,14 +131,14 @@ local function close_all_files()
 end
 
 -- Override the default close behavior
-keymap("n", "<C-w>c", smart_close, opts)
-keymap("n", "<leader>c", smart_close, opts)
+-- keymap("n", "<C-w>c", smart_close, opts)
+-- keymap("n", "<leader>c", smart_close, opts)
 
 -- Close all files keybinding
 keymap("n", "<leader>qa", close_all_files, opts)
 
 -- Create a custom :close command
-vim.api.nvim_create_user_command("Close", smart_close, {})
+-- vim.api.nvim_create_user_command("Close", smart_close, {})
 
 -- Create a custom :CloseAll command
 vim.api.nvim_create_user_command("CloseAll", close_all_files, {})

@@ -17,78 +17,27 @@ require("mason").setup({
 require("mason-lspconfig").setup({
   ensure_installed = {
     "lua_ls",
-    "ts_ls",        -- tsserver foi renomeado para ts_ls
+    "vtsls",        -- Usando vtsls (melhor que ts_ls)
     "html",
     "cssls",
     "jsonls",
     "eslint",
+    "mdx_analyzer", -- LSP para arquivos MDX
   },
   automatic_installation = true,
 })
 
--- Setup completion
-local cmp = require('cmp')
-local luasnip = require('luasnip')
 
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = {
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, { 'i', 's' }),
-  },
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-  }, {
-    { name = 'buffer' },
-    { name = 'path' },
-  }),
-  formatting = {
-    format = function(entry, vim_item)
-      vim_item.menu = ({
-        nvim_lsp = "[LSP]",
-        luasnip = "[Snippet]",
-        buffer = "[Buffer]",
-        path = "[Path]",
-      })[entry.source.name]
-      return vim_item
-    end,
-  },
-})
-
--- LSP server configurations
-local lspconfig = require('lspconfig')
+-- LSP server configurations using new vim.lsp.config API (Neovim 0.11+)
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Common on_attach function
 local on_attach = function(client, bufnr)
   local opts = { noremap = true, silent = true, buffer = bufnr }
-  
+
+  -- Debug: Mostrar quando LSP está anexado
+  print("LSP attached: " .. client.name .. " to buffer " .. bufnr)
+
   -- LSP keymaps
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
@@ -109,9 +58,11 @@ local on_attach = function(client, bufnr)
   end, opts)
 end
 
--- Configure LSP servers
+-- Configure LSP servers using new API
 local servers = {
   lua_ls = {
+    cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/lua-language-server") },
+    filetypes = { "lua" },
     settings = {
       Lua = {
         runtime = { version = 'LuaJIT' },
@@ -120,16 +71,67 @@ local servers = {
         telemetry = { enable = false },
       },
     },
+    on_attach = on_attach,
+    capabilities = capabilities,
   },
-  ts_ls = {},    -- tsserver foi renomeado para ts_ls
-  html = {},
-  cssls = {},
-  jsonls = {},
-  eslint = {},
+  vtsls = {
+    cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/vtsls"), "--stdio" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "mdx" },
+    root_markers = { "package.json", "tsconfig.json", "jsconfig.json", ".git" },
+    settings = {
+      typescript = {
+        preferences = {
+          includeCompletionsForModuleExports = true,
+        },
+      },
+      vtsls = {
+        autoUseWorkspaceTsdk = true,
+      },
+    },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
+  html = {
+    cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/vscode-html-language-server"), "--stdio" },
+    filetypes = { "html" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
+  cssls = {
+    cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/vscode-css-language-server"), "--stdio" },
+    filetypes = { "css", "scss", "less" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
+  jsonls = {
+    cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/vscode-json-language-server"), "--stdio" },
+    filetypes = { "json", "jsonc" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
+  eslint = {
+    cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/vscode-eslint-language-server"), "--stdio" },
+    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
+  mdx_analyzer = {
+    cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/mdx-analyzer"), "--stdio" },
+    filetypes = { "mdx" },
+    root_markers = { "package.json", ".git" },
+    settings = {
+      typescript = {
+        preferences = {
+          includeCompletionsForModuleExports = true,
+        },
+      },
+    },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
 }
 
+-- Setup servers using vim.lsp.config
 for server_name, config in pairs(servers) do
-  config.on_attach = on_attach
-  config.capabilities = capabilities
-  lspconfig[server_name].setup(config)
+  vim.lsp.config[server_name] = config
 end

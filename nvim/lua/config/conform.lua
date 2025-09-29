@@ -15,6 +15,7 @@ require("conform").setup({
     css = { "prettier" },
     scss = { "prettier" },
     markdown = { "prettier" },
+    mdx = { "prettier" },
     yaml = { "prettier" },
   },
   -- format_on_save disabled - format manually with :Format or <leader>f
