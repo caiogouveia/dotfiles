@@ -4,7 +4,7 @@
 # export LC_CTYPE=en_US.UTF-8
 # export LANGUAGE="en_US.UTF-8"
 
-export EDITOR='vim'
+export EDITOR='nvim'
 
 # Prompt
 # autoload -U colors && colors
