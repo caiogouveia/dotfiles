@@ -1,0 +1,91 @@
+# Prefix keyh
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# Start indices at 1
+set -g base-index 1
+set -g pane-base-index 1
+
+# Window splitting
+bind "\\" split-window -h -c "#{pane_current_path}"
+bind "-" split-window -v -c "#{pane_current_path}"
+unbind '"'
+unbind %
+
+# New windows in current path
+bind c new-window -c "#{pane_current_path}"
+
+# Reload config
+bind r source-file ~/.tmux.conf
+
+# Window Navigation
+# unbind p
+# bind p previous-window
+# bind -r M-Left select-window -t :-
+# bind -r M-Right select-window -t :+
+
+# Window management
+bind , command-prompt "rename-window '%%'"
+
+# Pane navigation
+# bind -n M-Left select-pane -L
+# bind -n M-Right select-pane -R
+# bind -n M-Up select-pane -U
+# bind -n M-Down select-pane -D
+
+# Pane cycling
+unbind o
+bind ^A select-pane -t:.+
+
+# Pane resizing
+bind-key -r h resize-pane -R 25
+bind-key -r j resize-pane -D 25
+bind-key -r k resize-pane -U 25
+bind-key -r l resize-pane -L 25
+
+# General settings
+set -sg escape-time 1
+set -g allow-rename on
+set -g mouse on
+set -g focus-events on
+set-window-option -g mode-keys vi
+
+# Terminal settings
+set -g default-terminal "xterm-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"
+
+# Visual notifications
+set -g visual-activity on
+set -g visual-bell on
+set -g visual-silence off
+setw -g monitor-activity off
+set -g bell-action none
+
+# Mode styling
+setw -g clock-mode-colour darkred
+setw -g mode-style 'fg=white bg=darkred bold'
+
+# Pane styling
+set -g pane-border-style 'fg=white'
+set -g pane-active-border-style 'fg=darkred'
+
+# Status bar
+set -g status-position bottom
+set -g status-justify left
+set -g status-style 'fg=darkred bg=white bold'
+set -g status-left '#{?client_prefix,#[fg=darkred],#[bg=white]} '
+set -g status-left-length 10
+set -g status-right ' %d/%m/%Y - %H:%M '
+set -g status-right-style 'fg=darkred bg=white bold'
+
+# Window status styling
+setw -g window-status-current-style 'fg=white bg=darkred bold'
+setw -g window-status-current-format '#[reverse]#[noreverse]#I #[fg=white]#W #F#[bg=darkred fg=black]#[reverse]#[noreverse]'
+setw -g window-status-style 'fg=darkred bg=white'
+setw -g window-status-separator ''
+setw -g window-status-format ' #I #[fg=darkred]#W #[fg=darkred]#F '
+setw -g window-status-bell-style 'fg=darkred bg=red bold'
+
+# Message styling
+set -g message-style 'fg=darkred bg=white bold'
