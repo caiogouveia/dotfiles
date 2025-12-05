@@ -39,6 +39,7 @@ alias lsdocker="docker container ls"
 alias dockerstop="dstop"
 alias dockerrun="docker container run"
 alias dockerexec="docker exec -it"
+alias lzd="lazydocker"
 
 # Laravel
 alias artisan="php artisan"
@@ -60,4 +61,3 @@ alias rmigrate="rake db:drop && rake db:create && rake db:migrate && rake db:see
 alias killruby="killall -9 ruby"
 alias killrudy="killruby"
 alias kr="killruby"
-

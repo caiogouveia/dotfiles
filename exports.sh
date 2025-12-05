@@ -22,7 +22,7 @@ export EDITOR='nvim'
 # user bin folder
 USR_BIN_DIR=$HOME/bin/
 if [ -d "$USR_BIN_DIR"  ]; then
-  export PATH="$HOME/bin/:$PATH"
+    export PATH="$HOME/bin/:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
@@ -30,69 +30,54 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# rvm config
-# RVM_CONFIG_FILE=/etc/profile.d/rvm.sh
-# if [ -f "$RVM_CONFIG_FILE"  ]; then
-#   source $RVM_CONFIG_FILE
-# fi
-
-# nvm config
-# NVM_DIR_TEST=$HOME/.nvm
-# if [ -d "$NVM_DIR_TEST"  ]; then
-#   export NVM_DIR="$HOME/.nvm"
-#   [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# fi
-
-# deno
-# DENO_DIR_TEST=$HOME/.deno
-# if [ -d "$NVM_DIR_TEST"  ]; then
-#   export DENO_INSTALL="$HOME/.deno"
-#   export PATH="$DENO_INSTALL/bin:$PATH"
-# fi
-
-# Imagem Magick Stuff
-#export MAGICK_HOME="$HOME/opt/ImageMagick-6.9.1"
-#export PATH="$MAGICK_HOME/bin:$PATH"
-#export DYLD_LIBRARY_PATH="$MAGICK_HOME/lib"
-
-# Mysql
-# export PATH=$PATH:"/usr/local/mysql/bin/"
-
-# JAVA
-#/Library/Java/JavaVirtualMachines/jdk1.7.0_80.jdk/Contents/Home/jre
-# export JAVA_HOME=`/usr/libexec/java_home`
-# export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-# export PATH=$PATH:$JAVA_HOME/bin
-
-# Apache Maven
-# export M1_HOME=$HOME/Projects/apache-maven-3.2.3
-# export PATH=$PATH:$M1_HOME/bin
-
-# Python
-# export PATH=$PATH:/usr/local/bin/python
-
-# ANDROID
-# export PATH="$PATH:$HOME/Dev/libs/flutter/bin"
-# export PATH="$PATH:$HOME/Android/Sdk"
-# export ANDROID_HOME=$HOME/Android
-# export PATH=$PATH:$ANDROID_HOME/tools
-# export PATH=$PATH:$ANDROID_HOME/platform-tools
-
 # Export variables for Docker and Docker Compose
 export USER_ID=$(id -u)
 export GROUP_ID=$(id -g)
 
-# emulate sh -c 'source /etc/profile.d/apps-bin-path.sh'
+# php composer
+if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
+    export PATH=$HOME/.config/composer/vendor/bin:$PATH
+fi
 
-# # bun completions
-# [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+# node
+export PATH="$HOMEBREW_PREFIX/opt/node@22/bin:$PATH"
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# # bun
-# export BUN_INSTALL="$HOME/.bun"
-# export PATH="$BUN_INSTALL/bin:$PATH"
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+# bun completions
+if [[ -d "$HOME/.bun/)bun" ]]; then
+    source "$HOME/.bun/_bun"
+fi
 
-# ssl + sqlserver
-# export PATH="$PATH:/opt/mssql-tools18/bin"
-# export OPENSSL_CONF=/etc/ssl/openssl.cnf
+# linux Android
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    #TODO: arrumar o path do java 
+    export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+    export ANDROID_HOME=$HOME/Android/Sdk
+    export PATH=$PATH:$ANDROID_HOME/emulator
+    export PATH=$PATH:$ANDROID_HOME/platform-tools
+fi
+
+# ruby
+if [[ -d "$HOMEBREW_PREFIX/lib/ruby/gems/3.2.0/bin" ]]; then
+    export PATH="$HOMEBREW_PREFIX/lib/ruby/gems/3.2.0/bin:$PATH"
+fi
+
+# ??
+export PATH="$HOMEBREW_PREFIX/opt/binutils/bin:$PATH"
+
+# zsh-autosuggestions
+HISTFILE=~/.zsh_history
+SAVEHIST=10000
+setopt HIST_IGNORE_DUPS  # Don't save duplicate commands
+setopt APPEND_HISTORY    # Add new history to the end of the file
+setopt SHARE_HISTORY     # Share history between sessions
+# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bold"
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='bg=#d1d1d1,fg=#686868,bold'
+# Load zsh-autosuggestions if it exists
+if [[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+    source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
 
