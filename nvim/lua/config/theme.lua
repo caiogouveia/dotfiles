@@ -8,7 +8,7 @@ vim.cmd("syntax enable")
 -- Set colorscheme (using vscode theme as equivalent to codedark)
 -- Try multiple themes in order of preference
 -- Mude a ordem aqui para trocar o tema padrão
-local themes = {"vscode", "default", "tokyonight", "nord" }
+local themes = {"onedarkpro", "vscode", "default", "tokyonight", "nord" }
 for _, theme in ipairs(themes) do
   local success = pcall(vim.cmd, "colorscheme " .. theme)
   if success then
@@ -56,6 +56,6 @@ vim.api.nvim_create_user_command("Theme", function(opts)
 end, {
   nargs = 1,
   complete = function()
-    return { "tokyonight", "tokyonight-night", "tokyonight-day", "vscode", "nord", "default" }
+    return { "onedarkpro", "onedarkpro-night", "onedarkpro-day", "tokyonight", "tokyonight-night", "tokyonight-day", "vscode", "nord", "default" }
   end
 })

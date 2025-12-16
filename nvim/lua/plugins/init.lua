@@ -364,6 +364,10 @@ opts = {
 
   -- Themes
   {
+    "olimorris/onedarkpro.nvim",
+    priority = 1000,
+  },
+  {
     "folke/tokyonight.nvim",
     lazy = false,
     priority = 1000,
