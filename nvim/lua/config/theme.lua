@@ -8,7 +8,7 @@ vim.cmd("syntax enable")
 -- Set colorscheme (using vscode theme as equivalent to codedark)
 -- Try multiple themes in order of preference
 -- Mude a ordem aqui para trocar o tema padrão
-local themes = {"onedarkpro", "vscode", "default", "tokyonight", "nord" }
+local themes = {"zenbones", "onedarkpro", "vscode", "default", "tokyonight", "nord" }
 for _, theme in ipairs(themes) do
   local success = pcall(vim.cmd, "colorscheme " .. theme)
   if success then
@@ -36,7 +36,7 @@ local function set_highlights()
 end
 
 -- Apply highlights after colorscheme loads
-vim.api.nvim_create_autocmd("ColorScheme", {
+vim.api.nvim_create_.autocmd("ColorScheme", {
   callback = set_highlights,
 })
 
@@ -56,6 +56,6 @@ vim.api.nvim_create_user_command("Theme", function(opts)
 end, {
   nargs = 1,
   complete = function()
-    return { "onedarkpro", "onedarkpro-night", "onedarkpro-day", "tokyonight", "tokyonight-night", "tokyonight-day", "vscode", "nord", "default" }
+    return { "zenbones", "zenbones_dark", "zenbones_light", "onedarkpro", "onedarkpro-night", "onedarkpro-day", "tokyonight", "tokyonight-night", "tokyonight-day", "vscode", "nord", "default" }
   end
 })

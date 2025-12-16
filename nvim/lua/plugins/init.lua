@@ -364,6 +364,10 @@ opts = {
 
   -- Themes
   {
+    "zenbones-theme/zenbones.nvim",
+    dependencies = "rktjmp/lush.nvim",
+  },
+  {
     "olimorris/onedarkpro.nvim",
     priority = 1000,
   },
