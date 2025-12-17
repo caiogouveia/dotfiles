@@ -21,7 +21,7 @@ require("conform").setup({
   -- format_on_save disabled - format manually with :Format or <leader>f
   formatters = {
     prettier = {
-      prepend_args = { "--tab-width", "2" },
+      prepend_args = { "--tab-width", "4" },
     },
   },
 })
