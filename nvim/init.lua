@@ -20,5 +20,9 @@ safe_require('core.autocommands')
 -- Load plugins after a short delay to ensure Neovim is fully initialized
 vim.defer_fn(function()
   safe_require('plugins.init')
-  safe_require('config.theme')
+
+  -- Load theme after lazy.nvim has loaded all plugins
+  vim.defer_fn(function()
+    safe_require('config.theme')
+  end, 200)
 end, 100)
