@@ -8,7 +8,7 @@ vim.cmd("syntax enable")
 -- Set colorscheme (using vscode theme as equivalent to codedark)
 -- Try multiple themes in order of preference
 -- Mude a ordem aqui para trocar o tema padrão
-local themes = {"zenbones", "onedarkpro", "vscode", "default", "tokyonight", "nord" }
+local themes = {"neobones", "onedark", "vscode", "tokyonight", "nord", "default" }
 for _, theme in ipairs(themes) do
   local success = pcall(vim.cmd, "colorscheme " .. theme)
   if success then
@@ -18,16 +18,14 @@ end
 
 -- Custom highlights
 local function set_highlights()
-  -- Make background transparent
-  vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
-  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
-  vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
-  
+  -- Background is NOT transparent - using theme's original background
+  -- If you want transparent background, uncomment the lines below:
+  -- vim.api.nvim_set_hl(0, "Normal", { bg = "NONE" })
+  -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "NONE" })
+  -- vim.api.nvim_set_hl(0, "NormalNC", { bg = "NONE" })
+
   -- Color column highlight - red line at 80 characters
   vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#ff0000", fg = "NONE" })
-
-  -- Clear sign column background
-  vim.api.nvim_set_hl(0, "SignColumn", { bg = "NONE" })
 
   -- Git signs colors (will be used when gitsigns is loaded)
   vim.api.nvim_set_hl(0, "GitSignsAdd", { fg = "#00ff00" })
@@ -36,7 +34,7 @@ local function set_highlights()
 end
 
 -- Apply highlights after colorscheme loads
-vim.api.nvim_create_.autocmd("ColorScheme", {
+vim.api.nvim_create_autocmd("ColorScheme", {
   callback = set_highlights,
 })
 
@@ -56,6 +54,6 @@ vim.api.nvim_create_user_command("Theme", function(opts)
 end, {
   nargs = 1,
   complete = function()
-    return { "zenbones", "zenbones_dark", "zenbones_light", "onedarkpro", "onedarkpro-night", "onedarkpro-day", "tokyonight", "tokyonight-night", "tokyonight-day", "vscode", "nord", "default" }
+    return { "neobones", "nordbones", "rosebones", "seoulbones", "forestbones", "duckbones", "kanagawabones", "onedark", "onedark_dark", "onedark_vivid", "onelight", "vaporwave", "tokyonight", "tokyonight-night", "tokyonight-storm", "tokyonight-day", "vscode", "nord", "default" }
   end
 })
