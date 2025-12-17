@@ -33,8 +33,8 @@ opt.incsearch = true                -- Incremental search
 
 -- Indentation
 opt.expandtab = true                -- Use spaces instead of tabs
-opt.tabstop = 2                     -- Tab width
-opt.shiftwidth = 2                  -- Indentation width
+opt.tabstop = 4                     -- Tab width
+opt.shiftwidth = 4                  -- Indentation width
 opt.smartindent = true              -- Smart indenting
 opt.autoindent = true               -- Auto indenting
 
