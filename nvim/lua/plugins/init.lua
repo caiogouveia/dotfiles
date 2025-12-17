@@ -331,6 +331,15 @@ opts = {
     end
   },
 
+  -- Inline diagnostics
+  {
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    config = function()
+      require('tiny-inline-diagnostic').setup()
+    end
+  },
+
   -- Treesitter for better syntax highlighting
   {
     "nvim-treesitter/nvim-treesitter",
@@ -340,6 +349,15 @@ opts = {
     },
     config = function()
       pcall(require, 'config.treesitter')
+    end
+  },
+
+  -- Auto close and rename HTML/XML tags
+  {
+    "windwp/nvim-ts-autotag",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+    config = function()
+      require('nvim-ts-autotag').setup()
     end
   },
 
