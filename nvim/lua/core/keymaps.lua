@@ -15,86 +15,34 @@ keymap("n", "<leader>wq", ":wq<CR>", opts)
 keymap("n", "<leader>x", ":bdelete<CR>", opts)
 
 -- Navigation between splits
-keymap("n", "<C-h>", "<C-w>h", opts)
-keymap("n", "<C-j>", "<C-w>j", opts)
-keymap("n", "<C-k>", "<C-w>k", opts)
-keymap("n", "<C-l>", "<C-w>l", opts)
+-- keymap("n", "<C-h>", "<C-w>h", opts)
+-- keymap("n", "<C-j>", "<C-w>j", opts)
+-- keymap("n", "<C-k>", "<C-w>k", opts)
+-- keymap("n", "<C-l>", "<C-w>l", opts)
 
 -- Move splits
-keymap("n", "<A-h>", "<C-W>H", opts)
-keymap("n", "<A-j>", "<C-W>J", opts)
-keymap("n", "<A-k>", "<C-W>K", opts)
-keymap("n", "<A-l>", "<C-W>L", opts)
-
--- Buffer navigation (using barbar.nvim)
--- keymap("n", "<leader>bn", "<Cmd>BufferNext<CR>", opts)
--- keymap("n", "<leader>bp", "<Cmd>BufferPrevious<CR>", opts)
--- keymap("n", "<leader>bd", "<Cmd>BufferClose<CR>", opts)
-
--- Enhanced buffer navigation
--- keymap("n", "<Tab>", "<Cmd>BufferNext<CR>", opts)
--- keymap("n", "<S-Tab>", "<Cmd>BufferPrevious<CR>", opts)
--- keymap("n", "<leader>b", "<Cmd>BufferPick<CR>", opts)
-
--- Quick buffer access (numbers 1-9) - using barbar
--- for i = 1, 9 do
---   keymap("n", "<leader>" .. i, "<Cmd>BufferGoto " .. i .. "<CR>", opts)
--- end
-
--- Additional barbar keymaps
--- keymap("n", "<A-,>", "<Cmd>BufferPrevious<CR>", opts)
--- keymap("n", "<A-.>", "<Cmd>BufferNext<CR>", opts)
--- keymap("n", "<A-<>", "<Cmd>BufferMovePrevious<CR>", opts)
--- keymap("n", "<A->>", "<Cmd>BufferMoveNext<CR>", opts)
--- keymap("n", "<A-1>", "<Cmd>BufferGoto 1<CR>", opts)
--- keymap("n", "<A-2>", "<Cmd>BufferGoto 2<CR>", opts)
--- keymap("n", "<A-3>", "<Cmd>BufferGoto 3<CR>", opts)
--- keymap("n", "<A-4>", "<Cmd>BufferGoto 4<CR>", opts)
--- keymap("n", "<A-5>", "<Cmd>BufferGoto 5<CR>", opts)
--- keymap("n", "<A-6>", "<Cmd>BufferGoto 6<CR>", opts)
--- keymap("n", "<A-7>", "<Cmd>BufferGoto 7<CR>", opts)
--- keymap("n", "<A-8>", "<Cmd>BufferGoto 8<CR>", opts)
--- keymap("n", "<A-9>", "<Cmd>BufferGoto 9<CR>", opts)
--- keymap("n", "<A-0>", "<Cmd>BufferLast<CR>", opts)
--- keymap("n", "<A-p>", "<Cmd>BufferPin<CR>", opts)
--- keymap("n", "<A-c>", "<Cmd>BufferClose<CR>", opts)
--- keymap("n", "<leader>p", "<Cmd>BufferPick<CR>", opts)
+-- keymap("n", "<A-h>", "<C-W>H", opts)
+-- keymap("n", "<A-j>", "<C-W>J", opts)
+-- keymap("n", "<A-k>", "<C-W>K", opts)
+-- keymap("n", "<A-l>", "<C-W>L", opts)
 
 -- Tab navigation
-keymap("n", "<C-t>", ":tabnew<CR>", opts)
-keymap("n", "<C-w>", ":tabclose<CR>", opts)
+-- keymap("n", "<C-t>", ":tabnew<CR>", opts)
+-- keymap("n", "<C-w>", ":tabclose<CR>", opts)
 
 -- Tab navigation with Alt + number (note: conflicts with barbar Alt+number, using different keys)
-keymap("n", "<A-Right>", ":tabnext<CR>", opts)
-keymap("n", "<A-Left>", ":tabprevious<CR>", opts)
+-- keymap("n", "<A-Right>", ":tabnext<CR>", opts)
+-- keymap("n", "<A-Left>", ":tabprevious<CR>", opts)
 
 -- Plugin toggles (these will be updated when plugins are configured)
 keymap("n", "<C-b>", ":NvimTreeToggle<CR>", opts)
+keymap("n", "<leader>e", ":NvimTreeToggle<CR>", opts)
 keymap("n", "<C-p>", ":Telescope find_files<CR>", opts)  -- CtrlP replacement
-keymap("n", "<leader>ff", ":Telescope find_files<CR>", opts)
+keymap("n", "<leader><leader>", ":Telescope find_files<CR>", opts)
 keymap("n", "<leader>fb", ":Telescope buffers<CR>", opts)
 keymap("n", "<leader>fg", ":Telescope live_grep<CR>", opts)
+keymap("n", "<leader>/", ":Telescope live_grep<CR>", opts)
 keymap("n", "<leader>fh", ":Telescope help_tags<CR>", opts)
-
--- Clear search highlighting
-keymap("n", "<leader>/", ":nohlsearch<CR>", opts)
-
--- Home and End key fixes for all modes
--- Normal mode
--- keymap("n", "<Home>", "^", opts)  -- Go to first non-blank character
--- keymap("n", "<End>", "$", opts)   -- Go to end of line
-
--- Insert mode
--- keymap("i", "<Home>", "<C-o>^", opts)  -- Go to first non-blank character
--- keymap("i", "<End>", "<C-o>$", opts)   -- Go to end of line
-
--- Visual mode
--- keymap("v", "<Home>", "^", opts)  -- Go to first non-blank character
--- keymap("v", "<End>", "$", opts)   -- Go to end of line
-
--- Command mode
--- keymap("c", "<Home>", "<C-b>", opts)  -- Go to beginning of command line
--- keymap("c", "<End>", "<C-e>", opts)   -- Go to end of command line
 
 -- Custom close function that allows closing last window
 local function smart_close()
