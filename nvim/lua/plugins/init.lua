@@ -366,9 +366,12 @@ opts = {
   {
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim",
+    lazy = false,
+    priority = 1000,
   },
   {
     "olimorris/onedarkpro.nvim",
+    lazy = false,
     priority = 1000,
   },
   {
@@ -377,10 +380,14 @@ opts = {
     priority = 1000,
   },
   {
-    "arcticicestudio/nord-vim"
+    "arcticicestudio/nord-vim",
+    lazy = false,
+    priority = 1000,
   },
   {
-    "Mofiqul/vscode.nvim"
+    "Mofiqul/vscode.nvim",
+    lazy = false,
+    priority = 1000,
   },
 
   -- Formatting
@@ -404,7 +411,12 @@ opts = {
   -- MDX support
   {
     "davidmh/mdx.nvim",
-    config = true,
+    config = function()
+      local ok, mdx = pcall(require, 'mdx')
+      if ok then
+        mdx.setup()
+      end
+    end,
     dependencies = {"nvim-treesitter/nvim-treesitter"}
   }
 }
