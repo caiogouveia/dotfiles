@@ -20,6 +20,7 @@ require('nvim-treesitter.configs').setup({
     "css",
     "scss",
     "python",
+    "php",
     "markdown",
     "markdown_inline",
     "bash",

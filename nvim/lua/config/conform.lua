@@ -17,6 +17,7 @@ require("conform").setup({
     markdown = { "prettier" },
     mdx = { "prettier" },
     yaml = { "prettier" },
+    php = { "php_cs_fixer" },
   },
   -- format_on_save disabled - format manually with :Format or <leader>f
   formatters = {

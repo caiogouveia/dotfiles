@@ -23,6 +23,7 @@ require("mason-lspconfig").setup({
     "jsonls",
     "eslint",
     "mdx_analyzer", -- LSP para arquivos MDX
+    "intelephense", -- LSP para PHP
   },
   automatic_installation = true,
 })
@@ -123,6 +124,20 @@ local servers = {
       typescript = {
         preferences = {
           includeCompletionsForModuleExports = true,
+        },
+      },
+    },
+    on_attach = on_attach,
+    capabilities = capabilities,
+  },
+  intelephense = {
+    cmd = { vim.fn.expand("~/.local/share/nvim/mason/bin/intelephense"), "--stdio" },
+    filetypes = { "php" },
+    root_markers = { "composer.json", ".git" },
+    settings = {
+      intelephense = {
+        files = {
+          maxSize = 1000000,
         },
       },
     },
