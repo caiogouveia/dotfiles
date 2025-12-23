@@ -6,10 +6,10 @@ keybind = global:ctrl+grave_accent=toggle_quick_terminal
 #keybind = cmd+shift+s>r=reload_config
 
 # fonts config
-# font-family = "JetBrains Mono NL"
+font-family = "JetBrains Mono"
 # font-family = "JetBrains Mono Nerd Font"
 font-thicken = true
-font-size = 14
+font-size = 12
 
 # Window, cursor, theme config
 window-height=24
@@ -31,7 +31,7 @@ background-blur-radius = 40
 # font-style-bold-italic = Ubuntu Mono ExtraBold Italic
 # font-thicken = true
 # font-thicken-strength = 0.5
-macos-titlebar-style = tabs
+macos-titlebar-style = native
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
 confirm-close-surface = false
