@@ -1,4 +1,4 @@
-vim.opt.guicursor = ""
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50"
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
@@ -9,6 +9,8 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 
 vim.opt.smartindent = true
+vim.opt.autoindent = true
+vim.opt.cindent = false
 
 vim.opt.wrap = false
 
@@ -29,3 +31,8 @@ vim.opt.isfname:append("@-@")
 vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
+vim.opt.cursorline = true
+vim.opt.cursorcolumn = false
+
+vim.opt.clipboard = "unnamedplus"
+

@@ -23,6 +23,20 @@ function R(name)
     require("plenary.reload").reload_module(name)
 end
 
+function ReloadConfig()
+    -- Limpar cache dos módulos
+    for name, _ in pairs(package.loaded) do
+        if name:match('^theprimeagen') then
+            package.loaded[name] = nil
+        end
+    end
+
+    -- Recarregar configuração principal
+    dofile(vim.env.MYVIMRC)
+
+    vim.notify("Config recarregada!", vim.log.levels.INFO)
+end
+
 vim.filetype.add({
     extension = {
         templ = 'templ',
@@ -46,14 +60,29 @@ autocmd({"BufWritePre"}, {
     command = [[%s/\s\+$//e]],
 })
 
-autocmd('BufEnter', {
+-- autocmd('BufEnter', {
+--     group = ThePrimeagenGroup,
+--     callback = function()
+--         if vim.bo.filetype == "zig" then
+--             pcall(vim.cmd.colorscheme, "tokyonight-night")
+--         else
+--             pcall(vim.cmd.colorscheme, "rose-pine-moon")
+--         end
+--     end
+-- })
+
+-- Indentação para JS/TS/JSX/TSX com 4 espaços
+autocmd('FileType', {
     group = ThePrimeagenGroup,
+    pattern = {'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'json', 'jsonc'},
     callback = function()
-        if vim.bo.filetype == "zig" then
-            pcall(vim.cmd.colorscheme, "tokyonight-night")
-        else
-            pcall(vim.cmd.colorscheme, "rose-pine-moon")
-        end
+        vim.opt_local.tabstop = 4
+        vim.opt_local.softtabstop = 4
+        vim.opt_local.shiftwidth = 4
+        vim.opt_local.expandtab = true
+        -- Deixar o plugin de sintaxe controlar a indentação
+        vim.opt_local.smartindent = false
+        vim.opt_local.autoindent = true
     end
 })
 
