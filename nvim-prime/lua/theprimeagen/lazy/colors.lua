@@ -1,5 +1,5 @@
 function ColorMyPencils(color)
-	color = color or "brightburn"
+	color = color or "fluoromachine"
 	vim.cmd.colorscheme(color)
 
 	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -116,6 +116,19 @@ return {
                     dark = "wave",
                     light = "lotus"
                 },
+            })
+        end
+    },
+
+    {
+        "maxmx03/fluoromachine.nvim",
+        name = "fluoromachine",
+        config = function()
+            local fm = require('fluoromachine')
+            fm.setup({
+                glow = false,
+                theme = 'fluoromachine', -- fluoromachine, retrowave, delta
+                transparent = false,
             })
         end
     },
