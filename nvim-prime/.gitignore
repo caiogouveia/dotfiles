@@ -1,2 +1,16 @@
+# Plugin managers
 plugin/packer_compiled.lua
 
+# macOS
+.DS_Store
+
+# Lua LSP
+.luarc.json
+
+# Debug files
+*.log
+.debug
+
+# Neovim runtime
+.repro/
+.tests/
