@@ -86,6 +86,9 @@ vim.keymap.set("n", "<leader>rr", function()
     ReloadConfig()
 end)
 
+vim.keymap.set("n", "<tab>", "<cmd>bnext<CR>")
+vim.keymap.set("n", "<S-tab>", "<cmd>bprev<CR>")
+
 -- Comandos com maiúscula (erros comuns)
 vim.api.nvim_create_user_command('W', 'w', {})
 vim.api.nvim_create_user_command('Q', 'q', {})
