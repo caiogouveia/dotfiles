@@ -36,3 +36,5 @@ vim.opt.cursorcolumn = false
 
 vim.opt.clipboard = "unnamedplus"
 
+vim.opt.showmode = true
+vim.opt.cmdheight = 1
