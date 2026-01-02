@@ -19,11 +19,12 @@ export EDITOR='nvim'
 # terminal colors
 # eval $(dircolors -p | sed -e 's/DIR 01;34/DIR 01;36/' | dircolors /dev/stdin)
 
+# NOTE: remove this, just use .local/bin
 # user bin folder
-USR_BIN_DIR=$HOME/bin/
-if [ -d "$USR_BIN_DIR"  ]; then
-    export PATH="$HOME/bin/:$PATH"
-fi
+# USR_BIN_DIR=$HOME/bin/
+# if [ -d "$USR_BIN_DIR"  ]; then
+#     export PATH="$HOME/bin/:$PATH"
+# fi
 
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
@@ -53,7 +54,7 @@ fi
 
 # linux Android
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
-    #TODO: arrumar o path do java 
+    #TODO: arrumar o path do java
     export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
     export ANDROID_HOME=$HOME/Android/Sdk
     export PATH=$PATH:$ANDROID_HOME/emulator
