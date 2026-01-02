@@ -1,54 +1,37 @@
-font-family = "JetBrains Mono Nerd Font"
-font-size = 11
-theme = "SynthwaveAlpha"
-command = tmux
-window-width=80
-window-height=24
+# command=/usr/bin/tmux
+command = $(test "$(uname)" = "Linux" && echo "/usr/bin/tmux" || echo "/opt/homebrew/bin/tmux")
+
+# Keybinds
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
-# NOTE:
-# docs:
-# ghostty +show-config --default --docs | nvim
-# examples:
-# https://github.com/search?q=path%3Aghostty%2Fconfig&type=code
+#keybind = cmd+shift+s>r=reload_config
 
-# ghostty +list-fonts
+# fonts config
+font-family = "JetBrains Mono"
+# font-family = "JetBrains Mono Nerd Font"
+font-thicken = true
+font-size = 12
 
-# monospace
-# https://usgraphics.com/products/berkeley-mono
-#font-family = "Berkeley Mono Variable"
-font-variation = wght=300
-font-variation = wdth=100
-font-variation-bold = wght=800
+# Window, cursor, theme config
+window-height=24
+window-width=80
+# adjust-cell-height = 35%
+# adjust-cell-width = -5%
+cursor-style = block_hollow
+cursor-color = red
+theme = Apple System Colors Light
 
-# italics
-# https://github.com/subframe7536/maple-font
-#font-family-italic = "Maple Mono"
-font-variation-italic = wght=200
-# font-family-bold-italic = "Maple Mono"
-font-variation-bold-italic = wght=800
-
-#window-title-font-family = "Berkeley Mono Variable"
-
-#corrected-alpha = blending-linear
-
-macos-titlebar-style = tabs
-macos-titlebar-proxy-icon = hidden
-macos-option-as-alt = true
-
-background-opacity = 0.95
+# Background
+background-opacity = 1.0
+background-blur = true
 background-blur-radius = 40
 
-# ghostty +list-themes
-#theme = dark:/Users/fredrik/.local/share/fredrik/lazy/tokyonight.nvim/extras/ghostty/tokyonight_moon,light:/Users/fredrik/.local/share/fredrik/lazy/nightfox.nvim/extra/dayfox/dayfox.ghostty
-
-mouse-hide-while-typing = true
-
-window-inherit-working-directory = false
-working-directory = home
-
-# keymaps
-keybind = global:cmd+`=toggle_quick_terminal
-keybind = shift+ctrl+left_bracket=previous_tab
-keybind = shift+ctrl+right_bracket=next_tab
-keybind = shift+ctrl+,=move_tab:-1
-keybind = shift+ctrl+.=move_tab:+1
+# Macos only
+# font-style-bold = Ubuntu Mono ExtraBold
+# font-style-italic = Ubuntu Mono Italic
+# font-style-bold-italic = Ubuntu Mono ExtraBold Italic
+# font-thicken = true
+# font-thicken-strength = 0.5
+macos-titlebar-style = native
+macos-titlebar-proxy-icon = hidden
+macos-option-as-alt = true
+confirm-close-surface = false
