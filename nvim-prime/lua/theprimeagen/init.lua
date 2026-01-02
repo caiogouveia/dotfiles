@@ -1,7 +1,9 @@
 require("theprimeagen.set")
 require("theprimeagen.remap")
 require("theprimeagen.lazy_init")
-require("theprimeagen.lualine")
+-- require("theprimeagen.snacks")
+-- require("theprimeagen.lualine")
+-- require("theprimeagen.bufferline")
 
 -- DO.not
 -- DO NOT INCLUDE THIS
@@ -48,7 +50,7 @@ autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',
     callback = function()
-        vim.highlight.on_yank({
+        vim.hl.on_yank({
             higroup = 'IncSearch',
             timeout = 40,
         })
