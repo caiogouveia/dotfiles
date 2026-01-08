@@ -1,5 +1,5 @@
 function ColorMyPencils(color)
-	color = color or "vesper"
+	color = color or "fluoromachine"
 	vim.cmd.colorscheme(color)
 
 	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
@@ -17,14 +17,6 @@ return {
         end
     },
 
-    {
-        "folke/tokyonight.nvim",
-        lazy = false,
-        opts = {},
-        config = function()
-            ColorMyPencils()
-        end
-    },
     {
         "ellisonleao/gruvbox.nvim",
         name = "gruvbox",
@@ -123,11 +115,12 @@ return {
     {
         "maxmx03/fluoromachine.nvim",
         name = "fluoromachine",
+        lazy = true,
         config = function()
             local fm = require('fluoromachine')
             fm.setup({
                 glow = false,
-                theme = 'fluoromachine', -- fluoromachine, retrowave, delta
+                theme = 'retrowave', -- fluoromachine, retrowave, delta
                 transparent = false,
             })
         end
@@ -136,6 +129,8 @@ return {
     {
         "datsfilipe/vesper.nvim",
         name = "Vesper",
+        lazy = false,
+        priority = 1000,
         config = function()
             require('vesper').setup({
                 transparent = false, -- Boolean: Sets the background to transparent
