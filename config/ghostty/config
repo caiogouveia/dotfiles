@@ -14,7 +14,7 @@ font-size = 16
 # Window, cursor, theme config
 window-height=24
 window-width=80
-# adjust-cell-height = 35%
+adjust-cell-height = 20%
 # adjust-cell-width = -5%
 cursor-style = block_hollow
 cursor-color = red
