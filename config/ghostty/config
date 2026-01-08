@@ -1,4 +1,3 @@
-# command=/usr/bin/tmux
 command = $(test "$(uname)" = "Linux" && echo "/usr/bin/tmux" || echo "/opt/homebrew/bin/tmux")
 
 # Keybinds
@@ -6,10 +5,11 @@ keybind = global:ctrl+grave_accent=toggle_quick_terminal
 #keybind = cmd+shift+s>r=reload_config
 
 # fonts config
-font-family = "JetBrains Mono"
+font-family = "Agave Nerd Font Mono"
+# font-family = "JetBrains Mono"
 # font-family = "JetBrains Mono Nerd Font"
 font-thicken = true
-font-size = 12
+font-size = 16
 
 # Window, cursor, theme config
 window-height=24
@@ -18,7 +18,7 @@ window-width=80
 # adjust-cell-width = -5%
 cursor-style = block_hollow
 cursor-color = red
-theme = Apple System Colors Light
+theme = Vesper
 
 # Background
 background-opacity = 1.0
