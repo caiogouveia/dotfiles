@@ -14,6 +14,9 @@ return {
 				go = { "gofmt" },
 				javascript = { "prettier" },
 				typescript = { "prettier" },
+				javascriptreact = { "prettier" },
+				typescriptreact = { "prettier" },
+				mdx = { "prettier" },
 				elixir = { "mix" },
 			},
 			formatters = {

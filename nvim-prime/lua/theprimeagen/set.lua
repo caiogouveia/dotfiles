@@ -38,3 +38,10 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.showmode = true
 vim.opt.cmdheight = 1
+
+-- MDX filetype detection
+vim.filetype.add({
+    extension = {
+        mdx = "mdx",
+    },
+})
