@@ -52,7 +52,6 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
-                "gopls",
                 "vtsls",
                 "tailwindcss",
             },
@@ -102,14 +101,14 @@ return {
                     local lspconfig = require("lspconfig")
                     lspconfig.tailwindcss.setup({
                         capabilities = capabilities,
-                        filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "heex", "mdx" },
+                        filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "heex" },
                     })
                 end,
                 ["vtsls"] = function()
                     local lspconfig = require("lspconfig")
                     lspconfig.vtsls.setup({
                         capabilities = capabilities,
-                        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "mdx" },
+                        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
                     })
                 end,
             }
