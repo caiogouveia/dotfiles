@@ -84,6 +84,19 @@ return {
                         capabilities = capabilities,
                         settings = {
                             Lua = {
+                                runtime = {
+                                    version = 'LuaJIT',
+                                },
+                                diagnostics = {
+                                    globals = { 'vim' },
+                                },
+                                workspace = {
+                                    library = vim.api.nvim_get_runtime_file("", true),
+                                    checkThirdParty = false,
+                                },
+                                telemetry = {
+                                    enable = false,
+                                },
                                 format = {
                                     enable = true,
                                     -- Put format options here
@@ -138,22 +151,33 @@ return {
             })
         })
 
+        -- vim.diagnostic.config({
+        --     virtual_text = {
+        --         prefix = '●',
+        --         source = "if_many",
+        --     },
+        --     signs = {
+        --         text = {
+        --             [vim.diagnostic.severity.ERROR] = " ",
+        --             [vim.diagnostic.severity.WARN] = " ",
+        --             [vim.diagnostic.severity.INFO] = " ",
+        --             [vim.diagnostic.severity.HINT] = "󰠠 ",
+        --         },
+        --     },
+        --     underline = true,
+        --     update_in_insert = false,
+        --     severity_sort = true,
+        --     float = {
+        --         focusable = false,
+        --         style = "minimal",
+        --         border = "rounded",
+        --         source = "always",
+        --         header = "",
+        --         prefix = "",
+        --     },
+        -- })
         vim.diagnostic.config({
-            virtual_text = {
-                prefix = '●',
-                source = "if_many",
-            },
-            signs = {
-                text = {
-                    [vim.diagnostic.severity.ERROR] = " ",
-                    [vim.diagnostic.severity.WARN] = " ",
-                    [vim.diagnostic.severity.INFO] = " ",
-                    [vim.diagnostic.severity.HINT] = "󰠠 ",
-                },
-            },
-            underline = true,
-            update_in_insert = false,
-            severity_sort = true,
+            -- update_in_insert = true,
             float = {
                 focusable = false,
                 style = "minimal",
@@ -164,13 +188,5 @@ return {
             },
         })
 
-        -- Bordas para hover e signature help
-        local handlers = {
-            ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
-            ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
-        }
-
-        vim.lsp.handlers["textDocument/hover"] = handlers["textDocument/hover"]
-        vim.lsp.handlers["textDocument/signatureHelp"] = handlers["textDocument/signatureHelp"]
     end
 }
