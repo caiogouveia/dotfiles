@@ -60,7 +60,11 @@ autocmd('TextYankPost', {
 autocmd({"BufWritePre"}, {
     group = ThePrimeagenGroup,
     pattern = "*",
-    command = [[%s/\s\+$//e]],
+    callback = function()
+        if vim.bo.modifiable then
+            vim.cmd([[%s/\s\+$//e]])
+        end
+    end,
 })
 
 -- autocmd('BufEnter', {
