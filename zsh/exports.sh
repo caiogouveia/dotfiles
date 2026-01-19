@@ -42,7 +42,12 @@ fi
 
 # node
 export PATH="$HOMEBREW_PREFIX/opt/node@22/bin:$PATH"
-eval "$(/opt/homebrew/bin/brew shellenv)"
+
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+elif [[ "$OSTYPE" == "darwin" ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -81,4 +86,3 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='bg=#d1d1d1,fg=#686868,bold'
 if [[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
     source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
-
