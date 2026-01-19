@@ -1,12 +1,50 @@
 # nvim-prime
 
-Configuração Neovim baseada no setup do ThePrimeagen.
+Configuração Neovim moderna baseada no setup do **ThePrimeagen**, otimizada para desenvolvimento com foco em produtividade e workflow minimalista.
 
-## Pré-requisitos
+## 🎯 Visão Geral
 
-- [ripgrep](https://github.com/BurntSushi/ripgrep)
-- [tmux](https://github.com/tmux/tmux)
-- [fzf](https://github.com/junegunn/fzf)
+Setup inspirado no workflow do **ThePrimeagen**: produtividade máxima, distrações mínimas, terminal-first, Git-centric, tudo acessível via teclado sem mouse.
+
+**Estatísticas:**
+- 27+ plugins cuidadosamente selecionados
+- ~1.233 linhas de configuração Lua
+- Organização modular e fácil de manter
+- Performance otimizada com lazy loading
+
+## 📁 Estrutura do Projeto
+
+```
+nvim-prime/
+├── init.lua                    # Entry point (carrega theprimeagen module)
+├── lua/theprimeagen/
+│   ├── init.lua               # Configuração principal + autocmds
+│   ├── set.lua                # Opções do vim
+│   ├── remap.lua              # Keybindings globais
+│   ├── lazy_init.lua          # Bootstrap do lazy.nvim
+│   └── lazy/                  # Plugins (27 arquivos)
+│       ├── lsp.lua            # LSP + autocompletion (192 linhas)
+│       ├── telescope.lua      # Fuzzy finder
+│       ├── harpoon.lua        # Navegação rápida entre arquivos
+│       ├── treesitter.lua     # Syntax highlighting
+│       ├── fugitive.lua       # Git integration
+│       ├── dap.lua            # Debug adapter protocol
+│       └── ...                # 21+ outros plugins
+```
+
+## 📦 Pré-requisitos
+
+### Requeridos
+
+- [ripgrep](https://github.com/BurntSushi/ripgrep) - Busca rápida em arquivos
+- [tmux](https://github.com/tmux/tmux) - Terminal multiplexer
+- [fzf](https://github.com/junegunn/fzf) - Fuzzy finder
+- [Node.js](https://nodejs.org/) - Para LSPs JavaScript/TypeScript
+
+### Opcionais (mas recomendados)
+
+- [lazygit](https://github.com/jesseduffield/lazygit) - Interface TUI para Git
+- [tmux-sessionizer](https://github.com/ThePrimeagen/tmux-sessionizer) - Navegação entre projetos
 
 ## Instalação do tmux-sessionizer
 
@@ -127,7 +165,74 @@ tmux-sessionizer ~/meu-projeto
 - [Repositório oficial do tmux-sessionizer](https://github.com/ThePrimeagen/tmux-sessionizer)
 - [Dotfiles do ThePrimeagen](https://github.com/ThePrimeagen/.dotfiles)
 
-## Keybindings
+## ✨ Características Principais
+
+### Configurações Essenciais
+
+- **Números de linha**: Relativos + absolutos para navegação eficiente
+- **Indentação**: 4 espaços (padrão), conversão automática de tabs
+- **Sem swap files**: Histórico persistente via undodir (`~/.vim/undodir`)
+- **Scrolloff**: 8 linhas de contexto sempre visíveis
+- **Clipboard**: Integrado com sistema operacional
+- **Color column**: Marcador em 80 caracteres
+- **Cursorline**: Destaque da linha atual
+
+### Plugins Organizados por Categoria
+
+#### 🔧 Core Development
+
+- **LSP** (Mason + lspconfig + nvim-cmp): Autocomplete, diagnósticos, code actions
+  - LSPs configurados: `lua_ls`, `rust_analyzer`, `vtsls`, `tailwindcss`, `zls`
+  - Snippet support via LuaSnip
+  - Signature help integrado
+- **Treesitter**: Syntax highlighting inteligente (otimizado para arquivos < 100KB)
+- **Telescope**: Fuzzy finder universal para arquivos, grep, buffers, help tags
+- **Harpoon 2**: Navegação ultra-rápida entre arquivos marcados
+
+#### 🐙 Git Integration
+
+- **Fugitive**: Comandos Git nativos dentro do Neovim
+- **Gitsigns**: Indicadores visuais de mudanças no código
+- **LazyGit**: Interface TUI completa para Git
+
+#### 🚀 Produtividade
+
+- **Conform**: Formatação automática de código
+- **Trouble**: Navegação em diagnósticos e quickfix
+- **Todo-comments**: Destaque e busca de TODO, FIXME, NOTE, etc.
+- **Undotree**: Visualização e navegação no histórico de edições
+- **Zen Mode**: Foco sem distrações (2 modos: 80 e 90 colunas)
+
+#### 🛠️ Utilitários
+
+- **DAP** (Debug Adapter Protocol): Debug integrado
+- **Snacks**: Coleção de mini utilidades
+- **Cloak**: Ocultar secrets/tokens em arquivos de configuração
+- **Colorizer**: Preview inline de cores hex/rgb
+- **Claude**: Integração com Claude AI
+- **Cellular Automaton**: Easter egg divertido (`:leader ca`)
+
+#### 🎨 Temas Disponíveis
+
+- Rose Pine (moon/main/dawn)
+- Gruvbox
+- Tokyo Night
+- Vesper
+- Fluoromachine
+- Brightburn
+
+## ⚙️ Autocmds e Automações
+
+Esta configuração inclui automações inteligentes para melhorar o workflow:
+
+- **Highlight on yank**: Feedback visual ao copiar texto (40ms)
+- **Auto-remove whitespace**: Remove espaços trailing ao salvar (apenas em arquivos modificáveis)
+- **Indentação JS/TS**: 4 espaços automáticos para JavaScript/TypeScript/JSON
+- **LSP keymaps**: Keybindings automáticos quando LSP attach
+- **Treesitter performance**: Desativa automaticamente em arquivos > 100KB
+- **Filetype detection**: Suporte para MDX e Templ
+
+## 🎯 Keybindings
 
 **Leader key:** `<space>`
 
@@ -268,15 +373,39 @@ Aceita variações com maiúsculas de comandos comuns:
 - `:Wq` / `:WQ` → `:wq`
 - `:Qa` → `:qa`
 
-## Recursos do ThePrimeagen
+## 🌟 Diferenciais
+
+O que torna este setup único:
+
+1. **Minimalista mas Completo**: Sem bloat, apenas ferramentas essenciais cuidadosamente selecionadas
+2. **Harpoon como Diferencial**: Sistema de marcação ultra-rápido substitui abas tradicionais
+3. **Workflow Terminal-First**: Integração profunda com tmux via tmux-sessionizer
+4. **Git-Centric**: Múltiplas ferramentas Git (Fugitive + Gitsigns + LazyGit) para diferentes workflows
+5. **Performance Otimizada**: 
+   - Lazy loading de plugins
+   - Treesitter inteligente (desativa em arquivos grandes)
+   - Preview do Telescope sem Treesitter para velocidade
+6. **Tolerante a Erros**: Aceita comandos com maiúsculas (`:W`, `:Q`, etc.)
+7. **Keybinds do Prime**: Atalhos otimizados para produtividade máxima (baseados em anos de experiência)
+
+## 📚 Recursos e Links
+
+### Recursos do ThePrimeagen
 
 - [Vídeo completo do setup](https://www.youtube.com/watch?v=w7i4amO_zaE)
+- [Repositório original do ThePrimeagen](https://github.com/ThePrimeagen/init.lua)
+- [Dotfiles do ThePrimeagen](https://github.com/ThePrimeagen/.dotfiles)
+- [Canal do YouTube](https://www.youtube.com/@ThePrimeagen)
 
-## Change Log
+### Documentação Útil
 
-* [33eee9ad](https://github.com/ThePrimeagen/init.lua/commit/33eee9ad0c035a92137d99dae06a2396be4c892e) initial commits
-* [cb210006](https://github.com/ThePrimeagen/init.lua/commit/cb210006356b4b613b71c345cb2b02eefa961fc0) netrw, autogroups for yank highlighting, and auto remove whitespace
-* [c8c0bf4a](https://github.com/ThePrimeagen/init.lua/commit/c8c0bf4aeacd0bd77136d9c5ee490680515a106b) zenmode. i really like this plugin
-* [81c770d2](https://github.com/ThePrimeagen/init.lua/commit/81c770d2d2e32e59916b39c7f5babbc8560f7a82) copilot testing
-* [4a96e645](https://github.com/ThePrimeagen/init.lua/commit/4a96e6457b0a0241ca7361ce62177aa6b9a33a38) fugitive mappings for push and pull
-* [a3bad06a](https://github.com/ThePrimeagen/init.lua/commit/a3bad06a4681c322538d609aa1c0bd18880f77c6) disabled eslint. driving me crazy
+- [Neovim Docs](https://neovim.io/doc/)
+- [Lazy.nvim](https://github.com/folke/lazy.nvim) - Plugin manager
+- [Mason.nvim](https://github.com/williamboman/mason.nvim) - LSP installer
+- [Telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) - Fuzzy finder
+
+---
+
+**Total**: ~1.233 linhas de configuração Lua bem organizadas e modularizadas.
+
+Configuração mantida e personalizada por [@caiogouveia](https://github.com/caiogouveia) baseada no setup do [ThePrimeagen](https://github.com/ThePrimeagen).
