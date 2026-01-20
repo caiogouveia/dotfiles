@@ -1,0 +1,10 @@
+mode=drun,run
+term=ghostty
+hide_scroll=false
+insensitive=true
+height=45%
+width=45%
+prompt=Search...
+allow_markup=true
+columns=1
+layershell = blur
