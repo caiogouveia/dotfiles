@@ -20,6 +20,7 @@
         // "sway/workspaces"
     ],
     "modules-right": [
+        "custom/gammastep",
         "idle_inhibitor",
         "pulseaudio",
         "network",
@@ -222,5 +223,12 @@
 			"suspend": "systemctl suspend",
 			"hibernate": "systemctl hibernate"
 		}
+    },
+    "custom/gammastep": {
+        "format": "{}",
+        "interval": 5,
+        "on-update": "",
+        "exec": "sleep 0.05; gammastep.sh",
+        "on-click": "gammastep.sh toggle"
     }
 }
