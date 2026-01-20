@@ -6,6 +6,10 @@
 
 ### Variables
 #
+# set $wallpaper /home/caiogouveia/Downloads/02716_torcal_1920x1080.jpg
+# set $wallpaper /home/caiogouveia/Downloads/OsakaRiver.jpg
+set $wallpaper /home/caiogouveia/Downloads/winxp.jpg
+
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Home row direction keys, like vim
@@ -18,7 +22,7 @@ set $term ghostty
 # Your preferred application launcher
 set $menu wofi --show drun
 
-font pango:Iosevka Term 10
+font pango:Agave Nerd Font Mono 10
 
 # exec --no-startup-id dbus-update-activation-environment --all
 exec systemctl --user import-environment
@@ -27,8 +31,7 @@ exec systemctl --user import-environment
 #
 # General output settings - applies to all displays
 # You can get the names of your specific outputs by running: swaymsg -t get_outputs
-output * resolution 1920x1080 bg /home/caiogouveia/Downloads/02716_torcal_1920x1080.jpg fill
-#
+output * resolution 1920x1080 bg $wallpaper fill
 # Example for a specific display:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -38,10 +41,21 @@ output * resolution 1920x1080 bg /home/caiogouveia/Downloads/02716_torcal_1920x1
 #
 # Example configuration:
 #
+set $swaylockCommand swaylock --screenshots \
+		--ignore-empty-password \
+		--daemonize \
+		--indicator-caps-lock \
+		--indicator \
+		--clock \
+		--timestr "󰥔 %Hh %Mm %Ss"\
+		--datestr "󰃭 %b-%d-%Y" \
+		--show-failed-attempts \
+		--indicator-idle-visible
+
 exec swayidle -w \
-         timeout 120 'swaylock -f -c 000000' \
+         timeout 120 $swaylockCommand \
          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f -c 000000'
+         before-sleep $swaylockCommand
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
