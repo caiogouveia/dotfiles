@@ -1,0 +1,95 @@
+/* * { */
+/* 	font-family: CALICOMP; */
+/* 	font-size: 20 */
+/* 	border-radius: 20px; */
+/* } */
+/**/
+/* window { */
+/* 	background-color: rgba(0, 0, 0, 1); */
+/* 	border-left: 2px solid #9b8d7f; */
+/* 	border-right: 2px solid #9b8d7f; */
+/* 	border-top: 2px solid #9b8d7f; */
+/* 	border-bottom: 2px solid #9b8d7f; */
+/* 	border-radius: 20px; */
+/*     border-width: 4px; */
+/*     padding: 14px; */
+/* } */
+/**/
+/* #input { */
+/* 	color: rgba(255, 255, 255, 1.0); */
+/* 	background-color: rgba(0, 0, 0, 1); */
+/* 	border-radius: 0px; */
+/* 	border-color: #9b8d7f; */
+/*     border-width: 4px; */
+/* } */
+/**/
+/* #entry { */
+/*     margin: 4px; */
+/*     border-left: 2px solid trasparent; */
+/* 	border-right: 2px solid trasparent; */
+/* 	border-top: 2px solid trasparent; */
+/* 	border-bottom: 2px solid trasparent; */
+/* } */
+/**/
+/* #entry:selected { */
+/*     color: #ffffff; */
+/* 	background-color: #9b8d7f; */
+/* 	border-left: 2px solid #9b8d7f; */
+/* 	border-right: 2px solid #9b8d7f; */
+/* 	border-top: 2px solid #9b8d7f; */
+/* 	border-bottom: 2px solid #9b8d7f; */
+/* } */
+/**/
+
+
+window {
+  font-family: "DejaVu Sans", "Font Awesome 5 Free";
+  margin: 0px;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  background-color: rgba(29, 31, 33, 0.95);
+  border-radius: 10px;
+}
+
+#input {
+  margin: 5px;
+  border: none;
+  color: #f8f8f2;
+  background-color: rgba(55, 59, 65, 0.95);
+}
+
+#inner-box {
+  margin: 5px;
+  border: none;
+  background-color: transparent;
+}
+
+#outer-box {
+  margin: 5px;
+  border: none;
+  background-color: transparent;
+}
+
+#scroll {
+  margin: 0px;
+  border: none;
+}
+
+#text {
+  margin: 5px;
+  border: none;
+  color: #c5c8c6;
+}
+
+#entry {
+  border: none;
+}
+
+#entry:focus {
+  border: none;
+}
+
+#entry:selected {
+  background-color: rgba(55, 59, 65, 0.95);
+  border-radius: 5px;
+  border: none;
+}

@@ -9,7 +9,7 @@ font-family = "Agave Nerd Font Mono"
 # font-family = "JetBrains Mono"
 # font-family = "JetBrains Mono Nerd Font"
 font-thicken = true
-font-size = 16
+font-size = 14
 
 # Window, cursor, theme config
 window-height=24
@@ -21,7 +21,7 @@ cursor-color = red
 theme = Vesper
 
 # Background
-background-opacity = 1.0
+background-opacity = .85
 background-blur = true
 background-blur-radius = 40
 
