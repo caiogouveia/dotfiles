@@ -66,13 +66,22 @@ exec swayidle -w \
 # You can also configure each device individually.
 # Read `man 5 sway-input` for more information about this section.
 #
-input * {
-    xkb_layout "br"
-    xkb_model "pc105"
+# input * {
+input "type:keyboard" {
+    xkb_layout br
+    # xkb_model "pc105"
     # Ou "abnt2", se pc105 não funcionar
+    xkb_variant abnt2
+    xkb_model abnt2
     repeat_delay 200
     repeat_rate 30
 }
+
+# input "type:keyboard"	{
+#     xkb_layout br
+#         xkb_variant abnt2
+#         xkb_model abnt2
+# }
 
 input type:touchpad {
     tap enabled
