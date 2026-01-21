@@ -39,13 +39,14 @@ export GROUP_ID=$(id -g)
 if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
     export PATH=$HOME/.config/composer/vendor/bin:$PATH
 fi
-
+#
 # node
 export PATH="$HOMEBREW_PREFIX/opt/node@22/bin:$PATH"
 
+# Homebrew
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [[ "$OSTYPE" == "darwin" ]]; then
+elif [[ "$OSTYPE" == "darwin25.0" ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
@@ -83,6 +84,6 @@ setopt SHARE_HISTORY     # Share history between sessions
 # ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=white,bold"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='bg=#d1d1d1,fg=#686868,bold'
 # Load zsh-autosuggestions if it exists
-if [[ -f "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
-    source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+if [[ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
+    source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
