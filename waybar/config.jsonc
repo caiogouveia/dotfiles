@@ -228,7 +228,7 @@
         "format": "{}",
         "interval": 5,
         "on-update": "",
-        "exec": "sleep 0.05; gammastep.sh",
-        "on-click": "gammastep.sh toggle"
+        "exec": "sleep 0.05; $HOME/DEV/dotfiles/gammastep.sh",
+        "on-click": "$HOME/DEV/dotfiles/gammastep.sh toggle"
     }
 }
