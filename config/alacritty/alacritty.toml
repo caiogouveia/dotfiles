@@ -1,0 +1,58 @@
+[colors.bright]
+black = "#666666"
+blue = "#3b8eea"
+cyan = "#29b8db"
+green = "#23d18b"
+magenta = "#d670d6"
+red = "#f14c4c"
+white = "#ffffff"
+yellow = "#fede5d"
+
+[colors.normal]
+black = "#000000"
+blue = "#2472c8"
+cyan = "#038585"
+green = "#0dbc79"
+magenta = "#bc3fbc"
+red = "#cd3131"
+white = "#e5e5e5"
+yellow = "#e5e510"
+
+[colors.primary]
+background = "#1e1e1e"
+foreground = "#d4d4d4"
+
+[colors.cursor]
+text = "#000000" # Color of the text under the cursor
+cursor = "#ff0000" # Red cursor color
+
+[cursor]
+unfocused_hollow = true
+
+[cursor.style]
+blinking = "On"
+shape = "Block"
+
+[font]
+size = 13
+offset.x = 0
+offset.y = 3
+
+glyph_offset.x = 0
+glyph_offset.y = 0
+
+[font.normal]
+family = "Agave Nerd Font Mono"
+
+[terminal.shell]
+program = "/usr/bin/tmux"
+
+[window]
+blur = true
+opacity = 0.85
+
+[window.dimensions]
+columns = 80
+lines = 24
+
+[terminal]
