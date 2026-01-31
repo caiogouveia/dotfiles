@@ -18,7 +18,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term ghostty
+set $term alacritty
 # Your preferred application launcher
 set $menu wofi --show drun
 
@@ -67,12 +67,12 @@ exec swayidle -w \
 # Read `man 5 sway-input` for more information about this section.
 #
 # input * {
-input "type:keyboard" {
-    xkb_layout br
+input type:keyboard {
+    xkb_layout "br"
     # xkb_model "pc105"
     # Ou "abnt2", se pc105 não funcionar
-    xkb_variant abnt2
-    xkb_model abnt2
+    xkb_variant "abnt2"
+    xkb_model "abnt2"
     repeat_delay 200
     repeat_rate 30
 }
