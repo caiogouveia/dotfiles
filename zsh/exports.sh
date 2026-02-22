@@ -39,22 +39,24 @@ export GROUP_ID=$(id -g)
 if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
     export PATH=$HOME/.config/composer/vendor/bin:$PATH
 fi
-#
-# node
-export PATH="$HOMEBREW_PREFIX/opt/node@22/bin:$PATH"
 
 # Homebrew
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-elif [[ "$OSTYPE" == "darwin25.0" ]]; then
+elif [[ "$OSTYPE" == "darwin"* ]]; then
     eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
+
+# node (must be after Homebrew initialization)
+export PATH="$HOMEBREW_PREFIX/opt/node@22/bin:$PATH"
+export LDFLAGS="-L/opt/homebrew/opt/node@22/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/node@22/include"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 # bun completions
-if [[ -d "$HOME/.bun/)bun" ]]; then
+if [[ -d "$HOME/.bun/bun" ]]; then
     source "$HOME/.bun/_bun"
 fi
 

@@ -12,6 +12,7 @@ alias la="ls -la --color=auto"
 alias lla="ls -la --color=auto"
 alias more="less"
 alias tamanho_pastas="du -h -d 1"
+alias tmux_kill_server="tmux kill-server"
 
 # git
 alias giff="git diff $1^!"
