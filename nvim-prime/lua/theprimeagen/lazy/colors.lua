@@ -1,151 +1,148 @@
 function ColorMyPencils(color)
-	color = color or "fluoromachine"
-	vim.cmd.colorscheme(color)
-
-	-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	local colorSchemeFile = vim.fn.expand("~/.config/nvim/.colorscheme")
+	local previousColor = color or vim.fn.readfile(colorSchemeFile)[1] or "vesper"
+	vim.fn.writefile({ previousColor }, colorSchemeFile)
+	vim.cmd.colorscheme(previousColor)
+	vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#FF0000" })
+	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
 return {
 
-    {
-        "erikbackman/brightburn.vim",
-        lazy = false,
-        priority = 1000,
-        config = function()
+	{
+		"erikbackman/brightburn.vim",
+		name = "brightburn",
+		config = function()
             ColorMyPencils()
-        end
-    },
+		end,
+	},
 
-    {
-        "ellisonleao/gruvbox.nvim",
-        name = "gruvbox",
-        config = function()
-            require("gruvbox").setup({
-                terminal_colors = true, -- add neovim terminal colors
-                undercurl = true,
-                underline = false,
-                bold = true,
-                italic = {
-                    strings = false,
-                    emphasis = false,
-                    comments = false,
-                    operators = false,
-                    folds = false,
-                },
-                strikethrough = true,
-                invert_selection = false,
-                invert_signs = false,
-                invert_tabline = false,
-                invert_intend_guides = false,
-                inverse = true, -- invert background for search, diffs, statuslines and errors
-                contrast = "", -- can be "hard", "soft" or empty string
-                palette_overrides = {},
-                overrides = {},
-                dim_inactive = false,
-                transparent_mode = false,
-            })
-        end,
-    },
-    {
-        "folke/tokyonight.nvim",
-        config = function()
-            require("tokyonight").setup({
-                -- your configuration comes here
-                -- or leave it empty to use the default settings
-                style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-                transparent = false, -- Enable this to disable setting the background color
-                terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-                styles = {
-                    -- Style to be applied to different syntax groups
-                    -- Value is any valid attr-list value for `:help nvim_set_hl`
-                    comments = { italic = false },
-                    keywords = { italic = false },
-                    -- Background styles. Can be "dark", "transparent" or "normal"
-                    sidebars = "dark", -- style for sidebars, see below
-                    floats = "dark", -- style for floating windows
-                },
-            })
-        end
-    },
+	{
+		"ellisonleao/gruvbox.nvim",
+		name = "gruvbox",
+		config = function()
+			require("gruvbox").setup({
+				terminal_colors = true, -- add neovim terminal colors
+				undercurl = true,
+				underline = false,
+				bold = true,
+				italic = {
+					strings = false,
+					emphasis = false,
+					comments = false,
+					operators = false,
+					folds = false,
+				},
+				strikethrough = true,
+				invert_selection = false,
+				invert_signs = false,
+				invert_tabline = false,
+				invert_intend_guides = false,
+				inverse = true, -- invert background for search, diffs, statuslines and errors
+				contrast = "", -- can be "hard", "soft" or empty string
+				palette_overrides = {},
+				overrides = {},
+				dim_inactive = false,
+				transparent_mode = false,
+			})
+		end,
+	},
+	{
+		"folke/tokyonight.nvim",
+		name = "tokyonight",
+		config = function()
+			require("tokyonight").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+				transparent = false, -- Enable this to disable setting the background color
+				terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
+				styles = {
+					-- Style to be applied to different syntax groups
+					-- Value is any valid attr-list value for `:help nvim_set_hl`
+					comments = { italic = false },
+					keywords = { italic = false },
+					-- Background styles. Can be "dark", "transparent" or "normal"
+					sidebars = "dark", -- style for sidebars, see below
+					floats = "dark", -- style for floating windows
+				},
+			})
+		end,
+	},
 
-    {
-        "rose-pine/neovim",
-        name = "rose-pine",
-        config = function()
-            require('rose-pine').setup({
-                disable_background = false,
-                styles = {
-                    italic = false,
-                },
-            })
+	{
+		"rose-pine/neovim",
+		name = "rose-pine",
+		config = function()
+			require("rose-pine").setup({
+				disable_background = false,
+				styles = {
+					italic = false,
+				},
+			})
+		end,
+	},
 
-            ColorMyPencils();
-        end
-    },
+	{
+		"rebelot/kanagawa.nvim",
+		name = "kanagawa",
+		config = function()
+			require("kanagawa").setup({
+				compile = false,
+				undercurl = true,
+				commentStyle = { italic = false },
+				functionStyle = {},
+				keywordStyle = { italic = false },
+				statementStyle = { bold = true },
+				typeStyle = {},
+				transparent = false,
+				dimInactive = false,
+				terminalColors = true,
+				colors = {
+					palette = {},
+					theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
+				},
+				theme = "wave", -- Load "wave" theme when 'background' option is not set
+				background = {
+					dark = "wave",
+					light = "lotus",
+				},
+			})
+		end,
+	},
 
-    {
-        "rebelot/kanagawa.nvim",
-        name = "kanagawa",
-        config = function()
-            require('kanagawa').setup({
-                compile = false,
-                undercurl = true,
-                commentStyle = { italic = false },
-                functionStyle = {},
-                keywordStyle = { italic = false },
-                statementStyle = { bold = true },
-                typeStyle = {},
-                transparent = false,
-                dimInactive = false,
-                terminalColors = true,
-                colors = {
-                    palette = {},
-                    theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
-                },
-                theme = "wave", -- Load "wave" theme when 'background' option is not set
-                background = {
-                    dark = "wave",
-                    light = "lotus"
-                },
-            })
-        end
-    },
+	{
+		"maxmx03/fluoromachine.nvim",
+		name = "fluoromachine",
+		config = function()
+			local fm = require("fluoromachine")
+			fm.setup({
+				glow = false,
+				theme = "retrowave", -- fluoromachine, retrowave, delta
+				transparent = false,
+			})
+		end,
+	},
 
-    {
-        "maxmx03/fluoromachine.nvim",
-        name = "fluoromachine",
-        lazy = true,
-        config = function()
-            local fm = require('fluoromachine')
-            fm.setup({
-                glow = false,
-                theme = 'retrowave', -- fluoromachine, retrowave, delta
-                transparent = false,
-            })
-        end
-    },
-
-    {
-        "datsfilipe/vesper.nvim",
-        name = "Vesper",
-        lazy = false,
-        priority = 1000,
-        config = function()
-            require('vesper').setup({
-                transparent = false, -- Boolean: Sets the background to transparent
-                italics = {
-                    comments = true, -- Boolean: Italicizes comments
-                    keywords = true, -- Boolean: Italicizes keywords
-                    functions = true, -- Boolean: Italicizes functions
-                    strings = true, -- Boolean: Italicizes strings
-                    variables = true, -- Boolean: Italicizes variables
-                },
-                overrides = {}, -- A dictionary of group names, can be a function returning a dictionary or a table.
-                palette_overrides = {}
-            })
-            ColorMyPencils('vesper')
-        end
-    },
-
+	{
+		"datsfilipe/vesper.nvim",
+		name = "Vesper",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("vesper").setup({
+				transparent = false, -- Boolean: Sets the background to transparent
+				italics = {
+					comments = true, -- Boolean: Italicizes comments
+					keywords = true, -- Boolean: Italicizes keywords
+					functions = true, -- Boolean: Italicizes functions
+					strings = true, -- Boolean: Italicizes strings
+					variables = true, -- Boolean: Italicizes variables
+				},
+				overrides = {}, -- A dictionary of group names, can be a function returning a dictionary or a table.
+				palette_overrides = {},
+			})
+		end,
+	},
 }
