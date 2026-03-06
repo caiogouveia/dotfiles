@@ -36,7 +36,15 @@ return {
             callback = function(ev)
                 local opts = { buffer = ev.buf }
                 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-                vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                vim.keymap.set('n', 'K', function()
+                    for _, win in ipairs(vim.api.nvim_list_wins()) do
+                        if vim.api.nvim_win_get_config(win).zindex then
+                            vim.api.nvim_win_close(win, true)
+                            return
+                        end
+                    end
+                    vim.lsp.buf.hover()
+                end, opts)
                 vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
                 vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
                 vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
