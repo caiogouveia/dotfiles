@@ -1,11 +1,20 @@
+function SetColoColumn(color)
+    local columnColor = color or "#FF0000"
+	vim.api.nvim_set_hl(0, "ColorColumn", { bg = columnColor })
+end
+
+function TransparentBackground()
+	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+end
+
 function ColorMyPencils(color)
 	local colorSchemeFile = vim.fn.expand("~/.config/nvim/.colorscheme")
 	local previousColor = color or vim.fn.readfile(colorSchemeFile)[1] or "vesper"
 	vim.fn.writefile({ previousColor }, colorSchemeFile)
 	vim.cmd.colorscheme(previousColor)
-	vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#FF0000" })
-	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+    TransparentBackground()
+    SetColoColumn("#FF00ff")
 end
 
 return {
