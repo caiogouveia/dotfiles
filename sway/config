@@ -7,8 +7,8 @@
 ### Variables
 #
 # set $wallpaper /home/caiogouveia/Downloads/02716_torcal_1920x1080.jpg
-# set $wallpaper /home/caiogouveia/Downloads/OsakaRiver.jpg
-set $wallpaper /home/caiogouveia/Downloads/winxp.jpg
+set $wallpaper /home/caiogouveia/Downloads/OsakaRiver.jpg
+# set $wallpaper /home/caiogouveia/Downloads/winxp.jpg
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -263,12 +263,12 @@ client.unfocused #202020 #202020 #9b8d7f #202020 #202020
 
 
 # Gaps
-gaps inner 0
-gaps outer 0
+gaps inner 15
+gaps outer 5
 smart_gaps on
 
-default_border pixel 5
-default_floating_border pixel 5
+default_border pixel 2
+default_floating_border pixel 2
 
 # gaps horizontal 5
 # gaps vertical 5
@@ -303,19 +303,23 @@ bindsym $mod+z mode "special"
 bar {
      swaybar_command waybar
 }
-# bar {
-#     position top
-#
-#     # When the status_command prints a new line to stdout, swaybar updates.
-#     # The default just shows the current date and time.
-#     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-#
-#     colors {
-#         statusline #ffffff
-#         background #323232
-#         inactive_workspace #32323200 #32323200 #5c5c5c
-#     }
-# }
 
-# include @sysconfdir@/sway/config.d/*
+# waybar blur
+layer_effects "waybar" blur enable; shadows enable;
+layer_effects "gtk-layer-shell" blur enable; shadows enable; corner_radius 13
+layer_effects "wofi" blur enable; shadows enable; corner_radius 13
+layer_effects "avizo" blur enable; corner_radius 15
 
+smart_corner_radius enable
+corner_radius 5
+shadows enable
+shadows_on_csd enable
+shadow_blur_radius 12
+shadow_offset 0 6
+shadow_color #0000007F
+
+## blur
+blur enable
+blur_xray disable
+blur_passes 4
+blur_radius 4
