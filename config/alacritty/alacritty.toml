@@ -34,7 +34,7 @@ blinking = "On"
 shape = "Block"
 
 [font]
-size = 13
+size = 13.5
 offset.x = 0
 offset.y = 3
 
@@ -43,6 +43,8 @@ glyph_offset.y = 0
 
 [font.normal]
 family = "Agave Nerd Font Mono"
+
+[terminal]
 
 [terminal.shell]
 program = "/usr/bin/tmux"
@@ -55,4 +57,3 @@ opacity = 0.75
 columns = 80
 lines = 24
 
-[terminal]
