@@ -29,14 +29,26 @@ return {
 
         require("fidget").setup({})
         require("mason").setup()
-
         -- Keymaps do LSP
         vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('UserLspConfig', {}),
             callback = function(ev)
                 local opts = { buffer = ev.buf }
                 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-                vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+                vim.keymap.set('n', 'K', function()
+                    for _, win in ipairs(vim.api.nvim_list_wins()) do
+                        if vim.api.nvim_win_get_config(win).zindex then
+                            vim.api.nvim_win_close(win, true)
+                            return
+                        end
+                    end
+                    -- vim.lsp.buf.hover()
+                    vim.lsp.buf.hover({
+                        border = "rounded",   -- ← INVÁLIDO no 0.11
+                        title = " Hover ",
+                        max_width = 80,
+                    })
+                end, opts)
                 vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
                 vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
                 vim.keymap.set('n', '[d', vim.diagnostic.goto_next, opts)
@@ -176,6 +188,7 @@ return {
         --         prefix = "",
         --     },
         -- })
+
         vim.diagnostic.config({
             -- update_in_insert = true,
             float = {
