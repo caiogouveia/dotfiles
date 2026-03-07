@@ -1,27 +1,24 @@
+@define-color bg #4d3e63;
+@define-color fg #ffffff;
 * {
-    font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
+    /* font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace; */
+    font-family: "JetBrainsMono";
     font-size: 13px;
+    font-weight: bold;
 }
 
 window#waybar {
-    /* background-color: rgba(0,0,0, 0.45); */
-    background: alpha(#000000, 0.25);
+    background-color: alpha(@bg, 0.77);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
-    border-radius: 50px;
-    border: 1px solid alpha(#fff, 0.08);
+    border: 1px solid alpha(@fg, 0.1);
     padding: 0px 10px;
+    border-radius: 15;
 }
 
 window#waybar.hidden {
     opacity: 0.2;
-}
-
-#clock, #battery, #cpu, #memory {
-    border-radius: 8px;
-    margin: 0 5px; /* Add some spacing between modules */
-    padding: 0 10px;
 }
 
 #custom-gammastep
@@ -69,21 +66,21 @@ button:hover {
 }
 
 #workspaces {
-    /* A large value creates a pill shape */
-    border-radius: 50px;
+    border-radius: 5;
     background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 15;
 }
 
 #workspaces button {
     padding: 0 5px;
     background-color: transparent;
     color: #ffffff;
-    border-radius: 50px;
+    border-radius: 15;
     min-width: 50px;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.35);
 }
 
 #workspaces button.focused {
@@ -117,13 +114,15 @@ button:hover {
 #scratchpad,
 #power-profiles-daemon,
 #mpd {
+    margin: 0 5px;
     padding: 0 10px;
     color: #ffffff;
+    /* border: 1px solid red; */
 }
 
 #window,
 #workspaces {
-    margin: 0 4px;
+    /* margin: 0 4px; */
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -141,7 +140,7 @@ button:hover {
 }
 
 #clock {
-    /* background-color: #64727D; */
+    background-color: alpha(@bg, 0.25);
 }
 
 #battery {
@@ -276,7 +275,7 @@ label:focus {
 }
 
 #idle_inhibitor {
-    background-color: #2d3436;
+    /* background-color: #2d3436; */
 }
 
 #idle_inhibitor.activated {

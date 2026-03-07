@@ -2,13 +2,13 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 32, // Waybar height (to be removed for auto height)
-    "width": 1280, // Waybar width
-    "spacing": 4, // Gaps between modules (4px)
+    "height": 30, // Waybar height (to be removed for auto height)
+    "width": 1600, // Waybar width
+    "spacing": 0, // Gaps between modules (4px)
     "margin-top": 3,
     "margin-left": 5,
     "margin-right": 5,
-    // "margin-bottom": 5,
+    "margin-bottom": 5,
     // Choose the order of the modules
     "modules-left": [
         "sway/workspaces",
@@ -118,9 +118,11 @@
         }
     },
     "clock": {
-        // "timezone": "America/New_York",
+        "timezone": "America/Sao_Paulo",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format-alt": "{:%Y-%m-%d}",
+        "format": "{:%A  %d/%m/%Y - %H:%M:%S}",
+        "interval": 1
     },
     "cpu": {
         "format": "{usage}% ",
@@ -173,7 +175,7 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{essid} ({signalStrength}%)  ",
         "format-ethernet": "{ipaddr}/{cidr} ",
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
@@ -182,11 +184,11 @@
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{volume}%  {icon}   {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format-source": "{volume}%  ",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
