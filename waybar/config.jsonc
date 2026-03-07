@@ -1,13 +1,13 @@
 // -*- mode: jsonc -*-
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 44, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 32, // Waybar height (to be removed for auto height)
+    "width": 1280, // Waybar width
     "spacing": 4, // Gaps between modules (4px)
-    // "margin-top": 5,
-    // "margin-left": 5,
-    // "margin-right": 5,
+    "margin-top": 3,
+    "margin-left": 5,
+    "margin-right": 5,
     // "margin-bottom": 5,
     // Choose the order of the modules
     "modules-left": [
@@ -17,7 +17,6 @@
     ],
     "modules-center": [
         "sway/window"
-        // "sway/workspaces"
     ],
     "modules-right": [
         "custom/gammastep",
@@ -29,10 +28,10 @@
         "memory",
         "temperature",
         "backlight",
-        "sway/language",
-        "battery",
-        "clock",
-        "tray"
+        // "sway/language",
+        // "battery",
+        "clock"
+        // "tray"
     ],
     // Modules configuration
     "sway/workspaces": {
@@ -111,12 +110,12 @@
         }
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 21,
         "spacing": 10,
-        // "icons": {
-        //   "blueman": "bluetooth",
-        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-        // }
+        "icons": {
+          "blueman": "bluetooth",
+          "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        }
     },
     "clock": {
         // "timezone": "America/New_York",

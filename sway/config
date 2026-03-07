@@ -6,8 +6,8 @@
 
 ### Variables
 #
-# set $wallpaper /home/caiogouveia/Downloads/02716_torcal_1920x1080.jpg
-set $wallpaper /home/caiogouveia/Downloads/OsakaRiver.jpg
+set $wallpaper /home/caiogouveia/Downloads/02716_torcal_1920x1080.jpg
+# set $wallpaper /home/caiogouveia/Downloads/OsakaRiver.jpg
 # set $wallpaper /home/caiogouveia/Downloads/winxp.jpg
 
 # Logo key. Use Mod1 for Alt.
@@ -26,6 +26,7 @@ font pango:Agave Nerd Font Mono 10
 
 # exec --no-startup-id dbus-update-activation-environment --all
 exec systemctl --user import-environment
+# exec dbus-launch waybar
 
 ### Output configuration
 #
@@ -75,6 +76,12 @@ input type:keyboard {
     xkb_model "abnt2"
     repeat_delay 200
     repeat_rate 30
+}
+
+# Identifier: 1241:41119:E-Signal_USB_Gaming_Mouse
+input "1241:41119:E-Signal_USB_Gaming_Mouse" {
+    accel_profile flat
+    pointer_accel 0.5
 }
 
 # input "type:keyboard"	{
@@ -311,7 +318,7 @@ layer_effects "wofi" blur enable; shadows enable; corner_radius 13
 layer_effects "avizo" blur enable; corner_radius 15
 
 smart_corner_radius enable
-corner_radius 5
+corner_radius 14
 shadows enable
 shadows_on_csd enable
 shadow_blur_radius 12
