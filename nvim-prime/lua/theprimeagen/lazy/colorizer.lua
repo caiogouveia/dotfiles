@@ -1,20 +1,11 @@
 return {
-    'norcalli/nvim-colorizer.lua',
+    "brenoprata10/nvim-highlight-colors",
+    event = "BufReadPre",
     config = function()
-        require('colorizer').setup({
-            '*',
-        }, {
-            RGB = true,
-            RRGGBB = true,
-            names = true,
-            RRGGBBAA = true,
-            AARRGGBB = true,
-            rgb_fn = true,
-            hsl_fn = true,
-            css = true,
-            css_fn = true,
-            mode = 'background',
+        require("nvim-highlight-colors").setup({
+            render = "background",
+            enable_named_colors = true,
+            enable_tailwind = false,
         })
     end
 }
-
