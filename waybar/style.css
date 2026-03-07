@@ -5,11 +5,11 @@
 
 window#waybar {
     /* background-color: rgba(0,0,0, 0.45); */
-    background: alpha(#000000, 0.1);
+    background: alpha(#000000, 0.25);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
-    /* border-radius: 50px; */
+    border-radius: 50px;
     border: 1px solid alpha(#fff, 0.08);
     padding: 0px 10px;
 }
@@ -22,11 +22,6 @@ window#waybar.hidden {
     border-radius: 8px;
     margin: 0 5px; /* Add some spacing between modules */
     padding: 0 10px;
-}
-
-#workspaces {
-    border-radius: 50px; /* A large value creates a pill shape */
-    background-color: rgba(255, 255, 255, 0.1);
 }
 
 #custom-gammastep
@@ -71,6 +66,12 @@ button:hover {
 /* you can set a style on hover for any module like this */
 #pulseaudio:hover {
     background-color: #a37800;
+}
+
+#workspaces {
+    /* A large value creates a pill shape */
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 #workspaces button {
@@ -262,6 +263,7 @@ label:focus {
 
 #tray {
     background-color: #2980b9;
+    color: #ffffff;
 }
 
 #tray > .passive {
