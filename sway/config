@@ -6,9 +6,10 @@
 
 ### Variables
 #
-set $wallpaper /home/caiogouveia/Downloads/02716_torcal_1920x1080.jpg
-# set $wallpaper /home/caiogouveia/Downloads/OsakaRiver.jpg
-# set $wallpaper /home/caiogouveia/Downloads/winxp.jpg
+# set $wallpaper /home/caiogouveia/Imagens/Wallpapers/02716_torcal_1920x1080.jpg
+# set $wallpaper /home/caiogouveia/Imagens/Wallpapers/OsakaRiver.jpg
+# set $wallpaper /home/caiogouveia/Imagens/Wallpapers/winxp.jpg
+set $wallpaper /home/caiogouveia/Imagens/Wallpapers/Abduzeedo_InstagramNashvilleTut_2.jpg
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -312,7 +313,7 @@ bar {
 }
 
 # waybar blur
-layer_effects "waybar" blur enable; shadows enable;
+layer_effects "waybar" blur enable; shadows enable; corner_radius 15
 layer_effects "gtk-layer-shell" blur enable; shadows enable; corner_radius 13
 layer_effects "wofi" blur enable; shadows enable; corner_radius 13
 layer_effects "avizo" blur enable; corner_radius 15
