@@ -1,7 +1,47 @@
 function ThemePicker()
+    ---@class Theme -- define o tipo Theme
+    ---@field name string -- campo nome
+    ---@field transparentBg boolean -- theme tem bg transparente
+
+    ---@class ThemeItem
+    ---@field text string
+    ---@field transparentBg boolean
+
+    ---@type Theme[] -- themes é um array de Theme
+    local themes = {
+        { name = "vesper", transparentBg = true },
+        { name = "rose-pine", transparentBg = true },
+        { name = "kanagawa", transparentBg = true },
+        { name = "fluoromachine", transparentBg = true },
+        { name = "brightburn", transparentBg = true },
+        { name = "onedark", transparentBg = true },
+        { name = "vaporwave", transparentBg = true },
+        { name = "onelight", transparentBg = false },
+    }
+
+    local original = vim.g.colors_name
     local Menu = require('nui.menu')
+
+    -- encontra o índice do tema atual na lista
+    local current_index = 1
+    for i, t in ipairs(themes) do
+        if t.name == original then
+            current_index = i
+            break
+        end
+    end
+
+    local lines = {}
+    for _, t in ipairs(themes) do
+        table.insert(lines, Menu.item(t.name, { transparentBg = t.transparentBg }))
+    end
+
     local menu = Menu({
         position = "50%",
+        size = {
+            width = 30,
+            height = 10
+        },
         border = {
             style = "rounded",
             text = {
@@ -9,117 +49,86 @@ function ThemePicker()
                 top_align = "center"
             }
         }
-    },{
-        lines = {
-            Menu.item("vesper"),
-            Menu.item("rose-pine"),
-            Menu.item("kanagawa"),
-            Menu.item("fluoromachine"),
-            Menu.item("brightburn")
-        },
+    }, {
+        lines = lines,
         keymap = {
             focus_next = { "j", "<Down>" },
             focus_prev = { "k", "<Up>" },
             close = { "<Esc>", "q" },
             submit = { "<CR>" },
         },
+        on_change = function(item)
+            ---@cast item ThemeItem
+            vim.cmd.colorscheme(item.text)
+        end,
+        ---@param item Theme
         on_submit = function(item)
-            ColorMyPencils(item.text)
-        end
+            ColorMyPencils(item.name, item.transparentBg)
+        end,
+        on_close = function()
+            vim.cmd.colorscheme(original)
+        end,
     })
+
     menu:mount()
+
+    -- posiciona o cursor no tema atual
+    vim.schedule(function()
+        for _ = 1, current_index - 1 do
+            vim.api.nvim_feedkeys(
+                vim.api.nvim_replace_termcodes("j", true, false, true),
+                "n", false
+            )
+        end
+    end)
 end
 
-vim.keymap.set("n", "<leader>th", function ()
-    ThemePicker()
-end)
-
+---@param color string
+---@return nil
 function SetColoColumn(color)
 	local columnColor = color or "#FF0000"
 	vim.api.nvim_set_hl(0, "ColorColumn", { bg = columnColor })
 end
 
-function TransparentBackground()
+function SetTransparentBackground()
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-function ColorMyPencils(color)
+---@param color? string
+---@param bg? boolean
+---@return nil
+function ColorMyPencils(color, bg)
 	local colorSchemeFile = vim.fn.expand("~/.config/nvim/.colorscheme")
 	local previousColor = color or vim.fn.readfile(colorSchemeFile)[1] or "vesper"
 	vim.fn.writefile({ previousColor }, colorSchemeFile)
 	vim.cmd.colorscheme(previousColor)
-	TransparentBackground()
-	SetColoColumn("#FF00ff")
+    local lBg = bg ~= nil and bg or false
+    if (lBg) then
+        SetTransparentBackground()
+    end
+    SetColoColumn("#FF00ff")
 end
 
 return {
 
 	{
-		"MunifTanjim/nui.nvim",
+        "MunifTanjim/nui.nvim",
         lazy = true
-	},
-	{
-		"erikbackman/brightburn.vim",
-		name = "brightburn",
-		config = function()
-			ColorMyPencils()
-		end,
-	},
+    },
 
-	-- {
-	-- 	"ellisonleao/gruvbox.nvim",
-	-- 	name = "gruvbox",
-	-- 	config = function()
-	-- 		require("gruvbox").setup({
-	-- 			terminal_colors = true, -- add neovim terminal colors
-	-- 			undercurl = true,
-	-- 			underline = false,
-	-- 			bold = true,
-	-- 			italic = {
-	-- 				strings = false,
-	-- 				emphasis = false,
-	-- 				comments = false,
-	-- 				operators = false,
-	-- 				folds = false,
-	-- 			},
-	-- 			strikethrough = true,
-	-- 			invert_selection = false,
-	-- 			invert_signs = false,
-	-- 			invert_tabline = false,
-	-- 			invert_intend_guides = false,
-	-- 			inverse = true, -- invert background for search, diffs, statuslines and errors
-	-- 			contrast = "", -- can be "hard", "soft" or empty string
-	-- 			palette_overrides = {},
-	-- 			overrides = {},
-	-- 			dim_inactive = false,
-	-- 			transparent_mode = false,
-	-- 		})
-	-- 	end,
-	-- },
+    {
+        "erikbackman/brightburn.vim",
+        name = "brightburn",
+        config = function()
+            ColorMyPencils()
+        end,
+    },
 
-	-- {
-	-- 	"folke/tokyonight.nvim",
-	-- 	name = "tokyonight",
-	-- 	config = function()
-	-- 		require("tokyonight").setup({
-	-- 			-- your configuration comes here
-	-- 			-- or leave it empty to use the default settings
-	-- 			style = "storm", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
-	-- 			transparent = false, -- Enable this to disable setting the background color
-	-- 			terminal_colors = true, -- Configure the colors used when opening a `:terminal` in Neovim
-	-- 			styles = {
-	-- 				-- Style to be applied to different syntax groups
-	-- 				-- Value is any valid attr-list value for `:help nvim_set_hl`
-	-- 				comments = { italic = false },
-	-- 				keywords = { italic = false },
-	-- 				-- Background styles. Can be "dark", "transparent" or "normal"
-	-- 				sidebars = "dark", -- style for sidebars, see below
-	-- 				floats = "dark", -- style for floating windows
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
+    {
+        "olimorris/onedarkpro.nvim",
+        priority = 1000, -- ensure it loads first
+    },
 
 	{
 		"rose-pine/neovim",

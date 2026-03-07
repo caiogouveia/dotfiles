@@ -96,3 +96,6 @@ vim.api.nvim_create_user_command('Wq', 'wq', {})
 vim.api.nvim_create_user_command('WQ', 'wq', {})
 vim.api.nvim_create_user_command('Qa', 'qa', {})
 
+vim.keymap.set("n", "<leader>th", function ()
+    ThemePicker()
+end)
