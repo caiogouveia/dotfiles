@@ -35,11 +35,6 @@ fi
 export USER_ID=$(id -u)
 export GROUP_ID=$(id -g)
 
-# php composer
-if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
-    export PATH=$HOME/.config/composer/vendor/bin:$PATH
-fi
-
 # Homebrew
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -88,4 +83,20 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='bg=#d1d1d1,fg=#686868,bold'
 # Load zsh-autosuggestions if it exists
 if [[ -f "$HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]]; then
     source $HOMEBREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fi
+
+export PATH="$PATH:$(go env GOPATH)/bin"
+
+# php composer
+if [[ -d "$HOME/.config/composer/vendor/bin" ]]; then
+    export PATH=$HOME/.config/composer/vendor/bin:$PATH
+fi
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # php 8.4 mac
+    export PATH="/opt/homebrew/opt/php@8.4/bin:$PATH"
+    export PATH="/opt/homebrew/opt/php@8.4/sbin:$PATH"
+
+    export LDFLAGS="-L/opt/homebrew/opt/php@8.4/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/php@8.4/include"
 fi
