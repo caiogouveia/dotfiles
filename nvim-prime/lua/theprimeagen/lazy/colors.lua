@@ -1,86 +1,90 @@
+---@class Theme -- define o tipo Theme
+---@field name string -- campo nome
+---@field transparentBg boolean -- theme tem bg transparente
+
+---@class ThemeItem
+---@field text string
+---@field transparentBg boolean
+
+---@return nil
 function ThemePicker()
-    ---@class Theme -- define o tipo Theme
-    ---@field name string -- campo nome
-    ---@field transparentBg boolean -- theme tem bg transparente
+	---@type Theme[] -- themes é um array de Theme
+	local themes = {
+		{ name = "default", transparentBg = false },
+		{ name = "vesper", transparentBg = false },
+		{ name = "rose-pine", transparentBg = false },
+		{ name = "kanagawa", transparentBg = true },
+		{ name = "fluoromachine", transparentBg = true },
+		{ name = "brightburn", transparentBg = true },
+		{ name = "onedark", transparentBg = true },
+		{ name = "vaporwave", transparentBg = true },
+		{ name = "onelight", transparentBg = false },
+		{ name = "retrobox", transparentBg = false },
+	}
 
-    ---@class ThemeItem
-    ---@field text string
-    ---@field transparentBg boolean
+	local original = vim.g.colors_name
+	local submitted = false
+	local Menu = require("nui.menu")
 
-    ---@type Theme[] -- themes é um array de Theme
-    local themes = {
-        { name = "vesper", transparentBg = true },
-        { name = "rose-pine", transparentBg = true },
-        { name = "kanagawa", transparentBg = true },
-        { name = "fluoromachine", transparentBg = true },
-        { name = "brightburn", transparentBg = true },
-        { name = "onedark", transparentBg = true },
-        { name = "vaporwave", transparentBg = true },
-        { name = "onelight", transparentBg = false },
-    }
+	-- encontra o índice do tema atual na lista
+	local current_index = 1
+	for i, t in ipairs(themes) do
+		if t.name == original then
+			current_index = i
+			break
+		end
+	end
 
-    local original = vim.g.colors_name
-    local Menu = require('nui.menu')
+	local lines = {}
+	for _, t in ipairs(themes) do
+		table.insert(lines, Menu.item(t.name, { transparentBg = t.transparentBg }))
+	end
 
-    -- encontra o índice do tema atual na lista
-    local current_index = 1
-    for i, t in ipairs(themes) do
-        if t.name == original then
-            current_index = i
-            break
-        end
-    end
+	local menu = Menu({
+		position = "50%",
+		size = {
+			width = 30,
+			height = 10,
+		},
+		border = {
+			style = "rounded",
+			text = {
+				top = " Themes ",
+				top_align = "center",
+			},
+		},
+	}, {
+		lines = lines,
+		keymap = {
+			focus_next = { "j", "<Down>" },
+			focus_prev = { "k", "<Up>" },
+			close = { "<Esc>", "q" },
+			submit = { "<CR>" },
+		},
+		on_change = function(item)
+			---@cast item ThemeItem
+			vim.cmd.colorscheme(item.text)
+		end,
+		on_submit = function(item)
+			submitted = true
+			---@cast item ThemeItem
+			ColorMyPencils(item.text, item.transparentBg)
+		end,
+		on_close = function()
+			if not submitted then
+				vim.cmd.colorscheme(original)
+			end
+		end,
+	})
 
-    local lines = {}
-    for _, t in ipairs(themes) do
-        table.insert(lines, Menu.item(t.name, { transparentBg = t.transparentBg }))
-    end
+	menu:mount()
 
-    local menu = Menu({
-        position = "50%",
-        size = {
-            width = 30,
-            height = 10
-        },
-        border = {
-            style = "rounded",
-            text = {
-                top = " Themes ",
-                top_align = "center"
-            }
-        }
-    }, {
-        lines = lines,
-        keymap = {
-            focus_next = { "j", "<Down>" },
-            focus_prev = { "k", "<Up>" },
-            close = { "<Esc>", "q" },
-            submit = { "<CR>" },
-        },
-        on_change = function(item)
-            ---@cast item ThemeItem
-            vim.cmd.colorscheme(item.text)
-        end,
-        ---@param item Theme
-        on_submit = function(item)
-            ColorMyPencils(item.name, item.transparentBg)
-        end,
-        on_close = function()
-            vim.cmd.colorscheme(original)
-        end,
-    })
-
-    menu:mount()
-
-    -- posiciona o cursor no tema atual
-    vim.schedule(function()
-        for _ = 1, current_index - 1 do
-            vim.api.nvim_feedkeys(
-                vim.api.nvim_replace_termcodes("j", true, false, true),
-                "n", false
-            )
-        end
-    end)
+	-- posiciona o cursor no tema atual
+	vim.schedule(function()
+		for _ = 1, current_index - 1 do
+			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("j", true, false, true), "n", false)
+		end
+	end)
 end
 
 ---@param color string
@@ -90,6 +94,7 @@ function SetColoColumn(color)
 	vim.api.nvim_set_hl(0, "ColorColumn", { bg = columnColor })
 end
 
+---@return nil
 function SetTransparentBackground()
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
@@ -100,35 +105,44 @@ end
 ---@return nil
 function ColorMyPencils(color, bg)
 	local colorSchemeFile = vim.fn.expand("~/.config/nvim/.colorscheme")
-	local previousColor = color or vim.fn.readfile(colorSchemeFile)[1] or "vesper"
+	local ok, lines = pcall(vim.fn.readfile, colorSchemeFile)
+	local savedColor = (ok and lines[1]) or nil
+	local previousColor = color or savedColor or "vesper"
+	vim.fn.mkdir(vim.fn.fnamemodify(colorSchemeFile, ":h"), "p")
 	vim.fn.writefile({ previousColor }, colorSchemeFile)
 	vim.cmd.colorscheme(previousColor)
-    local lBg = bg ~= nil and bg or false
-    if (lBg) then
-        SetTransparentBackground()
-    end
-    SetColoColumn("#FF00ff")
+	local lBg = bg ~= nil and bg or false
+	if lBg then
+		SetTransparentBackground()
+	end
+	SetColoColumn("#FF00ff")
 end
 
 return {
 
 	{
-        "MunifTanjim/nui.nvim",
-        lazy = true
-    },
+		"MunifTanjim/nui.nvim",
+		lazy = true,
+	},
 
-    {
-        "erikbackman/brightburn.vim",
-        name = "brightburn",
-        config = function()
-            ColorMyPencils()
-        end,
-    },
+	{
+		"erikbackman/brightburn.vim",
+		name = "brightburn",
+		config = function()
+			ColorMyPencils()
+			-- vim.api.nvim_create_autocmd("VimEnter", {
+			-- 	callback = function()
+			-- 		ColorMyPencils()
+			-- 	end,
+			-- 	once = true,
+			-- })
+		end,
+	},
 
-    {
-        "olimorris/onedarkpro.nvim",
-        priority = 1000, -- ensure it loads first
-    },
+	{
+		"olimorris/onedarkpro.nvim",
+		priority = 1000, -- ensure it loads first
+	},
 
 	{
 		"rose-pine/neovim",
@@ -137,7 +151,7 @@ return {
 			require("rose-pine").setup({
 				disable_background = false,
 				styles = {
-					italic = false,
+					italic = true,
 				},
 			})
 		end,
