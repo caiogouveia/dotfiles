@@ -1,14 +1,17 @@
 @define-color bg #4d3e63;
 @define-color fg #ffffff;
+@define-color purple #0000FF;
+@define-color yellow #FFFF00;
+/* #ffa000 */
 * {
-    /* font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace; */
-    font-family: "JetBrainsMono";
-    font-size: 13px;
+    font-family: "JetBrainsMono Nerd Font";
+    font-size: 14px;
     font-weight: bold;
 }
 
 window#waybar {
-    background-color: alpha(@bg, 0.77);
+    /* background-color: alpha(@bg, 0.77); */
+    background-color: transparent;
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
@@ -19,13 +22,6 @@ window#waybar {
 
 window#waybar.hidden {
     opacity: 0.2;
-}
-
-#custom-gammastep
-{
-  padding: 0px 8px 0px 8px;
-  margin: 0 5px;
-  color: #ffffff;
 }
 
 /*
@@ -42,7 +38,7 @@ window#waybar.termite {
 }
 
 window#waybar.chromium {
-    background-color: #000000;
+    background-color: @bg;
     border: none;
 }
 
@@ -113,8 +109,9 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
+#custom-power,
+#custom-gammastep,
 #mpd {
-    margin: 0 5px;
     padding: 0 10px;
     color: #ffffff;
     /* border: 1px solid red; */
@@ -141,6 +138,7 @@ button:hover {
 
 #clock {
     background-color: alpha(@bg, 0.25);
+    border-radius: 15;
 }
 
 #battery {
@@ -274,13 +272,18 @@ label:focus {
     background-color: #eb4d4b;
 }
 
+#custom-power,
+#custom-gammastep,
 #idle_inhibitor {
-    /* background-color: #2d3436; */
+    border-bottom: 2px solid transparent;
+    /* border: 1px solid red; */
 }
 
+#custom-gammastep.activated,
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    border-bottom: 2px solid @fg;
+    background-color: @fg;
+    color: @bg;
 }
 
 #mpd {
@@ -325,7 +328,10 @@ label:focus {
 }
 
 #scratchpad {
-    background: rgba(0, 0, 0, 0.2);
+    /* background: alpha(@bg, 0.25); */
+    background: alpha(@purple, 0.25);
+    border-radius: 15;
+    margin: 0 10;
 }
 
 #scratchpad.empty {

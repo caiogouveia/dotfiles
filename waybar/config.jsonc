@@ -1,11 +1,12 @@
 // -*- mode: jsonc -*-
+[
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
     "width": 1600, // Waybar width
     "spacing": 0, // Gaps between modules (4px)
-    "margin-top": 3,
+    "margin-top": 5,
     "margin-left": 5,
     "margin-right": 5,
     "margin-bottom": 5,
@@ -15,9 +16,7 @@
         "sway/scratchpad",
         "sway/mode"
     ],
-    "modules-center": [
-        "sway/window"
-    ],
+
     "modules-right": [
         "custom/gammastep",
         "idle_inhibitor",
@@ -30,8 +29,9 @@
         "backlight",
         // "sway/language",
         // "battery",
-        "clock"
+        "clock",
         // "tray"
+        "custom/power"
     ],
     // Modules configuration
     "sway/workspaces": {
@@ -70,7 +70,7 @@
         "format": "<span style=\"italic\">{}</span>"
     },
     "sway/scratchpad": {
-        "format": "{icon} {count}",
+        "format": "{icon}   {count}",
         "show-empty": false,
         "format-icons": ["", ""],
         "tooltip": true,
@@ -121,15 +121,15 @@
         "timezone": "America/Sao_Paulo",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format-alt": "{:%Y-%m-%d}",
-        "format": "{:%A  %d/%m/%Y - %H:%M:%S}",
+        "format": "{:%a  %d/%m/%Y - %H:%M:%S}",
         "interval": 1
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage} % ",
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "format": "{} % "
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -232,4 +232,12 @@
         "exec": "sleep 0.05; $HOME/DEV/dotfiles/gammastep.sh",
         "on-click": "$HOME/DEV/dotfiles/gammastep.sh toggle"
     }
-}
+},
+ {
+    "layer": "bottom",
+    "position": "bottom",
+    "modules-center": [
+        "sway/window"
+    ]
+  }
+]
