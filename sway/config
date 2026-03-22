@@ -27,6 +27,11 @@ font pango:Agave Nerd Font Mono 10
 
 # exec --no-startup-id dbus-update-activation-environment --all
 exec systemctl --user import-environment
+
+# Eww dock
+# exec_always eww daemon
+# exec_always eww -c ~/.config/eww open dock
+
 # exec dbus-launch waybar
 
 ### Output configuration
@@ -111,6 +116,9 @@ input type:touchpad {
 
     # Start your launcher
     bindsym $mod+Space exec $menu
+
+    # Wallpaper picker
+    bindsym $mod+Shift+w exec ~/.local/bin/wofi-wallpaper
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
