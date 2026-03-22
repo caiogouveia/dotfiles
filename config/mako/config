@@ -1,0 +1,16 @@
+# Estilo geral
+font=Agave Nerd Font Mono 10
+background-color=#1a1a1a
+text-color=#c5c8c6
+border-color=#9b8d7f
+border-size=2
+border-radius=10
+padding=15
+margin=10
+# Icone de app
+# default-icon=/usr/share/icons/hicolor/48x48/apps/utilities-terminal.png
+# Tempo de exibição (5 segundos)
+default-timeout=5000
+# Posição (canto inferior direito)
+layer=overlay
+anchor=top-right
