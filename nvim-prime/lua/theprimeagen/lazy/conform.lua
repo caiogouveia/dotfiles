@@ -1,6 +1,7 @@
 return {
 	"stevearc/conform.nvim",
 	opts = {},
+	event = "BufWritePre",
 	config = function()
 		require("conform").setup({
 			format_on_save = {
@@ -16,10 +17,24 @@ return {
 				javascriptreact = { "prettier" },
 				typescriptreact = { "prettier" },
 				elixir = { "mix" },
+				php = { "pint" },
 			},
 			formatters = {
 				["clang-format"] = {
 					prepend_args = { "-style=file", "-fallback-style=LLVM" },
+				},
+				pint = {
+					command = "./vendor/bin/pint",
+					args = { "$FILENAME" },
+					stdin = false,
+					condition = function()
+						local pint_path = vim.fn.getcwd() .. "/vendor/bin/pint"
+						if vim.fn.filereadable(pint_path) ~= 1 then
+							vim.notify("Pint não encontrado", vim.log.levels.WARN)
+							return false
+						end
+						return true
+					end,
 				},
 			},
 		})
