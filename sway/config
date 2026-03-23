@@ -6,10 +6,10 @@
 
 ### Variables
 #
-# set $wallpaper /home/caiogouveia/Imagens/Wallpapers/02716_torcal_1920x1080.jpg
+set $wallpaper /home/caiogouveia/Imagens/Wallpapers/02716_torcal_1920x1080.jpg
 # set $wallpaper /home/caiogouveia/Imagens/Wallpapers/OsakaRiver.jpg
 # set $wallpaper /home/caiogouveia/Imagens/Wallpapers/winxp.jpg
-set $wallpaper /home/caiogouveia/Imagens/Wallpapers/Abduzeedo_InstagramNashvilleTut_2.jpg
+# set $wallpaper /home/caiogouveia/Imagens/Wallpapers/Abduzeedo_InstagramNashvilleTut_2.jpg
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -27,6 +27,11 @@ font pango:Agave Nerd Font Mono 10
 
 # exec --no-startup-id dbus-update-activation-environment --all
 exec systemctl --user import-environment
+
+# Eww dock
+# exec_always eww daemon
+# exec_always eww -c ~/.config/eww open dock
+
 # exec dbus-launch waybar
 
 ### Output configuration
@@ -111,6 +116,9 @@ input type:touchpad {
 
     # Start your launcher
     bindsym $mod+Space exec $menu
+
+    # Wallpaper picker
+    bindsym $mod+Shift+w exec ~/.local/bin/wofi-wallpaper
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -313,7 +321,13 @@ bar {
 }
 
 # waybar blur
-layer_effects "waybar" blur enable; shadows enable; corner_radius 15
+layer_effects "waybar"
+{
+    blur enable;
+    shadows enable;
+    corner_radius 15;
+    # liquid_class enable;
+}
 layer_effects "gtk-layer-shell" blur enable; shadows enable; corner_radius 13
 layer_effects "wofi" blur enable; shadows enable; corner_radius 13
 layer_effects "avizo" blur enable; corner_radius 15
@@ -331,3 +345,5 @@ blur enable
 blur_xray disable
 blur_passes 4
 blur_radius 4
+
+

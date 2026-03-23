@@ -1,0 +1,71 @@
+#!/usr/bin/env zsh
+# wofi-wallpaper - Wallpaper picker with thumbnails for sway
+
+setopt NULL_GLOB
+
+WALLPAPER_DIR="$HOME/Imagens/Wallpapers"
+CACHE_DIR="$HOME/.cache/wofi-wallpaper"
+THUMBNAIL_WIDTH="250"
+THUMBNAIL_HEIGHT="180"
+
+mkdir -p "$CACHE_DIR"
+
+generate_thumbnail() {
+    local input="$1"
+    local output="$2"
+    local name="$3"
+    
+    magick "$input" -thumbnail "250x150^" -gravity center -extent 250x150 \
+        \( -size 250x30 xc:#1a1a1a -fill white -gravity center -pointsize 14 -annotate +0+0 "$name" \) \
+        -gravity south -composite \
+        "$output" 2>/dev/null
+}
+
+generate_menu() {
+    for img in $WALLPAPER_DIR/*.jpg $WALLPAPER_DIR/*.jpeg $WALLPAPER_DIR/*.png; do
+        [[ -f "$img" ]] || continue
+        
+        filename=$(basename "$img")
+        name_without_ext="${filename%.*}"
+        thumbnail="$CACHE_DIR/${name_without_ext}.png"
+        
+        if [[ ! -f "$thumbnail" ]] || [[ "$img" -nt "$thumbnail" ]]; then
+            generate_thumbnail "$img" "$thumbnail" "$name_without_ext"
+        fi
+        
+        echo -en "img:$thumbnail\x00$name_without_ext\n"
+    done
+}
+
+# Save mapping: name -> path
+> /tmp/wofi-wallpaper-map.txt
+for img in $WALLPAPER_DIR/*.jpg $WALLPAPER_DIR/*.jpeg $WALLPAPER_DIR/*.png; do
+    [[ -f "$img" ]] || continue
+    name=$(basename "$img" | sed 's/\.[^.]*$//')
+    echo "$name|$img" >> /tmp/wofi-wallpaper-map.txt
+done
+
+selected=$(generate_menu | wofi --show dmenu \
+    --cache-file /dev/null \
+    --define image_size="${THUMBNAIL_WIDTH}x${THUMBNAIL_HEIGHT}" \
+    --columns 3 \
+    --allow-images \
+    --insensitive \
+    --sort-order=default \
+    --prompt "Wallpaper" \
+    --width=60% \
+    --height=60% \
+    -c "$HOME/.config/wofi/config" \
+    -s "$HOME/.config/wofi/style.css" \
+    )
+
+if [ -n "$selected" ]; then
+    # Extract name from thumbnail path (remove path and .png extension)
+    selected_name=$(basename "$selected" .png)
+    wallpaper_path=$(grep "^$selected_name|" /tmp/wofi-wallpaper-map.txt | cut -d'|' -f2)
+    
+    if [ -n "$wallpaper_path" ] && [ -f "$wallpaper_path" ]; then
+        swaymsg "output * bg $wallpaper_path fill"
+        notify-send "Wallpaper" "Changed to $(basename "$wallpaper_path")" -i "$wallpaper_path" 2>/dev/null
+    fi
+fi

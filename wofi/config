@@ -8,3 +8,4 @@ prompt=Search...
 allow_markup=true
 columns=1
 layershell = blur
+allow_images = true
