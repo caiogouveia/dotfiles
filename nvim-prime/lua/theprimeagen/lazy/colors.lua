@@ -13,7 +13,7 @@ function ThemePicker()
 		{ name = "default", transparentBg = false },
 		{ name = "vesper", transparentBg = false },
 		{ name = "rose-pine", transparentBg = false },
-		{ name = "kanagawa", transparentBg = true },
+		{ name = "kanagawa", transparentBg = false },
 		{ name = "fluoromachine", transparentBg = true },
 		{ name = "brightburn", transparentBg = true },
 		{ name = "onedark", transparentBg = true },
