@@ -236,15 +236,8 @@
     },
     "custom/power": {
         "format" : "⏻ ",
-		"tooltip": false,
-		"menu": "on-click",
-		"menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-		"menu-actions": {
-			"shutdown": "shutdown",
-			"reboot": "reboot",
-			"suspend": "systemctl suspend",
-			"hibernate": "systemctl hibernate"
-		}
+        "tooltip": false,
+        "on-click": "$HOME/DEV/dotfiles/scripts/power-menu.sh"
     },
     "custom/gammastep": {
         "format": "{}",
@@ -253,29 +246,29 @@
         "exec": "sleep 0.05; $HOME/DEV/dotfiles/gammastep.sh",
         "on-click": "$HOME/DEV/dotfiles/gammastep.sh toggle"
     }
-}
- // {
- //    "layer": "bottom",
- //    "position": "bottom",
- //    "height": 30, // Waybar height (to be removed for auto height)
- //    "width": 1600, // Waybar width
- //    "spacing": 0, // Gaps between modules (4px)
- //    "margin-top": 5,
- //    "margin-left": 5,
- //    "margin-right": 5,
- //    "margin-bottom": 5,
- //    "modules-center": [
- //        "sway/window"
- //    ],
- //    "modules-right": [
- //        "clock"
- //    ],
- //    "clock": {
- //        "timezone": "America/Sao_Paulo",
- //        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
- //        "format-alt": "{:%Y-%m-%d}",
- //        "format": "{:%a  %d/%m/%Y - %H:%M:%S}",
- //        "interval": 1
- //    },
- //  }
+},
+ {
+    "layer": "bottom",
+    "position": "bottom",
+    "height": 30, // Waybar height (to be removed for auto height)
+    "width": 1600, // Waybar width
+    "spacing": 0, // Gaps between modules (4px)
+    "margin-top": 5,
+    "margin-left": 5,
+    "margin-right": 5,
+    "margin-bottom": 5,
+    "modules-center": [
+        "sway/window"
+    ],
+    "modules-right": [
+        "clock"
+    ],
+    "clock": {
+        "timezone": "America/Sao_Paulo",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}",
+        "format": "{:%a  %d/%m/%Y - %H:%M:%S}",
+        "interval": 1
+    },
+  }
 ]
