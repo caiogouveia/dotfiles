@@ -42,9 +42,9 @@
         "3": "三",
         "4": "四",
         "5": "五",
-        "urgent": "⚠️",
-        "active": "●",
-        "default": "○"
+        // "urgent": "⚠️",
+        // "active": "●",
+        // "default": "○"
     },
     "persistent-workspaces": {
         "*": 5 // Show 5 workspaces by default on all monitors
