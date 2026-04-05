@@ -12,9 +12,10 @@
     "margin-bottom": 5,
     // Choose the order of the modules
     "modules-left": [
-        "sway/workspaces",
-        "sway/scratchpad",
-        "sway/mode"
+        // "sway/workspaces",
+        // "sway/scratchpad",
+        // "sway/mode"
+        "hyprland/workspaces"
     ],
     "modules-right": [
         "custom/gammastep",
@@ -33,6 +34,27 @@
         "custom/power"
     ],
     // Modules configuration
+    "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+        "1": "一",
+        "2": "二",
+        "3": "三",
+        "4": "四",
+        "5": "五",
+        "urgent": "⚠️",
+        "active": "●",
+        "default": "○"
+    },
+    "persistent-workspaces": {
+        "*": 5 // Show 5 workspaces by default on all monitors
+    },
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "on-click": "activate",
+    "all-outputs": true,
+    "active-only": false
+},
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
@@ -231,29 +253,29 @@
         "exec": "sleep 0.05; $HOME/DEV/dotfiles/gammastep.sh",
         "on-click": "$HOME/DEV/dotfiles/gammastep.sh toggle"
     }
-},
- {
-    "layer": "bottom",
-    "position": "bottom",
-    "height": 30, // Waybar height (to be removed for auto height)
-    "width": 1600, // Waybar width
-    "spacing": 0, // Gaps between modules (4px)
-    "margin-top": 5,
-    "margin-left": 5,
-    "margin-right": 5,
-    "margin-bottom": 5,
-    "modules-center": [
-        "sway/window"
-    ],
-    "modules-right": [
-        "clock"
-    ],
-    "clock": {
-        "timezone": "America/Sao_Paulo",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}",
-        "format": "{:%a  %d/%m/%Y - %H:%M:%S}",
-        "interval": 1
-    },
-  }
+}
+ // {
+ //    "layer": "bottom",
+ //    "position": "bottom",
+ //    "height": 30, // Waybar height (to be removed for auto height)
+ //    "width": 1600, // Waybar width
+ //    "spacing": 0, // Gaps between modules (4px)
+ //    "margin-top": 5,
+ //    "margin-left": 5,
+ //    "margin-right": 5,
+ //    "margin-bottom": 5,
+ //    "modules-center": [
+ //        "sway/window"
+ //    ],
+ //    "modules-right": [
+ //        "clock"
+ //    ],
+ //    "clock": {
+ //        "timezone": "America/Sao_Paulo",
+ //        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+ //        "format-alt": "{:%Y-%m-%d}",
+ //        "format": "{:%a  %d/%m/%Y - %H:%M:%S}",
+ //        "interval": 1
+ //    },
+ //  }
 ]
