@@ -65,7 +65,17 @@ if [ -n "$selected" ]; then
     wallpaper_path=$(grep "^$selected_name|" /tmp/wofi-wallpaper-map.txt | cut -d'|' -f2)
     
     if [ -n "$wallpaper_path" ] && [ -f "$wallpaper_path" ]; then
-        swaymsg "output * bg $wallpaper_path fill"
+        if [ -n "$HYPRLAND_INSTANCE_SIGNATURE" ]; then
+            # Hyprland - using hyprpaper
+            hyprctl hyprpaper preload "$wallpaper_path"
+            hyprctl hyprpaper wallpaper ",$wallpaper_path"
+            # Optional: unload all other wallpapers to save memory
+            # hyprctl hyprpaper unload all
+        elif [ "$XDG_CURRENT_DESKTOP" = "sway" ] || [ -n "$SWAYSOCK" ]; then
+            # Sway
+            swaymsg "output * bg $wallpaper_path fill"
+        fi
+        
         notify-send "Wallpaper" "Changed to $(basename "$wallpaper_path")" -i "$wallpaper_path" 2>/dev/null
     fi
 fi
