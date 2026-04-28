@@ -9,7 +9,7 @@ font-family = "Agave Nerd Font Mono"
 # font-family = "JetBrains Mono"
 # font-family = "JetBrains Mono Nerd Font"
 font-thicken = true
-font-size = 15
+font-size = 13
 
 # Window, cursor, theme config
 window-height=24
