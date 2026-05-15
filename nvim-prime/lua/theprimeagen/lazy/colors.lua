@@ -1,32 +1,60 @@
----@class Theme -- define o tipo Theme
----@field name string -- campo nome
----@field transparentBg boolean -- theme tem bg transparente
+---@class Theme
+---@field name string
+---@field variant? string
+---@field transparentBg boolean
+---@field apply? fun()
 
 ---@class ThemeItem
 ---@field text string
+---@field name string
+---@field variant? string
 ---@field transparentBg boolean
+---@field apply? fun()
+
+local themes = {
+	{ name = "default", transparentBg = false },
+	{ name = "vesper", transparentBg = false },
+	{ name = "rose-pine", transparentBg = false },
+	{ name = "kanagawa", transparentBg = false },
+	{
+		name = "fluoromachine",
+		variant = "retrowave",
+		transparentBg = false,
+		apply = function()
+			pcall(require("fluoromachine").setup, {
+				theme = "retrowave",
+				glow = false,
+				transparent = false,
+			})
+			vim.cmd.colorscheme("fluoromachine")
+		end,
+	},
+	{
+		name = "fluoromachine",
+		variant = "delta",
+		transparentBg = false,
+		apply = function()
+			pcall(require("fluoromachine").setup, {
+				theme = "delta",
+				glow = true,
+				transparent = false,
+			})
+			vim.cmd.colorscheme("fluoromachine")
+		end,
+	},
+	{ name = "brightburn", transparentBg = true },
+	{ name = "onedark", transparentBg = true },
+	{ name = "vaporwave", transparentBg = true },
+	{ name = "onelight", transparentBg = false },
+	{ name = "retrobox", transparentBg = false },
+}
 
 ---@return nil
 function ThemePicker()
-	---@type Theme[] -- themes é um array de Theme
-	local themes = {
-		{ name = "default", transparentBg = false },
-		{ name = "vesper", transparentBg = false },
-		{ name = "rose-pine", transparentBg = false },
-		{ name = "kanagawa", transparentBg = false },
-		{ name = "fluoromachine", transparentBg = true },
-		{ name = "brightburn", transparentBg = true },
-		{ name = "onedark", transparentBg = true },
-		{ name = "vaporwave", transparentBg = true },
-		{ name = "onelight", transparentBg = false },
-		{ name = "retrobox", transparentBg = false },
-	}
-
 	local original = vim.g.colors_name
 	local submitted = false
 	local Menu = require("nui.menu")
 
-	-- encontra o índice do tema atual na lista
 	local current_index = 1
 	for i, t in ipairs(themes) do
 		if t.name == original then
@@ -37,19 +65,25 @@ function ThemePicker()
 
 	local lines = {}
 	for _, t in ipairs(themes) do
-		table.insert(lines, Menu.item(t.name, { transparentBg = t.transparentBg }))
+		local displayName = t.variant or t.name
+		table.insert(lines, Menu.item(displayName, {
+			name = t.name,
+			variant = t.variant,
+			transparentBg = t.transparentBg,
+			apply = t.apply,
+		}))
 	end
 
 	local menu = Menu({
 		position = "50%",
 		size = {
 			width = 30,
-			height = 10,
+			height = #lines,
 		},
 		border = {
 			style = "rounded",
 			text = {
-				top = " Themes ",
+				top = " " .. #lines .. " Themes ",
 				top_align = "center",
 			},
 		},
@@ -63,12 +97,16 @@ function ThemePicker()
 		},
 		on_change = function(item)
 			---@cast item ThemeItem
-			vim.cmd.colorscheme(item.text)
+			if item.apply then
+				item.apply()
+			else
+				vim.cmd.colorscheme(item.name)
+			end
 		end,
 		on_submit = function(item)
 			submitted = true
 			---@cast item ThemeItem
-			ColorMyPencils(item.text, item.transparentBg)
+			ColorMyPencils(item)
 		end,
 		on_close = function()
 			if not submitted then
@@ -79,7 +117,6 @@ function ThemePicker()
 
 	menu:mount()
 
-	-- posiciona o cursor no tema atual
 	vim.schedule(function()
 		for _ = 1, current_index - 1 do
 			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("j", true, false, true), "n", false)
@@ -100,19 +137,38 @@ function SetTransparentBackground()
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
----@param color? string
----@param bg? boolean
+---@param theme? ThemeItem|string
 ---@return nil
-function ColorMyPencils(color, bg)
+function ColorMyPencils(theme)
 	local colorSchemeFile = vim.fn.expand("~/.config/nvim/.colorscheme")
-	local ok, lines = pcall(vim.fn.readfile, colorSchemeFile)
-	local savedColor = (ok and lines[1]) or nil
-	local previousColor = color or savedColor or "vesper"
 	vim.fn.mkdir(vim.fn.fnamemodify(colorSchemeFile, ":h"), "p")
-	vim.fn.writefile({ previousColor }, colorSchemeFile)
-	vim.cmd.colorscheme(previousColor)
-	local lBg = bg ~= nil and bg or false
-	if lBg then
+
+	if type(theme) ~= "table" then
+		local ok, lines = pcall(vim.fn.readfile, colorSchemeFile)
+		local saved = ok and lines[1] or nil
+		if saved then
+			local ok2, data = pcall(vim.json.decode, saved)
+			if ok2 and type(data) == "table" then
+				theme = data
+			else
+				theme = { name = saved }
+			end
+		else
+			theme = { name = theme or "vesper" }
+		end
+	end
+
+	vim.fn.writefile({
+		vim.json.encode({ name = theme.name, variant = theme.variant }),
+	}, colorSchemeFile)
+
+	if theme.apply then
+		theme.apply()
+	else
+		vim.cmd.colorscheme(theme.name)
+	end
+
+	if theme.transparentBg then
 		SetTransparentBackground()
 	end
 	SetColoColumn("#FF00ff")
@@ -188,11 +244,26 @@ return {
 	{
 		"maxmx03/fluoromachine.nvim",
 		name = "fluoromachine",
+		variant = "retrowave",
 		config = function()
 			local fm = require("fluoromachine")
 			fm.setup({
 				glow = false,
-				theme = "retrowave", -- fluoromachine, retrowave, delta
+				theme = "retrowave", -- fluoromachine, retrowave, delta, synthwave
+				transparent = false,
+			})
+		end,
+	},
+
+	{
+		"maxmx03/fluoromachine.nvim",
+		name = "fluoromachine",
+		variant = "delta",
+		config = function()
+			local fm = require("fluoromachine")
+			fm.setup({
+				glow = true,
+				theme = "delta", -- fluoromachine, retrowave, delta
 				transparent = false,
 			})
 		end,
