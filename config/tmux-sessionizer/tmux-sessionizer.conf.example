@@ -1,0 +1,28 @@
+# tmux-sessionizer example configuration
+# Save as: ~/.config/tmux-sessionizer/tmux-sessionizer.conf
+
+# Diretórios onde o tmux-sessionizer vai buscar projetos
+# O número após ":" é a profundidade da busca (opcional, padrão: 1)
+TS_EXTRA_SEARCH_PATHS=(
+    ~/DEV:3
+    ~/projects:2
+    ~/.config:1
+)
+
+# Profundidade máxima global (usada quando o path não especifica profundidade)
+# TS_MAX_DEPTH=1
+
+# Substitui completamente os paths padrão (~/ ~/personal ~/personal/dev/env/.config)
+# TS_SEARCH_PATHS=(~/ ~/work)
+
+# Comandos para sessões (executam em janelas índice 69+)
+# Uso: tmux-sessionizer -s 0
+# TS_SESSION_COMMANDS=(
+#     "htop"
+#     "lazygit"
+#     "nvim"
+# )
+
+# Logging
+# TS_LOG=true          # ativa logging
+# TS_LOG_FILE=~/.local/share/tmux-sessionizer/tmux-sessionizer.logs
