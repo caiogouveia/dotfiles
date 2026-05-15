@@ -1,20 +1,25 @@
-command = $(test "$(uname)" = "Linux" && echo "/usr/bin/tmux" || echo "/opt/homebrew/bin/tmux")
+shell-integration = zsh
+command = $(test "$(uname)" = "Linux" && echo "/home/linuxbrew/.linuxbrew/bin/tmux" || echo "/opt/homebrew/bin/tmux")
 
 # Keybinds
-keybind = global:ctrl+grave_accent=toggle_quick_terminal
+# keybind = global:ctrl+grave_accent=toggle_quick_terminal
 #keybind = cmd+shift+s>r=reload_config
 
 # fonts config
+# font-family = "Agave Nerd Font"
 font-family = "Agave Nerd Font Mono"
 # font-family = "JetBrains Mono"
-# font-family = "JetBrains Mono Nerd Font"
+# font-family = "JetBrainsMono NF"
+# font-family = "Iosevka Charon"
 font-thicken = true
-font-size = 13
+# font-style = "ExtraBold"
+font-size = 11
 
 # Window, cursor, theme config
 window-height=24
 window-width=80
-adjust-cell-height = 20%
+# adjust-cell-height = -10%
+# adjust-cell-height = 20%
 # adjust-cell-width = -5%
 cursor-style = block_hollow
 cursor-color = red
@@ -34,4 +39,6 @@ background-blur-radius = 40
 macos-titlebar-style = native
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
+
+# Linux
 confirm-close-surface = false
