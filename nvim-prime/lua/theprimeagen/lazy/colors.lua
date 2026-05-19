@@ -15,6 +15,7 @@ local themes = {
 	{ name = "default", transparentBg = false },
 	{ name = "vesper", transparentBg = false },
 	{ name = "rose-pine", transparentBg = true },
+	{ name = "koda", transparentBg = false },
 	{ name = "kanagawa", transparentBg = false },
 	{
 		name = "fluoromachine",
@@ -43,7 +44,7 @@ local themes = {
 		end,
 	},
 	{ name = "brightburn", transparentBg = true },
-	{ name = "onedark", transparentBg = true },
+	{ name = "onedark", transparentBg = false },
 	{ name = "vaporwave", transparentBg = true },
 	{ name = "onelight", transparentBg = false },
 	{ name = "retrobox", transparentBg = false },
@@ -179,11 +180,16 @@ end
 
 return {
 	{
-		"olimorris/onedarkpro.nvim",
-		priority = 1000, -- ensure it loads first
+		"oskarnurm/koda.nvim",
+		lazy = false, -- make sure we load this during startup if it is your main colorscheme
+		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
+			require("koda").setup({ transparent = false })
 			ColorMyPencils()
 		end,
+	},
+	{
+		"olimorris/onedarkpro.nvim",
 	},
 	{
 		"MunifTanjim/nui.nvim",
