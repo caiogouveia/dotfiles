@@ -14,7 +14,7 @@
 local themes = {
 	{ name = "default", transparentBg = false },
 	{ name = "vesper", transparentBg = false },
-	{ name = "rose-pine", transparentBg = false },
+	{ name = "rose-pine", transparentBg = true },
 	{ name = "kanagawa", transparentBg = false },
 	{
 		name = "fluoromachine",
@@ -66,12 +66,15 @@ function ThemePicker()
 	local lines = {}
 	for _, t in ipairs(themes) do
 		local displayName = t.variant or t.name
-		table.insert(lines, Menu.item(displayName, {
-			name = t.name,
-			variant = t.variant,
-			transparentBg = t.transparentBg,
-			apply = t.apply,
-		}))
+		table.insert(
+			lines,
+			Menu.item(displayName, {
+				name = t.name,
+				variant = t.variant,
+				transparentBg = t.transparentBg,
+				apply = t.apply,
+			})
+		)
 	end
 
 	local menu = Menu({
@@ -175,7 +178,13 @@ function ColorMyPencils(theme)
 end
 
 return {
-
+	{
+		"olimorris/onedarkpro.nvim",
+		priority = 1000, -- ensure it loads first
+		config = function()
+			ColorMyPencils()
+		end,
+	},
 	{
 		"MunifTanjim/nui.nvim",
 		lazy = true,
@@ -184,33 +193,11 @@ return {
 	{
 		"erikbackman/brightburn.vim",
 		name = "brightburn",
-		config = function()
-			ColorMyPencils()
-			-- vim.api.nvim_create_autocmd("VimEnter", {
-			-- 	callback = function()
-			-- 		ColorMyPencils()
-			-- 	end,
-			-- 	once = true,
-			-- })
-		end,
-	},
-
-	{
-		"olimorris/onedarkpro.nvim",
-		priority = 1000, -- ensure it loads first
 	},
 
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
-		config = function()
-			require("rose-pine").setup({
-				disable_background = false,
-				styles = {
-					italic = true,
-				},
-			})
-		end,
 	},
 
 	{
@@ -232,7 +219,7 @@ return {
 					palette = {},
 					theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
 				},
-				theme = "wave", -- Load "wave" theme when 'background' option is not set
+				theme = "lotus", -- Load "wave" theme when 'background' option is not set
 				background = {
 					dark = "wave",
 					light = "lotus",
@@ -250,20 +237,6 @@ return {
 			fm.setup({
 				glow = false,
 				theme = "retrowave", -- fluoromachine, retrowave, delta, synthwave
-				transparent = false,
-			})
-		end,
-	},
-
-	{
-		"maxmx03/fluoromachine.nvim",
-		name = "fluoromachine",
-		variant = "delta",
-		config = function()
-			local fm = require("fluoromachine")
-			fm.setup({
-				glow = true,
-				theme = "delta", -- fluoromachine, retrowave, delta
 				transparent = false,
 			})
 		end,
