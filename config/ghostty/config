@@ -13,13 +13,13 @@ font-family = "Agave Nerd Font Mono"
 # font-family = "Iosevka Charon"
 font-thicken = true
 # font-style = "ExtraBold"
-font-size = 11
+font-size = 14
 
 # Window, cursor, theme config
 window-height=24
 window-width=80
 # adjust-cell-height = -10%
-# adjust-cell-height = 20%
+adjust-cell-height = 20%
 # adjust-cell-width = -5%
 cursor-style = block_hollow
 cursor-color = red
