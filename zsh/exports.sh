@@ -58,8 +58,10 @@ fi
 # linux Android
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
     #TODO: arrumar o path do java
-    export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+    # export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
+    export JAVA_HOME=/home/khan/JAVA/JAVA_HOME/
     export ANDROID_HOME=$HOME/Android/Sdk
+    export PATH=$PATH:$JAVA_HOME/bin
     export PATH=$PATH:$ANDROID_HOME/emulator
     export PATH=$PATH:$ANDROID_HOME/platform-tools
 fi
