@@ -14,6 +14,8 @@
 local themes = {
 	{ name = "default", transparentBg = false },
 	{ name = "vesper", transparentBg = false },
+	{ name = "sakura", transparentBg = false },
+	{ name = "darkthrone", transparentBg = false },
 	{ name = "rose-pine", transparentBg = true },
 	{ name = "koda", transparentBg = false },
 	{ name = "kanagawa", transparentBg = false },
@@ -188,9 +190,35 @@ return {
 			ColorMyPencils()
 		end,
 	},
+
+	{
+		"metalelf0/black-metal-theme-neovim",
+		name = "darkthrone",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("black-metal").setup({
+				theme = "darkthrone",
+				ColorMyPencils(),
+			})
+		end,
+	},
+
+	{
+		"anAcc22/sakura.nvim",
+		name = "sakura",
+		dependencies = "rktjmp/lush.nvim",
+		config = function()
+			vim.opt.background = "dark" -- or "light"
+			ColorMyPencils()
+		end,
+	},
+
 	{
 		"olimorris/onedarkpro.nvim",
+		name = "onedark",
 	},
+
 	{
 		"MunifTanjim/nui.nvim",
 		lazy = true,
