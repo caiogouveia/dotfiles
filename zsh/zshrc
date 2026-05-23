@@ -42,3 +42,6 @@ bindkey -s '\es' "tmux-sessionizer -s 3\n"
 
 # Add local bin to PATH
 export PATH="$HOME/.local/bin:$PATH"
+
+# bun completions
+[ -s "/Users/caiogouveia/.bun/_bun" ] && source "/Users/caiogouveia/.bun/_bun"
