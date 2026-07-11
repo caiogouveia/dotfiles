@@ -36,7 +36,7 @@ The dotfiles are structured with a modular approach:
 ### Desktop Environment (Linux)
 -   `hyprland/hyprland.conf`: Configuration for the Hyprland Wayland compositor.
 -   `hyprland/waybar/`: Configuration and styling for the Waybar status bar.
--   `hyprland/wofi/`: Styling for the Wofi application launcher.
+-   `hyprland/fuzzel/`: Configuration and styling for the Fuzzel application launcher.
 
 ### Miscellaneous
 -   `surf/`: A simple, local HTML/CSS homepage, likely for the Surf browser.
