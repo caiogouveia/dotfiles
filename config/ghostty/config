@@ -27,7 +27,7 @@ cursor-color = red
 theme = Vesper
 
 # Background
-background-opacity = .95
+background-opacity = .80
 background-blur = true
 background-blur-radius = 40
 

@@ -49,3 +49,4 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Added by Antigravity CLI installer
 export PATH="/home/khan/.local/bin:$PATH"
+export PATH="/Users/caiogouveia/.local/bin:$PATH"

@@ -8,7 +8,7 @@ return {
 				provider = "snacks",
 				snacks_win_opts = {
 					-- position = "float",
-					width = 0.25,
+					width = 0.45,
 					height = 0.45,
 					border = "double",
 					backdrop = 80,
