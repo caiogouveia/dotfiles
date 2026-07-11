@@ -44,9 +44,7 @@ bindkey -s '\es' "tmux-sessionizer -s 3\n"
 export PATH="$HOME/.local/bin:$PATH"
 
 # bun completions
-[ -s "/Users/caiogouveia/.bun/_bun" ] && source "/Users/caiogouveia/.bun/_bun"
-
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # Added by Antigravity CLI installer
-export PATH="/home/khan/.local/bin:$PATH"
-export PATH="/Users/caiogouveia/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
