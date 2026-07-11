@@ -171,22 +171,15 @@
         "interval": 1
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}%  {icon}   {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}%  ",
-        "format-source-muted": "",
+        "format": "<span color='#ffa000'>vol</span> {volume}% <span color='#ffa000'>{icon}</span>",
+        "format-bluetooth": "<span color='#ffa000'>vol</span> {volume}% <span color='#ffa000'>{icon}</span>",
+        "format-muted": "<span color='#ffa000'>vol</span> muted",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
+            "default": ["░░░░░░░░░░", "█░░░░░░░░░", "██░░░░░░░░", "███░░░░░░░", "████░░░░░░", "█████░░░░░", "██████░░░░", "███████░░░", "████████░░", "█████████░", "██████████"]
         },
-        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+        "on-click": "$HOME/DEV/dotfiles/scripts/volume-osd.sh mute",
+        "on-scroll-up": "$HOME/DEV/dotfiles/scripts/volume-osd.sh up",
+        "on-scroll-down": "$HOME/DEV/dotfiles/scripts/volume-osd.sh down"
     },
     "mpris": {
         "format": "{player_icon} {dynamic}",
@@ -208,7 +201,7 @@
     },
     "custom/gammastep": {
         "format": "{}",
-        "interval": 5,
+        "interval": 1,
         "on-update": "",
         "exec": "sleep 0.05; $HOME/DEV/dotfiles/gammastep.sh",
         "on-click": "$HOME/DEV/dotfiles/gammastep.sh toggle"

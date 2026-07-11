@@ -231,13 +231,11 @@ label:focus {
 }
 
 #pulseaudio {
-    /* background-color: #f1c40f; */
-    /* color: #000000; */
+    font-family: "JetBrainsMono Nerd Font";
 }
 
 #pulseaudio.muted {
-    /* background-color: #90b1b1; */
-    color: #2a5c45;
+    color: #b0a89a;
 }
 
 #wireplumber {
