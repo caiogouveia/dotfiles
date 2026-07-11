@@ -1,16 +1,30 @@
-# Estilo geral
-font=Agave Nerd Font Mono 10
-background-color=#1a1a1a
-text-color=#c5c8c6
-border-color=#9b8d7f
+# Estilo geral (igual ao waybar/fuzzel: fundo preto translúcido, borda laranja)
+font=JetBrainsMono Nerd Font 11
+background-color=#000000A6
+text-color=#FFFFFFFF
+border-color=#FFA000D9
 border-size=2
-border-radius=10
-padding=15
+border-radius=15
+padding=15,20
 margin=10
-# Icone de app
-# default-icon=/usr/share/icons/hicolor/48x48/apps/utilities-terminal.png
-# Tempo de exibição (5 segundos)
-default-timeout=5000
-# Posição (canto inferior direito)
+progress-color=over #FFA000FF
+
+# Ícones
+icons=1
+max-icon-size=48
+icon-location=left
+icon-border-radius=8
+
+# Tempo de exibição (10 segundos)
+default-timeout=10000
+
+# Posição (canto superior direito)
 layer=overlay
 anchor=top-right
+
+[urgency=low]
+border-color=#FFFFFF4D
+
+[urgency=critical]
+border-color=#FF0000E6
+default-timeout=0
