@@ -7,13 +7,14 @@ command = $(test "$(uname)" = "Linux" && echo "/home/linuxbrew/.linuxbrew/bin/tm
 
 # fonts config
 # font-family = "Agave Nerd Font"
-font-family = "Agave Nerd Font Mono"
+# font-family = "Agave Nerd Font Mono"
 # font-family = "JetBrains Mono"
 # font-family = "JetBrainsMono NF"
-# font-family = "Iosevka Charon"
+font-family = "Iosevka Charon Regular"
+
 font-thicken = true
-# font-style = "ExtraBold"
-font-size = 14
+font-style = "ExtraBold"
+font-size = 10
 
 # Window, cursor, theme config
 window-height=24
