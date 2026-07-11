@@ -4,17 +4,15 @@
 lock="  Bloquear"
 logout="󰗽  Sair"
 reload="  Recarregar Hyprland"
+waybar_reload="  Recarregar Waybar"
 reboot="  Reiniciar"
 shutdown="  Desligar"
 
-# Mostra o menu via wofi
-selected=$(echo -e "$lock\n$logout\n$reload\n$reboot\n$shutdown" | wofi --dmenu \
-    --prompt "Power Menu" \
-    --width=300 \
-    --height=280 \
-    --cache-file /dev/null \
-    -c "$HOME/.config/wofi/config" \
-    -s "$HOME/.config/wofi/style.css")
+# Mostra o menu via fuzzel
+selected=$(echo -e "$lock\n$logout\n$reload\n$waybar_reload\n$reboot\n$shutdown" | fuzzel --dmenu \
+    --prompt "Power Menu: " \
+    --lines=6 \
+    --width=25)
 
 # Executa a ação baseada na escolha
 case "$selected" in
@@ -26,6 +24,10 @@ case "$selected" in
         ;;
     "$reload")
         hyprctl reload
+        ;;
+    "$waybar_reload")
+        killall waybar
+        waybar & disown
         ;;
     "$reboot")
         systemctl reboot

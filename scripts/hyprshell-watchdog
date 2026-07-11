@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Watchdog de seguranca pro submap hyprshell_switch (alt-tab visual).
+# Sem o plugin nativo do hyprshell, nao da pra detectar "soltar Alt", entao usamos
+# um submap do Hyprland pra escopar Tab/Enter/Esc. Se o switcher fechar sozinho
+# (perda de foco, etc.) sem passar pelos binds de Enter/Esc, o Hyprland fica preso
+# no submap e QUALQUER outro bind (trocar workspace, mover janela, foco) para de
+# funcionar, sem aviso nenhum na tela.
+#
+# Diferente de uma versao anterior, isso roda so UMA VEZ ao ABRIR o switcher
+# (nao a cada Tab), pra nao acumular overhead/delay em sessoes de troca rapida.
+# Timeout mais generoso (8s) pra nao interromper uma escolha ainda em andamento.
+setsid bash -c 'sleep 8; hyprctl dispatch submap reset' </dev/null >/dev/null 2>&1 &
+disown
