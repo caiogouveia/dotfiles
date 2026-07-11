@@ -43,3 +43,4 @@ macos-option-as-alt = true
 
 # Linux
 confirm-close-surface = false
+clipboard-paste-protection = false
