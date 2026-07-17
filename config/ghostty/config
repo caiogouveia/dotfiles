@@ -14,7 +14,7 @@ font-family = "Iosevka Charon Regular"
 
 font-thicken = true
 font-style = "ExtraBold"
-font-size = 10
+font-size = 12
 
 # Window, cursor, theme config
 window-height=24
