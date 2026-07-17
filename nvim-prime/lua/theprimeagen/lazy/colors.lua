@@ -52,6 +52,35 @@ local themes = {
 	{ name = "retrobox", transparentBg = false },
 }
 
+-- Nome do plugin (spec do lazy.nvim) que fornece cada tema selecionável no
+-- ThemePicker. Usado para forçar o carregamento lazy do plugin certo antes
+-- de aplicar um tema que ainda não foi carregado nesta sessão.
+local theme_plugin_names = {
+	koda = "koda.nvim",
+	vesper = "Vesper",
+	sakura = "sakura",
+	darkthrone = "darkthrone",
+	["rose-pine"] = "rose-pine",
+	kanagawa = "kanagawa",
+	fluoromachine = "fluoromachine",
+	brightburn = "brightburn",
+	onedark = "onedark",
+	vaporwave = "onedark",
+	onelight = "onedark",
+	-- "default" e "retrobox" são colorschemes nativos do Neovim, não precisam de plugin.
+}
+
+---@param name string
+---@return nil
+local function ensure_theme_loaded(name)
+	local plugin_name = theme_plugin_names[name]
+	if plugin_name then
+		pcall(function()
+			require("lazy").load({ plugins = { plugin_name } })
+		end)
+	end
+end
+
 ---@return nil
 function ThemePicker()
 	local original = vim.g.colors_name
@@ -103,6 +132,7 @@ function ThemePicker()
 		},
 		on_change = function(item)
 			---@cast item ThemeItem
+			ensure_theme_loaded(item.name)
 			if item.apply then
 				item.apply()
 			else
@@ -112,6 +142,7 @@ function ThemePicker()
 		on_submit = function(item)
 			submitted = true
 			---@cast item ThemeItem
+			ensure_theme_loaded(item.name)
 			ColorMyPencils(item)
 		end,
 		on_close = function()
@@ -143,25 +174,33 @@ function SetTransparentBackground()
 	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
+---@return string
+local function colorSchemeFilePath()
+	return vim.fn.expand("~/.config/nvim/.colorscheme")
+end
+
+---@return Theme
+local function read_persisted_theme()
+	local ok, lines = pcall(vim.fn.readfile, colorSchemeFilePath())
+	local saved = ok and lines[1] or nil
+	if not saved then
+		return { name = "vesper" }
+	end
+	local ok2, data = pcall(vim.json.decode, saved)
+	if ok2 and type(data) == "table" then
+		return data
+	end
+	return { name = saved }
+end
+
 ---@param theme? ThemeItem|string
 ---@return nil
 function ColorMyPencils(theme)
-	local colorSchemeFile = vim.fn.expand("~/.config/nvim/.colorscheme")
+	local colorSchemeFile = colorSchemeFilePath()
 	vim.fn.mkdir(vim.fn.fnamemodify(colorSchemeFile, ":h"), "p")
 
 	if type(theme) ~= "table" then
-		local ok, lines = pcall(vim.fn.readfile, colorSchemeFile)
-		local saved = ok and lines[1] or nil
-		if saved then
-			local ok2, data = pcall(vim.json.decode, saved)
-			if ok2 and type(data) == "table" then
-				theme = data
-			else
-				theme = { name = saved }
-			end
-		else
-			theme = { name = theme or "vesper" }
-		end
+		theme = read_persisted_theme()
 	end
 
 	vim.fn.writefile({
@@ -180,6 +219,31 @@ function ColorMyPencils(theme)
 	SetColoColumn("#FF00ff")
 end
 
+-- No startup, vários plugins de tema podem estar marcados como eager (veja
+-- `is_eager` abaixo) para garantir que o tema persistido sempre tenha seu
+-- plugin disponível. Sem essa trava, cada um chamaria ColorMyPencils() de
+-- forma redundante (leitura/escrita de disco + :colorscheme repetidos).
+local pencils_applied_at_startup = false
+local function apply_once()
+	if pencils_applied_at_startup then
+		return
+	end
+	pencils_applied_at_startup = true
+	ColorMyPencils()
+end
+
+-- Só o tema persistido em ~/.config/nvim/.colorscheme (mais os fallbacks
+-- fixos abaixo) carrega no startup; os demais ficam lazy e só carregam
+-- quando selecionados via ThemePicker().
+local active_theme_name = read_persisted_theme().name
+local ALWAYS_EAGER = { koda = true, darkthrone = true, vesper = true }
+
+---@param plugin_theme_name string
+---@return boolean
+local function is_eager(plugin_theme_name)
+	return ALWAYS_EAGER[plugin_theme_name] == true or plugin_theme_name == active_theme_name
+end
+
 return {
 	{
 		"oskarnurm/koda.nvim",
@@ -187,7 +251,7 @@ return {
 		priority = 1000, -- make sure to load this before all the other start plugins
 		config = function()
 			require("koda").setup({ transparent = false })
-			ColorMyPencils()
+			apply_once()
 		end,
 	},
 
@@ -197,10 +261,8 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("black-metal").setup({
-				theme = "darkthrone",
-				ColorMyPencils(),
-			})
+			require("black-metal").setup({ theme = "darkthrone" })
+			apply_once()
 		end,
 	},
 
@@ -208,15 +270,22 @@ return {
 		"anAcc22/sakura.nvim",
 		name = "sakura",
 		dependencies = "rktjmp/lush.nvim",
+		lazy = not is_eager("sakura"),
+		priority = is_eager("sakura") and 1000 or nil,
 		config = function()
 			vim.opt.background = "dark" -- or "light"
-			ColorMyPencils()
+			apply_once()
 		end,
 	},
 
 	{
 		"olimorris/onedarkpro.nvim",
 		name = "onedark",
+		lazy = not is_eager("onedark"),
+		priority = is_eager("onedark") and 1000 or nil,
+		config = function()
+			apply_once()
+		end,
 	},
 
 	{
@@ -227,16 +296,28 @@ return {
 	{
 		"erikbackman/brightburn.vim",
 		name = "brightburn",
+		lazy = not is_eager("brightburn"),
+		priority = is_eager("brightburn") and 1000 or nil,
+		config = function()
+			apply_once()
+		end,
 	},
 
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
+		lazy = not is_eager("rose-pine"),
+		priority = is_eager("rose-pine") and 1000 or nil,
+		config = function()
+			apply_once()
+		end,
 	},
 
 	{
 		"rebelot/kanagawa.nvim",
 		name = "kanagawa",
+		lazy = not is_eager("kanagawa"),
+		priority = is_eager("kanagawa") and 1000 or nil,
 		config = function()
 			require("kanagawa").setup({
 				compile = false,
@@ -259,6 +340,7 @@ return {
 					light = "lotus",
 				},
 			})
+			apply_once()
 		end,
 	},
 
@@ -266,6 +348,8 @@ return {
 		"maxmx03/fluoromachine.nvim",
 		name = "fluoromachine",
 		variant = "retrowave",
+		lazy = not is_eager("fluoromachine"),
+		priority = is_eager("fluoromachine") and 1000 or nil,
 		config = function()
 			local fm = require("fluoromachine")
 			fm.setup({
@@ -273,6 +357,7 @@ return {
 				theme = "retrowave", -- fluoromachine, retrowave, delta, synthwave
 				transparent = false,
 			})
+			apply_once()
 		end,
 	},
 
@@ -294,6 +379,7 @@ return {
 				overrides = {}, -- A dictionary of group names, can be a function returning a dictionary or a table.
 				palette_overrides = {},
 			})
+			apply_once()
 		end,
 	},
 }

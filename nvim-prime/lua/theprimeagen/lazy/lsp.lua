@@ -14,6 +14,8 @@ return {
         "j-hui/fidget.nvim",
     },
 
+    event = { "BufReadPre", "BufNewFile" },
+
     config = function()
         require("conform").setup({
             formatters_by_ft = {

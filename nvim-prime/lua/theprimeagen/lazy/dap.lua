@@ -31,84 +31,117 @@ local function create_nav_options(name)
     }
 end
 
+local function layout(name)
+    return {
+        elements = {
+            { id = name },
+        },
+        enter = true,
+        size = 40,
+        position = "right",
+    }
+end
+
+local name_to_layout = {
+    repl = { layout = layout("repl"), index = 0 },
+    stacks = { layout = layout("stacks"), index = 0 },
+    scopes = { layout = layout("scopes"), index = 0 },
+    console = { layout = layout("console"), index = 0 },
+    watches = { layout = layout("watches"), index = 0 },
+    breakpoints = { layout = layout("breakpoints"), index = 0 },
+}
+
+local layouts = {}
+for name, layout_config in pairs(name_to_layout) do
+    table.insert(layouts, layout_config.layout)
+    name_to_layout[name].index = #layouts
+end
+
+local function toggle_debug_ui(name)
+    local dapui = require("dapui")
+    dapui.close()
+    local layout_config = name_to_layout[name]
+
+    if layout_config == nil then
+        error(string.format("bad name: %s", name))
+    end
+
+    local uis = vim.api.nvim_list_uis()[1]
+    if uis ~= nil then
+        layout_config.size = uis.width
+    end
+
+    pcall(dapui.toggle, layout_config.index)
+end
+
 return {
     {
         "mfussenegger/nvim-dap",
-        lazy = false,
+        keys = {
+            { "<F8>",       function() require("dap").continue() end,                                          desc = "Debug: Continue" },
+            { "<F10>",      function() require("dap").step_over() end,                                         desc = "Debug: Step Over" },
+            { "<F11>",      function() require("dap").step_into() end,                                         desc = "Debug: Step Into" },
+            { "<F12>",      function() require("dap").step_out() end,                                          desc = "Debug: Step Out" },
+            { "<leader>b",  function() require("dap").toggle_breakpoint() end,                                 desc = "Debug: Toggle Breakpoint" },
+            { "<leader>B",  function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Debug: Set Conditional Breakpoint" },
+        },
+        dependencies = {
+            {
+                "jay-babu/mason-nvim-dap.nvim",
+                dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig" },
+                config = function()
+                    require("mason-nvim-dap").setup({
+                        ensure_installed = {
+                            "delve",
+                        },
+                        automatic_installation = true,
+                        handlers = {
+                            function(config)
+                                require("mason-nvim-dap").default_setup(config)
+                            end,
+                            delve = function(config)
+                                table.insert(config.configurations, 1, {
+                                    args = function() return vim.split(vim.fn.input("args> "), " ") end,
+                                    type = "delve",
+                                    name = "file",
+                                    request = "launch",
+                                    program = "${file}",
+                                    outputMode = "remote",
+                                })
+                                table.insert(config.configurations, 1, {
+                                    args = function() return vim.split(vim.fn.input("args> "), " ") end,
+                                    type = "delve",
+                                    name = "file args",
+                                    request = "launch",
+                                    program = "${file}",
+                                    outputMode = "remote",
+                                })
+                                require("mason-nvim-dap").default_setup(config)
+                            end,
+                        },
+                    })
+                end,
+            },
+        },
         config = function()
-            local dap = require("dap")
-            dap.set_log_level("DEBUG")
-
-            vim.keymap.set("n", "<F8>", dap.continue, { desc = "Debug: Continue" })
-            vim.keymap.set("n", "<F10>", dap.step_over, { desc = "Debug: Step Over" })
-            vim.keymap.set("n", "<F11>", dap.step_into, { desc = "Debug: Step Into" })
-            vim.keymap.set("n", "<F12>", dap.step_out, { desc = "Debug: Step Out" })
-            vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-            vim.keymap.set("n", "<leader>B", function()
-                dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-            end, { desc = "Debug: Set Conditional Breakpoint" })
+            require("dap").set_log_level("DEBUG")
         end
     },
-
 
     {
         "rcarriga/nvim-dap-ui",
         dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+        keys = {
+            { "<leader>dr", function() toggle_debug_ui("repl") end,        desc = "Debug: toggle repl ui" },
+            { "<leader>ds", function() toggle_debug_ui("stacks") end,      desc = "Debug: toggle stacks ui" },
+            { "<leader>dw", function() toggle_debug_ui("watches") end,     desc = "Debug: toggle watches ui" },
+            { "<leader>db", function() toggle_debug_ui("breakpoints") end, desc = "Debug: toggle breakpoints ui" },
+            { "<leader>dS", function() toggle_debug_ui("scopes") end,      desc = "Debug: toggle scopes ui" },
+            { "<leader>dc", function() toggle_debug_ui("console") end,     desc = "Debug: toggle console ui" },
+        },
         config = function()
             local dap = require("dap")
             local dapui = require("dapui")
-            local function layout(name)
-                return {
-                    elements = {
-                        { id = name },
-                    },
-                    enter = true,
-                    size = 40,
-                    position = "right",
-                }
-            end
-            local name_to_layout = {
-                repl = { layout = layout("repl"), index = 0 },
-                stacks = { layout = layout("stacks"), index = 0 },
-                scopes = { layout = layout("scopes"), index = 0 },
-                console = { layout = layout("console"), index = 0 },
-                watches = { layout = layout("watches"), index = 0 },
-                breakpoints = { layout = layout("breakpoints"), index = 0 },
-            }
-            local layouts = {}
-
-            for name, config in pairs(name_to_layout) do
-                table.insert(layouts, config.layout)
-                name_to_layout[name].index = #layouts
-            end
-
-            local function toggle_debug_ui(name)
-                dapui.close()
-                local layout_config = name_to_layout[name]
-
-                if layout_config == nil then
-                    error(string.format("bad name: %s", name))
-                end
-
-                local uis = vim.api.nvim_list_uis()[1]
-                if uis ~= nil then
-                    layout_config.size = uis.width
-                end
-
-                pcall(dapui.toggle, layout_config.index)
-            end
-
-            vim.keymap.set("n", "<leader>dr", function() toggle_debug_ui("repl") end, { desc = "Debug: toggle repl ui" })
-            vim.keymap.set("n", "<leader>ds", function() toggle_debug_ui("stacks") end,
-                { desc = "Debug: toggle stacks ui" })
-            vim.keymap.set("n", "<leader>dw", function() toggle_debug_ui("watches") end,
-                { desc = "Debug: toggle watches ui" })
-            vim.keymap.set("n", "<leader>db", function() toggle_debug_ui("breakpoints") end,
-                { desc = "Debug: toggle breakpoints ui" })
-            vim.keymap.set("n", "<leader>dS", function() toggle_debug_ui("scopes") end,
-                { desc = "Debug: toggle scopes ui" })
-            vim.keymap.set("n", "<leader>dc", function() toggle_debug_ui("console") end,
-                { desc = "Debug: toggle console ui" })
 
             vim.api.nvim_create_autocmd("BufEnter", {
                 group = "DapGroup",
@@ -138,47 +171,6 @@ return {
                     dapui.eval(body.output) -- Sends stdout/stderr to Console
                 end
             end
-        end,
-    },
-
-    {
-        "jay-babu/mason-nvim-dap.nvim",
-        dependencies = {
-            "williamboman/mason.nvim",
-            "mfussenegger/nvim-dap",
-            "neovim/nvim-lspconfig",
-        },
-        config = function()
-            require("mason-nvim-dap").setup({
-                ensure_installed = {
-                    "delve",
-                },
-                automatic_installation = true,
-                handlers = {
-                    function(config)
-                        require("mason-nvim-dap").default_setup(config)
-                    end,
-                    delve = function(config)
-                        table.insert(config.configurations, 1, {
-                            args = function() return vim.split(vim.fn.input("args> "), " ") end,
-                            type = "delve",
-                            name = "file",
-                            request = "launch",
-                            program = "${file}",
-                            outputMode = "remote",
-                        })
-                        table.insert(config.configurations, 1, {
-                            args = function() return vim.split(vim.fn.input("args> "), " ") end,
-                            type = "delve",
-                            name = "file args",
-                            request = "launch",
-                            program = "${file}",
-                            outputMode = "remote",
-                        })
-                        require("mason-nvim-dap").default_setup(config)
-                    end,
-                },
-            })
         end,
     },
 }
