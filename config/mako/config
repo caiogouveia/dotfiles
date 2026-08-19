@@ -28,3 +28,7 @@ border-color=#FFFFFF4D
 [urgency=critical]
 border-color=#FF0000E6
 default-timeout=0
+
+# Ativado via `makoctl mode -t do-not-disturb` (botao da barra)
+[mode=do-not-disturb]
+invisible=1
