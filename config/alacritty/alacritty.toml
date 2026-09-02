@@ -54,6 +54,7 @@ program = "/opt/homebrew/bin/tmux"
 [window]
 blur = true
 opacity = 0.80
+option_as_alt = "Both"
 
 [window.dimensions]
 columns = 80
