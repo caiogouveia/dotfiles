@@ -34,20 +34,20 @@ blinking = "On"
 shape = "Block"
 
 [font]
-size = 13.5
+size = 12
 offset.x = 0
 offset.y = 3
 
 glyph_offset.x = 0
 glyph_offset.y = 0
 
-[font.normal]
-family = "Agave Nerd Font Mono"
+# [font.normal]
+# family = "Agave Nerd Font Mono"
 
 [terminal]
 
 [terminal.shell]
-program = "/usr/bin/tmux"
+program = "/home/linuxbrew/.linuxbrew/bin/tmux"
 
 [window]
 blur = true
@@ -57,3 +57,18 @@ opacity = 0.75
 columns = 80
 lines = 24
 
+[font.normal]
+family = "Iosevka Charon"
+style = "Regular"
+
+[font.bold]
+family = "Iosevka Charon"
+style = "Bold"
+
+[font.italic]
+family = "Iosevka Charon"
+style = "Italic"
+
+[font.bold_italic]
+family = "Iosevka Charon"
+style = "Bold Italic"
