@@ -1,0 +1,21 @@
+customCommands:
+  # Abre o diff do arquivo selecionado (staged ou unstaged) no diffview.nvim
+  - key: '<c-d>'
+    context: 'files'
+    description: 'Abrir diff no Diffview (Neovim)'
+    command: 'nvim -c "DiffviewOpen -- {{.SelectedFile.Name | quote}}"'
+    output: terminal
+
+  # Abre o diff do commit selecionado no diffview.nvim
+  - key: '<c-d>'
+    context: 'commits'
+    description: 'Abrir diff do commit no Diffview (Neovim)'
+    command: 'nvim -c "DiffviewOpen {{.SelectedCommit.Hash}}^!"'
+    output: terminal
+
+  # Compara a branch local selecionada com o HEAD atual no diffview.nvim
+  - key: '<c-d>'
+    context: 'localBranches'
+    description: 'Comparar branch no Diffview (Neovim)'
+    command: 'nvim -c "DiffviewOpen {{.SelectedLocalBranch.Name}}...HEAD"'
+    output: terminal
