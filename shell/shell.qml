@@ -1,6 +1,7 @@
 import Quickshell
 
 ShellRoot {
-  Bar {}
-  Sidebar {}
+  // Bar {}
+  // Sidebar {}
+  CommandPalette {}
 }

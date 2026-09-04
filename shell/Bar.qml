@@ -16,13 +16,45 @@ PanelWindow {
 
   property bool calendarOpen: false
 
+  // Workspaces: Hyprland has its own IPC module; sway doesn't, so we
+  // drive it via `swaymsg` instead when running under sway.
+  readonly property bool isSway: !!Quickshell.env("SWAYSOCK")
+  property var swayWorkspaces: []
+
+  function refreshSwayWorkspaces() {
+    swayWsQuery.running = true;
+  }
+
+  Process {
+    id: swayWsQuery
+    command: ["swaymsg", "-t", "get_workspaces"]
+    stdout: StdioCollector {
+      onStreamFinished: {
+        try { bar.swayWorkspaces = JSON.parse(text); } catch (e) {}
+      }
+    }
+  }
+
+  Process {
+    id: swayWsSubscribe
+    running: bar.isSway
+    command: ["swaymsg", "-t", "subscribe", "-m", "[\"workspace\"]"]
+    stdout: SplitParser {
+      onRead: data => bar.refreshSwayWorkspaces()
+    }
+  }
+
+  Component.onCompleted: if (bar.isSway) bar.refreshSwayWorkspaces()
+
   anchors {
     top: true
     left: true
     right: true
   }
 
-  implicitHeight: 30
+  readonly property int barGap: 8
+
+  implicitHeight: 33 + barGap
   color: "transparent"
 
   PwObjectTracker {
@@ -148,11 +180,18 @@ PanelWindow {
     anchors.topMargin: 0
     anchors.leftMargin: 0
     anchors.rightMargin: 0
-    anchors.bottomMargin: 0
-    radius: 15
-    color: Qt.rgba(0, 0, 0, 0.55)
-    border.width: 1
-    border.color: Qt.rgba(1, 1, 1, 0.14)
+    anchors.bottomMargin: bar.barGap
+    radius: 0
+    color: Qt.rgba(0, 0, 0, 0.70)
+    anchors.bottom: parent.bottom
+
+    Rectangle {
+      anchors.left: parent.left
+      anchors.right: parent.right
+      anchors.bottom: parent.bottom
+      height: 1
+      color: Qt.rgba(1, 1, 1, 0.14)
+    }
 
     RowLayout {
       anchors.left: parent.left
@@ -200,7 +239,9 @@ PanelWindow {
             delegate: Rectangle {
               required property int modelData
               readonly property var wsIcons: ({ 1: "一", 2: "二", 3: "三" })
-              readonly property bool active: Hyprland.workspaces.values.some(w => w.id === modelData && w.active)
+              readonly property bool active: bar.isSway
+                ? bar.swayWorkspaces.some(w => w.num === modelData && w.focused)
+                : Hyprland.workspaces.values.some(w => w.id === modelData && w.active)
               radius: 15
               implicitWidth: 50
               implicitHeight: 26
@@ -218,7 +259,9 @@ PanelWindow {
               MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
-                onClicked: Hyprland.dispatch("workspace " + parent.modelData)
+                onClicked: bar.isSway
+                  ? Quickshell.execDetached(["swaymsg", "workspace", "number", String(parent.modelData)])
+                  : Hyprland.dispatch("workspace " + parent.modelData)
               }
             }
           }
