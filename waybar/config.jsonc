@@ -8,14 +8,15 @@
    // "width": 1600, // Waybar width
     // "spacing": 0, // Gaps between modules (4px)
     "reload_style_on_change": true,
-    // "margin-top": 5,
-    // "margin-left": 5,
-    // "margin-right": 5,
-    // "margin-bottom": 10,
+    "margin-top": 5,
+    "margin-left": 5,
+    "margin-right": 5,
+    "margin-bottom": 5,
     // Choose the order of the modules
     "modules-left": [
         "custom/terminal",
-        "hyprland/workspaces",
+        // "hyprland/workspaces",
+        "sway/workspaces",
         "mpris"
     ],
     "modules-center": [
@@ -29,7 +30,7 @@
         "network",
         // "power-profiles-daemon",
         // "cpu",
-        // "memory",
+        "memory",
         // "temperature",
         "backlight",
         // "battery",
@@ -39,7 +40,8 @@
         "custom/power"
     ],
     // Modules configuration
-    "hyprland/workspaces": {
+    // "hyprland/workspaces": {
+    "sway/workspaces": {
     "format": "{icon}",
     "format-icons": {
         "1": "一",
@@ -50,9 +52,6 @@
         // "urgent": "⚠️",
         // "active": "●",
         // "default": "○"
-    },
-    "persistent-workspaces": {
-        "*": 3 // Show 5 workspaces by default on all monitors
     },
     "on-scroll-up": "hyprctl dispatch workspace e+1",
     "on-scroll-down": "hyprctl dispatch workspace e-1",
@@ -116,9 +115,9 @@
     //     "format": "{usage} % ",
     //     "tooltip": false
     // },
-    // "memory": {
-    //     "format": "{} % "
-    // },
+    "memory": {
+        "format": "{} % mem"
+    },
     // "temperature": {
     //     // "thermal-zone": 2,
     //     // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
