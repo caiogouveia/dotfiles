@@ -23,5 +23,5 @@ while true; do
     [ -n "$OLD_PID" ] && kill "$OLD_PID"
 
     # Wait 10 minutes (600 seconds) before changing again
-    sleep 10
+    sleep 100
 done
