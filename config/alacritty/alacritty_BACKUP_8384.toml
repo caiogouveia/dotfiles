@@ -36,19 +36,33 @@ shape = "Beam"
 blinking = "Always"
 
 [font]
+<<<<<<< HEAD
 size = 12
+=======
+size = 14
+>>>>>>> 73930c59717900c876a02ed8c1b9a230e83f6961
 offset.x = 0
 offset.y = 0
 glyph_offset.x = 0
 glyph_offset.y = 0
 
+<<<<<<< HEAD
 # [font.normal]
 # family = "Agave Nerd Font Mono"
+=======
+[font.normal]
+family = "Agave Nerd Font"
+>>>>>>> 73930c59717900c876a02ed8c1b9a230e83f6961
 
 [terminal]
 
 [terminal.shell]
+<<<<<<< HEAD
 program = "/home/linuxbrew/.linuxbrew/bin/tmux"
+=======
+# program = "/usr/bin/tmux"
+program = "/opt/homebrew/bin/tmux"
+>>>>>>> 73930c59717900c876a02ed8c1b9a230e83f6961
 
 [window]
 blur = true

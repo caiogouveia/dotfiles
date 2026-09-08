@@ -36,19 +36,20 @@ shape = "Beam"
 blinking = "Always"
 
 [font]
-size = 12
+size = 14
 offset.x = 0
 offset.y = 0
 glyph_offset.x = 0
 glyph_offset.y = 0
 
-# [font.normal]
-# family = "Agave Nerd Font Mono"
+[font.normal]
+family = "Agave Nerd Font"
 
 [terminal]
 
 [terminal.shell]
-program = "/home/linuxbrew/.linuxbrew/bin/tmux"
+# program = "/usr/bin/tmux"
+program = "/opt/homebrew/bin/tmux"
 
 [window]
 blur = true
@@ -59,18 +60,3 @@ option_as_alt = "Both"
 columns = 80
 lines = 24
 
-[font.normal]
-family = "Iosevka Charon"
-style = "Regular"
-
-[font.bold]
-family = "Iosevka Charon"
-style = "Bold"
-
-[font.italic]
-family = "Iosevka Charon"
-style = "Italic"
-
-[font.bold_italic]
-family = "Iosevka Charon"
-style = "Bold Italic"

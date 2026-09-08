@@ -8,7 +8,7 @@
 @define-color red #ff0000;
 
 * {
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "Iosevka Charon";
     font-size: 14px;
     font-weight: bold;
 }
@@ -19,7 +19,7 @@ window {
 }
 
 window#waybar {
-    background-color: alpha(@black, 0.55);
+    background-color: alpha(@black, 0.85);
     color: #ffffff;
     padding-top: 3px;
     padding-bottom: 3px;
@@ -255,7 +255,7 @@ label:focus {
 }
 
 #pulseaudio {
-    font-family: "JetBrainsMono Nerd Font";
+    font-family: "Iosevka Charon";
 }
 
 #pulseaudio.muted {

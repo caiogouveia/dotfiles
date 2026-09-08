@@ -6,10 +6,11 @@
 
 ### Variables
 #
-set $wallpaper /home/caiogouveia/Imagens/Wallpapers/02716_torcal_1920x1080.jpg
-# set $wallpaper /home/caiogouveia/Imagens/Wallpapers/OsakaRiver.jpg
-# set $wallpaper /home/caiogouveia/Imagens/Wallpapers/winxp.jpg
-# set $wallpaper /home/caiogouveia/Imagens/Wallpapers/Abduzeedo_InstagramNashvilleTut_2.jpg
+# set $wallpaper /home/khan/Imagens/Wallpapers/0.jpg
+# set $wallpaper /home/khan/Imagens/Wallpapers/02716_torcal_1920x1080.jpg
+# set $wallpaper /home/khan/Imagens/Wallpapers/OsakaRiver.jpg
+# set $wallpaper /home/khan/Imagens/Wallpapers/winxp.jpg
+# set $wallpaper /home/khan/Imagens/Wallpapers/Abduzeedo_InstagramNashvilleTut_2.jpg
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -21,9 +22,14 @@ set $right l
 # Your preferred terminal emulator
 set $term alacritty
 # Your preferred application launcher
-set $menu wofi --show drun
+set $menu fuzzel
+# set $menu wofi --show drun
+# set $menu wmenu-run
+set $menu-alter qs -p ~/DEV/dotfiles/shell ipc call palette toggle
 
-font pango:Agave Nerd Font Mono 10
+# font pango:Agave Nerd Font Mono 10
+font pango:Iosevka Charon 11
+seat * xcursor_theme sgi 24
 
 # exec --no-startup-id dbus-update-activation-environment --all
 exec systemctl --user import-environment
@@ -32,13 +38,18 @@ exec systemctl --user import-environment
 # exec_always eww daemon
 # exec_always eww -c ~/.config/eww open dock
 
+exec --no-startup-id ~/DEV/dotfiles/scripts/sway-wallpaper-changer.sh
+exec_always --no-startup-id mako
+exec hypridle
+exec ~/DEV/dotfiles/scripts/run-shell.sh
+
 # exec dbus-launch waybar
 
 ### Output configuration
 #
 # General output settings - applies to all displays
 # You can get the names of your specific outputs by running: swaymsg -t get_outputs
-output * resolution 1920x1080 bg $wallpaper fill
+# output * resolution 1920x1080 bg $wallpaper fill
 # Example for a specific display:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
@@ -115,7 +126,8 @@ input type:touchpad {
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    bindsym $mod+Space exec $menu
+    bindsym $mod+Space exec $menu-alter
+    bindsym $mod+d exec $menu
 
     # Wallpaper picker
     bindsym $mod+Shift+w exec ~/.local/bin/wofi-wallpaper
@@ -269,8 +281,13 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
 
-    # Special key to take a screenshot with grim
-    bindsym Print exec grim
+    # Screenshots
+    # Print: full screen, saved to file
+    bindsym Print exec grim "/home/khan/Imagens/Capturas de tela/$(date +%Y%m%d_%Hh%Mm%Ss)_grim.png"
+    # Alt+Shift+4: select a region, copy straight to the clipboard
+    bindsym Alt+Shift+4 exec grim -g "$(slurp)" - | wl-copy
+    # $mod+Shift+s: select a region and open it in swappy to annotate/save
+    bindsym $mod+Shift+s exec grim -g "$(slurp)" - | swappy -f -
 
 # colors
 client.focused #9b8d7f #9b8d7f #000000 #9b8d7f #9b8d7f
@@ -283,8 +300,8 @@ gaps inner 15
 gaps outer 5
 smart_gaps on
 
-default_border pixel 2
-default_floating_border pixel 2
+default_border normal
+default_floating_border normal
 
 # gaps horizontal 5
 # gaps vertical 5
@@ -302,15 +319,6 @@ default_floating_border pixel 2
 # workspace 5 gaps vertical 30
 # workspace 5 gaps inner 20
 #
-mode "special" {
-  bindsym $mod+Shift+s exec slurp | grim -g - - | wl-copy; mode "default"
-  # bindsym a exec grim -g "$(slurp -o -f '%x,%y %wx%h')" "$HOME/screenshot-$(date +%Y%m%d-%H%M%S).png"; mode "default"
-  # bindsym Shift+s grim -g "$(slurp)" "$HOME/screenshot-$(date +%Y%m%d-%H%M%S).png"; mode "default"
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-}
-
-bindsym $mod+z mode "special"
 
 #
 # Status Bar:
@@ -321,29 +329,29 @@ bar {
 }
 
 # waybar blur
-layer_effects "waybar"
-{
-    blur enable;
-    shadows enable;
-    corner_radius 15;
-    # liquid_class enable;
-}
-layer_effects "gtk-layer-shell" blur enable; shadows enable; corner_radius 13
-layer_effects "wofi" blur enable; shadows enable; corner_radius 13
-layer_effects "avizo" blur enable; corner_radius 15
-
-smart_corner_radius enable
-corner_radius 14
-shadows enable
-shadows_on_csd enable
-shadow_blur_radius 12
-shadow_offset 0 6
-shadow_color #0000007F
-
-## blur
-blur enable
-blur_xray disable
-blur_passes 4
-blur_radius 4
+# layer_effects "waybar"
+# {
+#     blur enable;
+#     shadows enable;
+#     corner_radius 15;
+#     # liquid_class enable;
+# }
+# layer_effects "gtk-layer-shell" blur enable; shadows enable; corner_radius 13
+# layer_effects "wofi" blur enable; shadows enable; corner_radius 13
+# layer_effects "avizo" blur enable; corner_radius 15
+#
+# smart_corner_radius enable
+# corner_radius 14
+# shadows enable
+# shadows_on_csd enable
+# shadow_blur_radius 12
+# shadow_offset 0 6
+# shadow_color #0000007F
+#
+# ## blur
+# blur enable
+# blur_xray disable
+# blur_passes 4
+# blur_radius 4
 
 

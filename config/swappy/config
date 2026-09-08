@@ -1,0 +1,4 @@
+[Default]
+save_dir=/home/khan/Imagens/Capturas de tela
+save_filename_format=%Y%m%d_%Hh%Mm%Ss_swappy.png
+early_exit=true
