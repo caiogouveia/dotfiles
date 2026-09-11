@@ -6,11 +6,13 @@ command = $(test "$(uname)" = "Linux" && echo "/home/linuxbrew/.linuxbrew/bin/tm
 #keybind = cmd+shift+s>r=reload_config
 
 # fonts config
-font-family = "Agave Nerd Font"
+# font-family = "Agave Nerd Font"
 # font-family = "Agave Nerd Font Mono"
 # font-family = "JetBrains Mono"
 # font-family = "JetBrainsMono NF"
 # font-family = "Iosevka Charon Regular"
+font-family = "JetBrainsMono Nerd Font"
+
 
 font-thicken = true
 font-style = "ExtraBold"

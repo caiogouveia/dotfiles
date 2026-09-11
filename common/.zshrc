@@ -30,8 +30,8 @@ HIST_STAMPS="dd/mm/yyyy"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
-source "$DOTFILES_PATH/zsh/alias.sh"
-source "$DOTFILES_PATH/zsh/exports.sh"
+source "$HOME/.config/zsh/alias.sh"
+source "$HOME/.config/zsh/exports.sh"
 
 # tmux-sessionizer
 bindkey -s ^f "tmux-sessionizer\n"

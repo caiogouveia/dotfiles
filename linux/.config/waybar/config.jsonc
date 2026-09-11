@@ -179,9 +179,9 @@
         "format-icons": {
             "default": ["░░░░░░░░░░", "█░░░░░░░░░", "██░░░░░░░░", "███░░░░░░░", "████░░░░░░", "█████░░░░░", "██████░░░░", "███████░░░", "████████░░", "█████████░", "██████████"]
         },
-        "on-click": "$HOME/DEV/dotfiles/scripts/volume-osd.sh mute",
-        "on-scroll-up": "$HOME/DEV/dotfiles/scripts/volume-osd.sh up",
-        "on-scroll-down": "$HOME/DEV/dotfiles/scripts/volume-osd.sh down"
+        "on-click": "$HOME/.local/bin/volume-osd.sh mute",
+        "on-scroll-up": "$HOME/.local/bin/volume-osd.sh up",
+        "on-scroll-down": "$HOME/.local/bin/volume-osd.sh down"
     },
     "mpris": {
         "format": "{player_icon} {dynamic}",
@@ -204,14 +204,14 @@
     "custom/power": {
         "format" : "⏻ ",
         "tooltip": false,
-        "on-click": "$HOME/DEV/dotfiles/scripts/power-menu.sh"
+        "on-click": "$HOME/.local/bin/power-menu.sh"
     },
     "custom/gammastep": {
         "format": "{}",
         "interval": 1,
         "on-update": "",
-        "exec": "sleep 0.05; $HOME/DEV/dotfiles/gammastep.sh",
-        "on-click": "$HOME/DEV/dotfiles/gammastep.sh toggle"
+        "exec": "sleep 0.05; $HOME/.local/bin/gammastep.sh",
+        "on-click": "$HOME/.local/bin/gammastep.sh toggle"
     }
 }
 // {

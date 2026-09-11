@@ -36,7 +36,7 @@ shape = "Beam"
 blinking = "Always"
 
 [font]
-size = 12
+size = 13.4
 offset.x = 0
 offset.y = 0
 glyph_offset.x = 0
@@ -48,7 +48,7 @@ glyph_offset.y = 0
 [terminal]
 
 [terminal.shell]
-program = "/home/linuxbrew/.linuxbrew/bin/tmux"
+program = "tmux"
 
 [window]
 blur = true
@@ -60,17 +60,29 @@ columns = 80
 lines = 24
 
 [font.normal]
-family = "Iosevka Charon"
+# family = "Iosevka Charon"
+# family = "JetBrains Mono"
+# family = "Agave Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Regular"
 
 [font.bold]
-family = "Iosevka Charon"
+# family = "Iosevka Charon"
+# family = "JetBrains Mono"
+# family = "Agave Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "Iosevka Charon"
+# family = "Iosevka Charon"
+# family = "JetBrains Mono"
+# family = "Agave Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Italic"
 
 [font.bold_italic]
-family = "Iosevka Charon"
+# family = "Iosevka Charon"
+# family = "JetBrains Mono"
+# family = "Agave Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Bold Italic"

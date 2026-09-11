@@ -21,17 +21,19 @@
   {
     "context": "Workspace",
     "bindings": {
-      "ctrl-w": "pane::CloseActiveItem",
-      "ctrl-f4": "pane::CloseActiveItem"
       // "shift shift": "file_finder::Toggle"
     }
   },
   {
     "context": "Editor",
     "bindings": {
-      "ctrl-w": "pane::CloseActiveItem",
-      "ctrl-f4": "pane::CloseActiveItem"
       // "j k": ["workspace::SendKeystrokes", "escape"]
+    }
+  },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "space space": "file_finder::Toggle"
     }
   }
 ]

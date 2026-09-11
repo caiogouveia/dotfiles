@@ -1,3 +1,5 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
 format = """
 $username\
 $hostname\
@@ -8,7 +10,7 @@ $git_status\
 $cmd_duration\
 $line_break\
 $python\
-  $character"""
+$character"""
 
 [directory]
 style = "blue"
@@ -34,7 +36,7 @@ deleted = "​"
 stashed = "≡"
 
 [git_state]
-format = '\([$state( $progress_current/$progress_total )]($style)\) '
+format = '\([$state( $progress_current/$progress_total)]($style)\) '
 style = "bright-black"
 
 [cmd_duration]
@@ -44,3 +46,5 @@ style = "yellow"
 [python]
 format = "[$virtualenv]($style) "
 style = "bright-black"
+detect_extensions = []
+detect_files = []

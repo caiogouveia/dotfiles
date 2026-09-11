@@ -1,0 +1,5 @@
+# Pacote Stow reservado para configs específicas de macOS
+# (aerospace, yabai, karabiner, hammerspoon, etc).
+# Hoje está vazio - nenhuma config exclusiva de macOS foi identificada ainda.
+# Este arquivo não é symlinkado (Stow o trata como config, não como conteúdo).
+^\.stow-local-ignore$

@@ -25,7 +25,7 @@ set $term alacritty
 set $menu fuzzel
 # set $menu wofi --show drun
 # set $menu wmenu-run
-set $menu-alter qs -p ~/DEV/dotfiles/shell ipc call palette toggle
+set $menu-alter qs -p ~/.config/quickshell ipc call palette toggle
 
 # font pango:Agave Nerd Font Mono 10
 font pango:Iosevka Charon 11
@@ -38,10 +38,10 @@ exec systemctl --user import-environment
 # exec_always eww daemon
 # exec_always eww -c ~/.config/eww open dock
 
-exec --no-startup-id ~/DEV/dotfiles/scripts/sway-wallpaper-changer.sh
+exec --no-startup-id ~/.local/bin/sway-wallpaper-changer.sh
 exec_always --no-startup-id mako
 exec hypridle
-exec ~/DEV/dotfiles/scripts/run-shell.sh
+exec ~/.local/bin/run-shell.sh
 
 # exec dbus-launch waybar
 

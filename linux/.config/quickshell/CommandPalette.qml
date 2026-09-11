@@ -8,7 +8,7 @@ import Quickshell.Widgets
 // Command palette estilo Omarchy: um atalho abre uma lista pesquisavel
 // com apps instalados + acoes de sistema (lock, reboot, etc). Acionado
 // via IpcHandler (target "palette") a partir de um bind do Hyprland, ver
-// `qs -p ~/DEV/dotfiles/shell ipc call palette toggle`.
+// `qs -p ~/.config/quickshell ipc call palette toggle`.
 //
 // id nao pode ser "palette": Item/Window ja tem uma property nativa
 // chamada `palette` (tema do Qt Quick), e ela vence na resolucao de escopo
@@ -29,14 +29,14 @@ PanelWindow {
   readonly property var systemActions: root.isSway ? [
     { id: "lock", icon: "󰌾", label: "Bloquear", exec: ["swaylock", "-f", "-c", "000000"] },
     { id: "reload-sway", icon: "󰑐", label: "Recarregar Sway", exec: ["swaymsg", "reload"] },
-    { id: "reload-shell", icon: "󰑓", label: "Recarregar Shell", exec: ["sh", "-c", "pkill -x quickshell; exec ~/DEV/dotfiles/scripts/run-shell.sh"] },
+    { id: "reload-shell", icon: "󰑓", label: "Recarregar Shell", exec: ["sh", "-c", "pkill -x quickshell; exec ~/.local/bin/run-shell.sh"] },
     { id: "logout", icon: "󰍃", label: "Sair", exec: ["swaymsg", "exit"] },
     { id: "reboot", icon: "󰜉", label: "Reiniciar", exec: ["systemctl", "reboot"] },
     { id: "shutdown", icon: "󰐥", label: "Desligar", exec: ["systemctl", "poweroff"] }
   ] : [
     { id: "lock", icon: "󰌾", label: "Bloquear", exec: ["hyprlock"] },
     { id: "reload-hypr", icon: "󰑐", label: "Recarregar Hyprland", exec: ["hyprctl", "reload"] },
-    { id: "reload-shell", icon: "󰑓", label: "Recarregar Shell", exec: ["sh", "-c", "pkill -x quickshell; exec ~/DEV/dotfiles/scripts/run-shell.sh"] },
+    { id: "reload-shell", icon: "󰑓", label: "Recarregar Shell", exec: ["sh", "-c", "pkill -x quickshell; exec ~/.local/bin/run-shell.sh"] },
     { id: "logout", icon: "󰍃", label: "Sair", exec: ["hyprctl", "dispatch", "exit"] },
     { id: "reboot", icon: "󰜉", label: "Reiniciar", exec: ["systemctl", "reboot"] },
     { id: "shutdown", icon: "󰐥", label: "Desligar", exec: ["systemctl", "poweroff"] }

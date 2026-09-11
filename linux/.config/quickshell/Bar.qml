@@ -549,7 +549,7 @@ PanelWindow {
         MouseArea {
           anchors.fill: parent
           cursorShape: Qt.PointingHandCursor
-          onClicked: Quickshell.execDetached([Quickshell.env("HOME") + "/DEV/dotfiles/scripts/power-menu.sh"])
+          onClicked: Quickshell.execDetached([Quickshell.env("HOME") + "/.local/bin/power-menu.sh"])
         }
       }
     }

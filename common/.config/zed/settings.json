@@ -1,0 +1,83 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "project_panel": {
+    "hide_hidden": true
+  },
+  "base_keymap": "VSCode",
+  "icon_theme": "Zed (Default)",
+  "assistent": {
+    "version": 2,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-3-7-sonnet-latest"
+    }
+  },
+  "agent": {
+    "model_parameters": [],
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "gpt-4o"
+    }
+  },
+  "telemetry": {
+    "metrics": false
+  },
+  "features": { "copilot": true, "edit_prediction_provider": "zed" },
+  "preview_tabs": {
+    "enabled": false
+  },
+  "vim_mode": true,
+  "vim": {
+    "cursor_shape": {
+      "normal": "hollow",
+      "insert": "bar",
+      "replace": "block",
+      "visual": "underline"
+    }
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "ui_font_family": "JetBrains Mono",
+  "relative_line_numbers": "enabled",
+  "show_whitespaces": "all",
+  "buffer_font_family": "JetBrains Mono",
+  "show_wrap_guides": true,
+  "wrap_guides": [80, 120],
+  "theme": "Min Light (Solid)",
+  "scrollbar": {
+    "visible": true,
+    "vertical": "auto",
+    "horizontal": "auto"
+  },
+  "experimental.theme_overrides": {
+    // "editor.foreground": "#dedcdc",
+    // "editor.background": "#0b0b0b",
+    "syntax": {
+      // "variable": {
+      //   "color": "#dedcdc"
+      // },
+      // "type": {
+      //   "color": "#debac7"
+      // },
+      // "variable.special": {
+      //   "color": "#dedcdc"
+      // },
+      // "function": {
+      //   "color": "#f3e67e"
+      // },
+      // "keyword": {
+      //   "color": "#ec6262"
+      // },
+      "comment": {
+        "color": "#ff9900"
+      }
+    }
+  }
+}
