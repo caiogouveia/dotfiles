@@ -16,6 +16,12 @@ return {
                     treesitter = false,
                 },
             },
+            pickers = {
+                find_files = {
+                    hidden = true,
+                    follow = true,
+                },
+            },
         })
 
         local builtin = require('telescope.builtin')
