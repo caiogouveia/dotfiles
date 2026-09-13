@@ -36,7 +36,7 @@ shape = "Beam"
 blinking = "Always"
 
 [font]
-size = 13.4
+size = 11
 offset.x = 0
 offset.y = 0
 glyph_offset.x = 0
@@ -48,11 +48,12 @@ glyph_offset.y = 0
 [terminal]
 
 [terminal.shell]
-program = "tmux"
+program = "zsh"
+args = ["-i", "-c", "exec tmux"]
 
 [window]
 blur = true
-opacity = 0.80
+opacity = 0.99
 option_as_alt = "Both"
 
 [window.dimensions]
