@@ -48,3 +48,8 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Added by Antigravity CLI installer
 export PATH="$HOME/.local/bin:$PATH"
+export PATH=$PATH:$HOME/.maestro/bin
+
+# OpenSpec rodando com Bun (o shebang do pacote usa node)
+alias openspec='bun ~/.bun/install/global/node_modules/@fission-ai/openspec/bin/openspec.js'
+export DO_NOT_TRACK=1
