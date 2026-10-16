@@ -14,4 +14,3 @@ plugin/packer_compiled.lua
 # Neovim runtime
 .repro/
 .tests/
-.colorscheme
