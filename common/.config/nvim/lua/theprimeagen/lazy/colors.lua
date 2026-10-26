@@ -193,6 +193,15 @@ local function read_persisted_theme()
 	return { name = saved }
 end
 
+---@param theme Theme|ThemeItem
+---@return string
+local function theme_key(theme)
+	return theme.name .. ":" .. (theme.variant or "")
+end
+
+-- Tema aplicado nesta instância, para detectar trocas feitas por fora (tmux).
+local applied_theme_key = nil
+
 ---@param theme? ThemeItem|string
 ---@return nil
 function ColorMyPencils(theme)
@@ -217,7 +226,29 @@ function ColorMyPencils(theme)
 		SetTransparentBackground()
 	end
 	SetColoColumn("#FF00ff")
+
+	applied_theme_key = theme_key(theme)
+	-- Propaga para tmux, Ghostty e Alacritty
+	vim.fn.jobstart({ vim.fn.expand("~/.config/tmux/theme.sh") })
 end
+
+-- O tmux também pode trocar o tema (prefix + T grava no .colorscheme);
+-- ao voltar o foco para o nvim, acompanha a mudança.
+vim.api.nvim_create_autocmd("FocusGained", {
+	callback = function()
+		local persisted = read_persisted_theme()
+		if theme_key(persisted) == applied_theme_key then
+			return
+		end
+		for _, t in ipairs(themes) do
+			if t.name == persisted.name and (persisted.variant == nil or t.variant == persisted.variant) then
+				ensure_theme_loaded(t.name)
+				ColorMyPencils(t)
+				return
+			end
+		end
+	end,
+})
 
 -- No startup, vários plugins de tema podem estar marcados como eager (veja
 -- `is_eager` abaixo) para garantir que o tema persistido sempre tenha seu
