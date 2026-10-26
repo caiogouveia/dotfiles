@@ -9,8 +9,21 @@ THEMES_DIR="$HOME/.config/tmux/themes"
 STATE_FILE="$HOME/.config/nvim/.colorscheme"
 FALLBACK="vesper"
 
+NVIM_THEMES="$HOME/.config/nvim/lua/theprimeagen/lazy/colors.lua"
+
+# Temas na ordem da tabela `themes` do nvim; os que só existem no tmux vão no fim.
+list_themes() {
+    {
+        awk '/^local themes = \{/{f=1;next} f&&/^\}/{exit} f' "$NVIM_THEMES" 2>/dev/null |
+            sed -n 's/.*name = "\([^"]*\)".*/\1/p'
+        ls "$THEMES_DIR" | sed 's/\.conf$//'
+    } | awk '!seen[$0]++' | while read -r t; do
+        [ -f "$THEMES_DIR/$t.conf" ] && echo "$t"
+    done
+}
+
 if [ "$1" = "--pick" ]; then
-    name=$(ls "$THEMES_DIR" | sed 's/\.conf$//' | fzf --prompt="tema> " --reverse) || exit 0
+    name=$(list_themes | fzf --prompt="tema> " --reverse) || exit 0
     exec "$0" "$name"
 fi
 
