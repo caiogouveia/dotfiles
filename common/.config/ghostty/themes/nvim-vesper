@@ -1,0 +1,23 @@
+# vesper (gerado a partir das cores do tema do nvim)
+background = #101010
+foreground = #cccccc
+cursor-color = #cccccc
+cursor-text = #101010
+selection-background = #656565
+selection-foreground = #cccccc
+palette = 0=#101010
+palette = 1=#ff8080
+palette = 2=#82d9c2
+palette = 3=#ffc799
+palette = 4=#82d9c2
+palette = 5=#ffcfa8
+palette = 6=#a0a0a0
+palette = 7=#cccccc
+palette = 8=#65737e
+palette = 9=#ff8080
+palette = 10=#ffcfa8
+palette = 11=#ffcfa8
+palette = 12=#65737e
+palette = 13=#ff8080
+palette = 14=#ffcfa8
+palette = 15=#7d7d7d

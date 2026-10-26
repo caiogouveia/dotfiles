@@ -1,5 +1,5 @@
 shell-integration = zsh
-command = $(test "$(uname)" = "Linux" && echo "/home/linuxbrew/.linuxbrew/bin/tmux" || echo "/opt/homebrew/bin/tmux")
+# command = $(test "$(uname)" = "Linux" && echo "/home/linuxbrew/.linuxbrew/bin/tmux" || echo "/opt/homebrew/bin/tmux")
 
 # Keybinds
 # keybind = global:ctrl+grave_accent=toggle_quick_terminal
@@ -26,7 +26,8 @@ adjust-cell-height = 20%
 # adjust-cell-width = -5%
 cursor-style = block_hollow
 cursor-color = red
-theme = Vesper
+# Tema: segue o nvim (gerado por ~/.config/tmux/theme.sh)
+config-file = ?current-theme.conf
 
 # Background
 background-opacity = .95
@@ -39,7 +40,7 @@ background-blur-radius = 40
 # font-style-bold-italic = Ubuntu Mono ExtraBold Italic
 # font-thicken = true
 # font-thicken-strength = 0.5
-macos-titlebar-style = native
+# macos-titlebar-style = native
 macos-titlebar-proxy-icon = hidden
 macos-option-as-alt = true
 

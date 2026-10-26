@@ -1,6 +1,7 @@
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/vesper.toml"
+    # Tema: segue o nvim (gerado por ~/.config/tmux/theme.sh)
+    "~/.config/alacritty/current-theme.toml"
 ]
 
 # [colors.bright]
@@ -36,14 +37,14 @@ shape = "Beam"
 blinking = "Always"
 
 [font]
-size = 11
+size = 13
 offset.x = 0
 offset.y = 0
 glyph_offset.x = 0
 glyph_offset.y = 0
 
 # [font.normal]
-# family = "Agave Nerd Font Mono"
+# family = "JetBrainsMono Nerd Font"
 
 [terminal]
 

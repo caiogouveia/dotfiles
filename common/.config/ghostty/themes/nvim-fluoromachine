@@ -1,0 +1,23 @@
+# fluoromachine (gerado a partir das cores do tema do nvim)
+background = #262335
+foreground = #f8f8f8
+cursor-color = #f8f8f8
+cursor-text = #262335
+selection-background = #463465
+selection-foreground = #f8f8f8
+palette = 0=#241b2f
+palette = 1=#fe4450
+palette = 2=#72f1b8
+palette = 3=#ffcc00
+palette = 4=#61e2ff
+palette = 5=#ff7edb
+palette = 6=#61e2ff
+palette = 7=#f8f8f8
+palette = 8=#495495
+palette = 9=#fe4450
+palette = 10=#72f1b8
+palette = 11=#ff8b39
+palette = 12=#61e2ff
+palette = 13=#af6df9
+palette = 14=#61e2ff
+palette = 15=#ffffff

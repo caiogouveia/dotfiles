@@ -1,0 +1,28 @@
+# vaporwave (gerado a partir das cores do tema do nvim)
+[colors.primary]
+background = "#222435"
+foreground = "#b4b7cf"
+
+[colors.selection]
+text = "#b4b7cf"
+background = "#2e3148"
+
+[colors.normal]
+black = "#222435"
+red = "#e16765"
+green = "#75be78"
+yellow = "#eae852"
+blue = "#25abe4"
+magenta = "#c678dd"
+cyan = "#46a3af"
+white = "#b4b7cf"
+
+[colors.bright]
+black = "#585b89"
+red = "#ff7572"
+green = "#8de490"
+yellow = "#fffd59"
+blue = "#29bfff"
+magenta = "#e48aff"
+cyan = "#55c7d5"
+white = "#b4b7cf"

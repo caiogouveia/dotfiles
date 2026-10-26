@@ -1,0 +1,28 @@
+# brightburn (gerado a partir das cores do tema do nvim)
+[colors.primary]
+background = "#18181b"
+foreground = "#dcdccc"
+
+[colors.selection]
+text = "#dcdccc"
+background = "#4f5258"
+
+[colors.normal]
+black = "#18181b"
+red = "#ac4142"
+green = "#acd2ac"
+yellow = "#ffd787"
+blue = "#8cd0d3"
+magenta = "#ffc1c1"
+cyan = "#52dcbd"
+white = "#dcdccc"
+
+[colors.bright]
+black = "#6a6a6e"
+red = "#f0616d"
+green = "#9ece9e"
+yellow = "#ffe636"
+blue = "#8cd0d3"
+magenta = "#ffcfaf"
+cyan = "#93b3a3"
+white = "#ffffff"

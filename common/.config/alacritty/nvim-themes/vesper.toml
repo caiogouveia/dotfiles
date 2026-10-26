@@ -1,0 +1,28 @@
+# vesper (gerado a partir das cores do tema do nvim)
+[colors.primary]
+background = "#101010"
+foreground = "#cccccc"
+
+[colors.selection]
+text = "#cccccc"
+background = "#656565"
+
+[colors.normal]
+black = "#101010"
+red = "#ff8080"
+green = "#82d9c2"
+yellow = "#ffc799"
+blue = "#82d9c2"
+magenta = "#ffcfa8"
+cyan = "#a0a0a0"
+white = "#cccccc"
+
+[colors.bright]
+black = "#65737e"
+red = "#ff8080"
+green = "#ffcfa8"
+yellow = "#ffcfa8"
+blue = "#65737e"
+magenta = "#ff8080"
+cyan = "#ffcfa8"
+white = "#7d7d7d"

@@ -1,0 +1,23 @@
+# vaporwave (gerado a partir das cores do tema do nvim)
+background = #222435
+foreground = #b4b7cf
+cursor-color = #b4b7cf
+cursor-text = #222435
+selection-background = #2e3148
+selection-foreground = #b4b7cf
+palette = 0=#222435
+palette = 1=#e16765
+palette = 2=#75be78
+palette = 3=#eae852
+palette = 4=#25abe4
+palette = 5=#c678dd
+palette = 6=#46a3af
+palette = 7=#b4b7cf
+palette = 8=#585b89
+palette = 9=#ff7572
+palette = 10=#8de490
+palette = 11=#fffd59
+palette = 12=#29bfff
+palette = 13=#e48aff
+palette = 14=#55c7d5
+palette = 15=#b4b7cf
