@@ -1,2 +1,4 @@
 *.log
 .DS_Store
+common/.config/ghostty/current-theme.conf
+common/.config/alacritty/current-theme.toml
