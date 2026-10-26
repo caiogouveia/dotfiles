@@ -81,6 +81,66 @@ local function ensure_theme_loaded(name)
 	end
 end
 
+---@param theme Theme|ThemeItem
+---@return string
+local function theme_key(theme)
+	return theme.name .. ":" .. (theme.variant or "")
+end
+
+-- Tema exibido nesta instância (salvo ou em preview), para detectar trocas
+-- feitas por fora (tmux ou outro nvim).
+local displayed_theme_key = nil
+
+---@param name string
+---@param variant? string
+---@return Theme|nil
+local function find_theme(name, variant)
+	for _, t in ipairs(themes) do
+		if t.name == name and (variant == nil or t.variant == variant) then
+			return t
+		end
+	end
+end
+
+-- Aplica o tema só nesta instância, sem salvar nem propagar.
+---@param theme Theme|ThemeItem
+---@return nil
+local function apply_theme(theme)
+	ensure_theme_loaded(theme.name)
+	if theme.apply then
+		theme.apply()
+	else
+		vim.cmd.colorscheme(theme.name)
+	end
+	if theme.transparentBg then
+		SetTransparentBackground()
+	end
+	SetColoColumn("#FF00ff")
+	displayed_theme_key = theme_key(theme)
+end
+
+-- Propaga para tmux, Ghostty, Alacritty e os outros nvim abertos.
+---@param args? string[]
+---@return nil
+local function run_theme_sh(args)
+	vim.fn.jobstart(vim.list_extend({ vim.fn.expand("~/.config/tmux/theme.sh") }, args or {}), {
+		env = { NVIM_SELF = vim.v.servername },
+	})
+end
+
+-- O preview externo espera a navegação parar, para não recarregar tudo a cada tecla.
+local preview_timer = nil
+---@param name string
+---@return nil
+local function preview_elsewhere(name)
+	if preview_timer then
+		preview_timer:stop()
+	end
+	preview_timer = vim.defer_fn(function()
+		run_theme_sh({ "--preview", name })
+	end, 150)
+end
+
 ---@return nil
 function ThemePicker()
 	local original = vim.g.colors_name
@@ -132,22 +192,24 @@ function ThemePicker()
 		},
 		on_change = function(item)
 			---@cast item ThemeItem
-			ensure_theme_loaded(item.name)
-			if item.apply then
-				item.apply()
-			else
-				vim.cmd.colorscheme(item.name)
-			end
+			apply_theme(item)
+			preview_elsewhere(item.name)
 		end,
 		on_submit = function(item)
 			submitted = true
+			if preview_timer then
+				preview_timer:stop()
+			end
 			---@cast item ThemeItem
-			ensure_theme_loaded(item.name)
 			ColorMyPencils(item)
 		end,
 		on_close = function()
 			if not submitted then
-				vim.cmd.colorscheme(original)
+				if preview_timer then
+					preview_timer:stop()
+				end
+				ThemeSync()
+				run_theme_sh()
 			end
 		end,
 	})
@@ -193,15 +255,6 @@ local function read_persisted_theme()
 	return { name = saved }
 end
 
----@param theme Theme|ThemeItem
----@return string
-local function theme_key(theme)
-	return theme.name .. ":" .. (theme.variant or "")
-end
-
--- Tema aplicado nesta instância, para detectar trocas feitas por fora (tmux).
-local applied_theme_key = nil
-
 ---@param theme? ThemeItem|string
 ---@return nil
 function ColorMyPencils(theme)
@@ -216,37 +269,27 @@ function ColorMyPencils(theme)
 		vim.json.encode({ name = theme.name, variant = theme.variant }),
 	}, colorSchemeFile)
 
-	if theme.apply then
-		theme.apply()
-	else
-		vim.cmd.colorscheme(theme.name)
-	end
-
-	if theme.transparentBg then
-		SetTransparentBackground()
-	end
-	SetColoColumn("#FF00ff")
-
-	applied_theme_key = theme_key(theme)
-	-- Propaga para tmux, Ghostty e Alacritty
-	vim.fn.jobstart({ vim.fn.expand("~/.config/tmux/theme.sh") })
+	apply_theme(find_theme(theme.name, theme.variant) or theme)
+	run_theme_sh()
 end
 
--- O tmux também pode trocar o tema (prefix + T grava no .colorscheme);
--- ao voltar o foco para o nvim, acompanha a mudança.
+-- Chamado pelo theme.sh via RPC (preview do tmux ou de outro nvim):
+-- com nome, mostra o tema sem salvar; sem nome, volta ao tema salvo.
+---@param name? string
+---@param variant? string
+---@return nil
+function ThemeSync(name, variant)
+	local target = name and { name = name, variant = variant } or read_persisted_theme()
+	local theme = find_theme(target.name, target.variant) or target
+	if theme_key(theme) ~= displayed_theme_key then
+		pcall(apply_theme, theme)
+	end
+end
+
+-- Garantia caso alguma notificação via RPC se perca.
 vim.api.nvim_create_autocmd("FocusGained", {
 	callback = function()
-		local persisted = read_persisted_theme()
-		if theme_key(persisted) == applied_theme_key then
-			return
-		end
-		for _, t in ipairs(themes) do
-			if t.name == persisted.name and (persisted.variant == nil or t.variant == persisted.variant) then
-				ensure_theme_loaded(t.name)
-				ColorMyPencils(t)
-				return
-			end
-		end
+		ThemeSync()
 	end,
 })
 
