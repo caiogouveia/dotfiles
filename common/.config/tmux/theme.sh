@@ -57,10 +57,12 @@ apply() {
         fi
     fi
 
-    # Alacritty: importa current-theme.toml e recarrega sozinho ao detectar mudança
+    # Alacritty: importa current-theme.toml; o touch no alacritty.toml força o
+    # reload mesmo em instâncias que não vigiam o import (abertas antes dele existir)
     local alacritty_dir="$HOME/.config/alacritty"
     if [ -f "$alacritty_dir/nvim-themes/$name.toml" ]; then
         cp "$alacritty_dir/nvim-themes/$name.toml" "$alacritty_dir/current-theme.toml"
+        touch "$alacritty_dir/alacritty.toml"
     fi
 }
 
