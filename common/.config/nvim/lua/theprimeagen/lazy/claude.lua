@@ -5,6 +5,7 @@ return {
 		config = true,
 		opts = {
 			terminal = {
+				-- terminal_cmd = "ai-memory run claude",
 				provider = "snacks",
 				snacks_win_opts = {
 					-- position = "float",

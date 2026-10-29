@@ -1,0 +1,23 @@
+# sakura (gerado a partir das cores do tema do nvim)
+background = #191719
+foreground = #d6c1c5
+cursor-color = #d6c1c5
+cursor-text = #191719
+selection-background = #362e35
+selection-foreground = #d6c1c5
+palette = 0=#191719
+palette = 1=#c96c7f
+palette = 2=#6f9354
+palette = 3=#bb8c6e
+palette = 4=#868eb8
+palette = 5=#957d96
+palette = 6=#c48da6
+palette = 7=#cfc3ca
+palette = 8=#5f5567
+palette = 9=#e87a90
+palette = 10=#8fb373
+palette = 11=#d9b391
+palette = 12=#a5aade
+palette = 13=#d5a8d9
+palette = 14=#e0aabf
+palette = 15=#ffffff

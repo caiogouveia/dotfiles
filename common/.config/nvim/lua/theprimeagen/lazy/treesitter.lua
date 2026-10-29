@@ -15,6 +15,8 @@ return {
 				"jsdoc",
 				"bash",
 				"go",
+				"swift",
+				"kotlin",
 			}
 
 			require("nvim-treesitter").install(parsers)
@@ -31,6 +33,8 @@ return {
 					"rust",
 					"bash",
 					"go",
+					"swift",
+					"kotlin",
 					"vim",
 					"vimdoc",
 					"markdown",
@@ -49,7 +53,8 @@ return {
 						return
 					end
 
-					vim.treesitter.start()
+					-- pcall: não quebra se o parser ainda não estiver instalado
+					pcall(vim.treesitter.start)
 				end,
 			})
 		end,

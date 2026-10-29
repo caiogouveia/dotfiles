@@ -1,0 +1,28 @@
+# sakura (gerado a partir das cores do tema do nvim)
+[colors.primary]
+background = "#191719"
+foreground = "#d6c1c5"
+
+[colors.selection]
+text = "#d6c1c5"
+background = "#362e35"
+
+[colors.normal]
+black = "#191719"
+red = "#c96c7f"
+green = "#6f9354"
+yellow = "#bb8c6e"
+blue = "#868eb8"
+magenta = "#957d96"
+cyan = "#c48da6"
+white = "#cfc3ca"
+
+[colors.bright]
+black = "#5f5567"
+red = "#e87a90"
+green = "#8fb373"
+yellow = "#d9b391"
+blue = "#a5aade"
+magenta = "#d5a8d9"
+cyan = "#e0aabf"
+white = "#ffffff"

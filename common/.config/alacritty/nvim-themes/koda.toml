@@ -1,0 +1,28 @@
+# koda (gerado a partir das cores do tema do nvim)
+[colors.primary]
+background = "#101010"
+foreground = "#ffffff"
+
+[colors.selection]
+text = "#ffffff"
+background = "#272727"
+
+[colors.normal]
+black = "#101010"
+red = "#ff7676"
+green = "#a3d6a3"
+yellow = "#ffffff"
+blue = "#b3b3b3"
+magenta = "#f4b8e4"
+cyan = "#fafafa"
+white = "#a5adce"
+
+[colors.bright]
+black = "#50585d"
+red = "#ff5733"
+green = "#86cd82"
+yellow = "#d9ba73"
+blue = "#ffffff"
+magenta = "#f2a4db"
+cyan = "#5abfb5"
+white = "#b5bfe2"

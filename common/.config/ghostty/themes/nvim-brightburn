@@ -1,0 +1,23 @@
+# brightburn (gerado a partir das cores do tema do nvim)
+background = #18181b
+foreground = #dcdccc
+cursor-color = #dcdccc
+cursor-text = #18181b
+selection-background = #4f5258
+selection-foreground = #dcdccc
+palette = 0=#18181b
+palette = 1=#ac4142
+palette = 2=#acd2ac
+palette = 3=#ffd787
+palette = 4=#8cd0d3
+palette = 5=#ffc1c1
+palette = 6=#52dcbd
+palette = 7=#dcdccc
+palette = 8=#6a6a6e
+palette = 9=#f0616d
+palette = 10=#9ece9e
+palette = 11=#ffe636
+palette = 12=#8cd0d3
+palette = 13=#ffcfaf
+palette = 14=#93b3a3
+palette = 15=#ffffff

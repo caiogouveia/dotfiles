@@ -1,0 +1,23 @@
+# darkthrone (gerado a partir das cores do tema do nvim)
+background = #000000
+foreground = #c1c1c1
+cursor-color = #c1c1c1
+cursor-text = #000000
+selection-background = #222222
+selection-foreground = #c1c1c1
+palette = 0=#000000
+palette = 1=#5f8787
+palette = 2=#c1c1c1
+palette = 3=#888888
+palette = 4=#aaaaaa
+palette = 5=#999999
+palette = 6=#ffffff
+palette = 7=#c1c1c1
+palette = 8=#505050
+palette = 9=#aaaaaa
+palette = 10=#c1c1c1
+palette = 11=#888888
+palette = 12=#aaaaaa
+palette = 13=#ffffff
+palette = 14=#ffffff
+palette = 15=#c1c1c1
