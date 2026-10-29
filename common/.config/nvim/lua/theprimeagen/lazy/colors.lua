@@ -13,8 +13,8 @@
 
 local themes = {
 	{ name = "default", transparentBg = false },
-	{ name = "vesper", transparentBg = false },
-	{ name = "sakura", transparentBg = false },
+	{ name = "vesper", transparentBg = true },
+	{ name = "sakura", transparentBg = true },
 	{ name = "darkthrone", transparentBg = false },
 	{ name = "rose-pine", transparentBg = true },
 	{ name = "koda", transparentBg = false },
