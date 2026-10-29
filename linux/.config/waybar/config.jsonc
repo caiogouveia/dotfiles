@@ -5,18 +5,18 @@
     "position": "top", // Waybar position (top|bottom|left|right)
     "fixed-center": true,
     "height": 37, // Waybar height (to be removed for auto height)
-   // "width": 1600, // Waybar width
+    "width": 1600, // Waybar width
     // "spacing": 0, // Gaps between modules (4px)
     "reload_style_on_change": true,
-    "margin-top": 5,
+    "margin-top": 0,
     "margin-left": 5,
     "margin-right": 5,
-    "margin-bottom": 5,
+    "margin-bottom": 2,
     // Choose the order of the modules
     "modules-left": [
         "custom/terminal",
-        // "hyprland/workspaces",
-        "sway/workspaces",
+        "hyprland/workspaces",
+        // "sway/workspaces",
         "mpris"
     ],
     "modules-center": [
@@ -40,14 +40,20 @@
         "custom/power"
     ],
     // Modules configuration
-    // "hyprland/workspaces": {
-    "sway/workspaces": {
+    "hyprland/workspaces": {
+    // "sway/workspaces": {
+        "persistent-workspaces": {
+    "1": [],
+    "2": [],
+    "3": [],
+    "4": []
+  },
     "format": "{icon}",
     "format-icons": {
         "1": "一",
         "2": "二",
         "3": "三",
-        // "4": "四",
+        "4": "四",
         // "5": "五",
         // "urgent": "⚠️",
         // "active": "●",
@@ -213,24 +219,27 @@
         "exec": "sleep 0.05; $HOME/.local/bin/gammastep.sh",
         "on-click": "$HOME/.local/bin/gammastep.sh toggle"
     }
+},
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "height": 30, // Waybar height (to be removed for auto height)
+    "spacing": 0, // Gaps between modules (4px)
+    "margin-top": 0,
+    "margin-left": 5,
+    "margin-right": 5,
+    "margin-bottom": 2,
+    "modules-center": [
+        "wlr/taskbar"
+    ],
+    "wlr/taskbar": {
+        "format": "{icon} {title}",
+        "icon-size": 18,
+        "icon-theme": "Adwaita",
+        "tooltip-format": "{title} | {app_id}",
+        "all-outputs": false,
+        "on-click": "activate",
+        "on-click-middle": "close"
+    }
 }
-// {
-//     "layer": "bottom",
-//     "position": "bottom",
-//     "height": 30, // Waybar height (to be removed for auto height)
-//     "spacing": 0, // Gaps between modules (4px)
-//     "margin-bottom": 5,
-//     "modules-center": [
-//         "wlr/taskbar"
-//     ],
-//     "wlr/taskbar": {
-//         "format": "{icon} {title}",
-//         "icon-size": 18,
-//         "icon-theme": "Adwaita",
-//         "tooltip-format": "{title} | {app_id}",
-//         "all-outputs": false,
-//         "on-click": "activate",
-//         "on-click-middle": "close"
-//     }
-// }
 ]
