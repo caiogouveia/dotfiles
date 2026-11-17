@@ -41,6 +41,14 @@ local themes = {
 				theme = "delta",
 				glow = true,
 				transparent = false,
+				overrides = function(c)
+					-- highlight de busca em amarelo
+					return {
+						Search = { fg = c.bg, bg = c.yellow },
+						CurSearch = { fg = c.bg, bg = c.yellow, bold = true },
+						IncSearch = { fg = c.bg, bg = c.yellow, bold = true },
+					}
+				end,
 			})
 			vim.cmd.colorscheme("fluoromachine")
 		end,
