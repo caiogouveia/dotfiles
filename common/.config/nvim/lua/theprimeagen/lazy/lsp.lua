@@ -25,6 +25,10 @@ return {
             {},
             vim.lsp.protocol.make_client_capabilities(),
             cmp_lsp.default_capabilities())
+        -- Desliga o file watcher do LSP: em projetos grandes (Laravel com vendor/,
+        -- storage/, sqlite-journal) gerava milhares de eventos/erros por sessão.
+        capabilities.workspace = capabilities.workspace or {}
+        capabilities.workspace.didChangeWatchedFiles = { dynamicRegistration = false }
 
         require("fidget").setup({})
         require("mason").setup()
@@ -122,7 +126,24 @@ return {
         })
         vim.lsp.enable("sourcekit")
 
+        -- PHP: apenas o intelephense. O mason-lspconfig v2 habilita TODO LSP instalado,
+        -- o que subia phpactor + laravel-ls junto, todos indexando o vendor/.
+        vim.lsp.config("intelephense", {
+            settings = {
+                intelephense = {
+                    files = {
+                        exclude = {
+                            "**/storage/**", "**/bootstrap/cache/**", "**/node_modules/**",
+                            "**/database/*.sqlite*", "**/public/build/**", "**/.git/**",
+                        },
+                    },
+                    telemetry = { enabled = false },
+                },
+            },
+        })
+
         require("mason-lspconfig").setup({
+            automatic_enable = { exclude = { "phpactor", "laravel_ls" } },
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
